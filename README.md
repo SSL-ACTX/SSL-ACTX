@@ -61,15 +61,9 @@ I am just your average script kiddo'. <img src="https://media.giphy.com/media/WU
 ---
 
 ### :fire: My Stats :
-[![GitHub Streak](https://github-readme-streak-stats.herokuapp.com/?user=SSL-ACTX&theme=dark&background=000000)](https://git.io/streak-stats)
-
 [![GitHub Streak](http://github-readme-streak-stats.herokuapp.com?user=SSL-ACTX&theme=highcontrast&border_radius=10&fire=DD2727&ring=5BBADD)](https://git.io/streak-stats)
 
-[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?SSL-ACTX)](https://github.com/anuraghazra/github-readme-stats)
-
-### 🎵: Spotify :
-[[https://spotify-github-profile.vercel.app/api/view.svg?uid=31yj6y7voanhlsfmzk3h6m3avnjy&redirect=true][https://spotify-github-profile.vercel.app/api/view.svg?uid=31yj6y7voanhlsfmzk3h6m3avnjy&cover_image=true&theme=default&show_offline=true&background_color=1f1f1f&bar_color=22bfb4&bar_color_cover=true)]]
-
+[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=SSL-ACTX&layout=compact&theme=vision-friendly-dark)](https://github.com/anuraghazra/github-readme-stats)
 
 
 
