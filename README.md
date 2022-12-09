@@ -65,7 +65,10 @@ I am just your average script kiddo'. <img src="https://media.giphy.com/media/WU
 
 [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=SSL-ACTX&layout=compact&theme=highcontrast)](https://github.com/anuraghazra/github-readme-stats)
 
-<figure><embed src="https://wakatime.com/share/@Seuriin/99a72d5b-9d62-43d7-9cce-2330ce949960.svg"></embed></figure>
+<img 
+  src="https://wakatime.com/share/@Seuriin/99a72d5b-9d62-43d7-9cce-2330ce949960.svg"
+  alt="WakaTime Stats"
+ />
 
 <img
   src="https://github.com/SSL-ACTX/SSL-ACTX/blob/main/images/stat.svg"
