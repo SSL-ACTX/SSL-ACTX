@@ -65,9 +65,15 @@ I am just your average script kiddo'. <img src="https://media.giphy.com/media/WU
 
 [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=SSL-ACTX&layout=compact&theme=highcontrast)](https://github.com/anuraghazra/github-readme-stats)
 
-<!--START_SECTION:waka-->
-<!--END_SECTION:waka-->
-
+<img
+  src="https://github.com/<username>/<repository-name>/blob/<branch-name>/images/stat.svg"
+  alt="Alternative Text"
+/>
+Example:
+<img
+  src="https://github.com/avinal/avinal/blob/main/images/stat.svg"
+  alt="Avinal WakaTime Activity"
+/>
 
 
 
