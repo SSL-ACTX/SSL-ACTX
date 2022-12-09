@@ -30,11 +30,9 @@
 
 I am just your average script kiddo'. <img src="https://media.giphy.com/media/WUlplcMpOCEmTGBtBW/giphy.gif" width="30"> 
 
-- :telescope: I’m a lone developer(?) and I'm currently devoted to Android Development.
+- :telescope: I’m a lone developer(?) and currently devoted to Android Development.
 
 - :seedling: Learn more Programming Languages.
-
-- :zap: In my free time, I solve problems on GeeksforGeeks, read tech articles, and play some games.
 
 - :mailbox: How to reach me: [![Gmail Badge](https://img.shields.io/badge/Gmail-blue?style=flat&logo=gmailn&logoColor=white)](seuriin@gmail.com)
 
@@ -65,14 +63,10 @@ I am just your average script kiddo'. <img src="https://media.giphy.com/media/WU
 [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=SSL-ACTX&layout=compact&theme=highcontrast)](https://github.com/anuraghazra/github-readme-stats)
 
 ### ⏲️: WakaTime Stats :
-<img 
-  src="https://wakatime.com/share/@Seuriin/1ade4ee8-600c-4b60-801d-dd442c853446.svg" width="450"
-  alt="WakaTime Stats"
- />
 
 <img
   src="https://github.com/SSL-ACTX/SSL-ACTX/blob/main/images/stat.svg"
-  alt="WakaTime Stats"
+  alt="WakaTime Stats" align="left"
 />
 
 
