@@ -66,7 +66,7 @@ I am just your average script kiddo'. <img src="https://media.giphy.com/media/WU
 
 ### ⏲️: WakaTime Stats :
 <img 
-  src="https://wakatime.com/share/@Seuriin/99a72d5b-9d62-43d7-9cce-2330ce949960.svg" width="400"
+  src="https://wakatime.com/share/@Seuriin/1ade4ee8-600c-4b60-801d-dd442c853446.svg" width="450"
   alt="WakaTime Stats"
  />
 
