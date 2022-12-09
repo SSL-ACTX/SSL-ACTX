@@ -67,6 +67,8 @@ I am just your average script kiddo'. <img src="https://media.giphy.com/media/WU
 
 ### ⏲️: WakaTime Stats :
 
+<p>Stats update every UTC+8 1:00PM</p>
+
 <img
   src="https://github.com/SSL-ACTX/SSL-ACTX/blob/main/images/stat.svg"
   alt="WakaTime Stats"
