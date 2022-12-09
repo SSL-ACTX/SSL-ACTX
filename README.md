@@ -71,7 +71,7 @@ I am just your average script kiddo'. <img src="https://media.giphy.com/media/WU
  />
 
 <img
-  src="https://github.com/SSL-ACTX/SSL-ACTX/blob/main/images/stat.svg"
+  src="https://github.com/SSL-ACTX/SSL-ACTX/blob/main/images/stat.svg" width="30"
   alt="WakaTime Stats"
 />
 
