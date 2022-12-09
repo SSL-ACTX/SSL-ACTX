@@ -66,12 +66,12 @@ I am just your average script kiddo'. <img src="https://media.giphy.com/media/WU
 [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=SSL-ACTX&layout=compact&theme=highcontrast)](https://github.com/anuraghazra/github-readme-stats)
 
 <img 
-  src="https://wakatime.com/share/@Seuriin/99a72d5b-9d62-43d7-9cce-2330ce949960.svg"
+  src="https://wakatime.com/share/@Seuriin/99a72d5b-9d62-43d7-9cce-2330ce949960.svg" width="200"
   alt="WakaTime Stats"
  />
 
 <img
-  src="https://github.com/SSL-ACTX/SSL-ACTX/blob/main/images/stat.svg" width="30"
+  src="https://github.com/SSL-ACTX/SSL-ACTX/blob/main/images/stat.svg"
   alt="WakaTime Stats"
 />
 
