@@ -28,7 +28,7 @@
 
 ### :man_technologist: About Me :
 
-I am just your average script kiddo'. <img src="https://media.giphy.com/media/WUlplcMpOCEmTGBtBW/giphy.gif" width="30"> 
+This is just my alt, my original account got locked so I made a new one, and here it is..'. <img src="https://media.giphy.com/media/WUlplcMpOCEmTGBtBW/giphy.gif" width="30"> 
 
 - :telescope: I’m a lone developer(?) and currently devoted to Android Development.
 
