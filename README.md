@@ -1,6 +1,6 @@
 
 <div id="header" align="center">
-  <img src="https://media.tenor.com/grK7jtRobfMAAAAC/grand-theft-auto-carl-johnson.gif" width="200"/>
+  <img src="https://cdn.dribbble.com/users/94656/screenshots/1141726/terminal2.gif" width="200"/>
 </div>
 <div id="badges" align="center">
   <a href="https://facebook.com/kim.hajin91">
@@ -23,7 +23,7 @@
 </h1>
 
 <div align="center">
-  <img src="https://media.tenor.com/ayjgB6M-OIwAAAAd/gta-samurai.gif" width="390"/>
+  <img src="https://developer.android.com/static/guide/practices/ui_guidelines/images/NB_Icon_Mask_Shapes_Ext_02.gif" width="390"/>
 </div>
 
 ### :man_technologist: About Me :
