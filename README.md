@@ -66,7 +66,7 @@ This is just my alt, my original account got locked so I made a new one, and her
 <p>Stats update every UTC+8 1:00PM</p>
 
 <img
-  src="https://github.com/avinal/avinal/blob/main/images/stat.svg"
+  src="https://github.com/avinal/SSL-ACTX/blob/main/images/stat.svg"
   alt="WakaTime Stats"
 />
 
