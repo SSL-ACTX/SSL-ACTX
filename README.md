@@ -23,7 +23,7 @@
 </h1>
 
 <div align="center">
-  <img src="https://developer.android.com/static/guide/practices/ui_guidelines/images/NB_Icon_Mask_Shapes_Ext_02.gif" width="300"/>
+  <img src="https://developer.android.com/static/guide/practices/ui_guidelines/images/NB_Icon_Mask_Shapes_Ext_02.gif" width="270"/>
 </div>
 
 ### :man_technologist: About Me :
