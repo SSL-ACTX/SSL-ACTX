@@ -56,10 +56,9 @@ This is just my alt, my original account got locked so I made a new one, and her
 
 ### :fire: My Stats :
 
-[![GitHub Streak](http://github-readme-streak-stats.herokuapp.com?user=SSL-ACTX&theme=highcontrast&border_radius=10&fire=DD2727&ring=5BBADD)](https://git.io/streak-stats)
+[![GitHub Streak](http://github-readme-streak-stats.herokuapp.com?user=SSL-ACTX&theme=highcontrast&border_radius=10)
 
-[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=SSL-ACTX&layout=compact&theme=highcontrast)](https://github.com/anuraghazra/github-readme-stats)
-
+[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=SSL-ACTX)
 
 ### ⏲️: WakaTime Stats :
 
