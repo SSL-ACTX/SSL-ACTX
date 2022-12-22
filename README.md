@@ -23,7 +23,7 @@
 ### ---
 
 <div align="center">
-  <img src="https://developer.android.com/static/guide/practices/ui_guidelines/images/NB_Icon_Mask_Shapes_Ext_02.gif" width="250"/>
+  <img src="https://raw.githubusercontent.com/SSL-ACTX/SSL-ACTX/main/gifs/android.gif" width="250"/>
 </div>
 
 ### :man_technologist: About:
