@@ -26,6 +26,7 @@
   <img src="https://raw.githubusercontent.com/SSL-ACTX/SSL-ACTX/main/gifs/android.gif" width="250"/>
 </div>
 
+
 ### :man_technologist: About:
 
 This is just my alt, my original account got locked so I made a new one, and here it is..'. <img src="https://media.giphy.com/media/WUlplcMpOCEmTGBtBW/giphy.gif" width="30"> 
@@ -54,8 +55,12 @@ This is just my alt, my original account got locked so I made a new one, and her
   <img src="https://github.com/devicons/devicon/blob/master/icons/android/android-original-wordmark.svg" title="Android" alt="Android" width="40" height="40"/>&nbsp;
   <img src="https://github.com/devicons/devicon/blob/master/icons/git/git-original-wordmark.svg" title="Git" **alt="Git" width="40" height="40"/>
 </div>
-
----
+  <div>
+  <div align="center">
+    
+### 🎶 Recently Played:
+  
+ ![Spotify](https://spotify-recently-played-readme.vercel.app/api?user=31yj6y7voanhlsfmzk3h6m3avnjy)
 
 ### :fire: My Stats :
 
