@@ -1,6 +1,6 @@
 
 <div id="header" align="center">
-  <img src="https://cdn.dribbble.com/users/94656/screenshots/1141726/terminal2.gif" width="200"/>
+  <img src="https://raw.githubusercontent.com/SSL-ACTX/SSL-ACTX/main/gifs/term.gif" width="200"/>
 </div>
 <div id="badges" align="center">
   <a href="https://facebook.com/kim.hajin91">
