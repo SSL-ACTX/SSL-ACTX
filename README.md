@@ -26,19 +26,19 @@
   <img src="https://developer.android.com/static/guide/practices/ui_guidelines/images/NB_Icon_Mask_Shapes_Ext_02.gif" width="250"/>
 </div>
 
-### :man_technologist: About Me :
+### :man_technologist: About:
 
 This is just my alt, my original account got locked so I made a new one, and here it is..'. <img src="https://media.giphy.com/media/WUlplcMpOCEmTGBtBW/giphy.gif" width="30"> 
 
-- :telescope: I’m a lone developer(?) and currently devoted to Android Development.
+- :telescope: Devoted to Android Development.
 
-- :seedling: Learn more Programming Languages.
+- :seedling: Create bots for automated log-in and interactions on Facebook :).
 
 - :mailbox: How to reach me: 
 - [![Gmail Badge](https://img.shields.io/badge/Gmail-blue?style=flat&logo=gmail&logoColor=white)](seuriin@gmail.com)
 - [![Protonmail Badge](https://img.shields.io/badge/Protonmail-blue?style=flat&logo=protonmail&logoColor=white)](degozaru@protonmail.com)
 
-### :hammer_and_wrench: Languages and Tools :
+### :hammer_and_wrench: Languages & Tools :
 
 <div>
   <div align="center">
@@ -59,9 +59,9 @@ This is just my alt, my original account got locked so I made a new one, and her
 
 ### :fire: My Stats :
 
-![GitHub Streak](http://github-readme-streak-stats.herokuapp.com?user=SSL-ACTX&theme=highcontrast&border_radius=10)
+![GitHub Streak](http://github-readme-streak-stats.herokuapp.com?user=SSL-ACTX&theme=highcontrast&border_radius=30)
 
-![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=SSL-ACTX&layout=compact&theme=highcontrast&border_radius=10)
+![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=SSL-ACTX&layout=compact&theme=highcontrast&border_radius=30)
 
 ### ⏲️: WakaTime Stats :
 
