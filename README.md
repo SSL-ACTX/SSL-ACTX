@@ -34,11 +34,14 @@ This is just my alt, my original account got locked so I made a new one, and her
 
 - :seedling: Learn more Programming Languages.
 
-- :mailbox: How to reach me: [![Gmail Badge](https://img.shields.io/badge/Gmail-blue?style=flat&logo=gmail&logoColor=white)](seuriin@gmail.com)
+- :mailbox: How to reach me: 
+- [![Gmail Badge](https://img.shields.io/badge/Gmail-blue?style=flat&logo=gmail&logoColor=white)](seuriin@gmail.com)
+- [![Protonmail Badge](https://img.shields.io/badge/Protonmail-blue?style=flat&logo=protonmail&logoColor=white)](degozaru@protonmail.com)
 
 ### :hammer_and_wrench: Languages and Tools :
 
 <div>
+  <div align="center">
   <img src="https://github.com/devicons/devicon/blob/master/icons/java/java-original-wordmark.svg" title="Java" alt="Java" width="40" height="40"/>&nbsp;
   <img src="https://github.com/devicons/devicon/blob/master/icons/react/react-original-wordmark.svg" title="React" alt="React" width="40" height="40"/>&nbsp;
   <img src="https://github.com/devicons/devicon/blob/master/icons/css3/css3-plain-wordmark.svg"  title="CSS3" alt="CSS" width="40" height="40"/>&nbsp;
@@ -62,7 +65,7 @@ This is just my alt, my original account got locked so I made a new one, and her
 
 ### ⏲️: WakaTime Stats :
 
-<p>Stats update every UTC+8 1:00PM</p>
+<p>Stats update every UTC+8 1:00PM   --Forgot to add VSCode Extension, damn it.</p>
 
 <img
   src="https://github.com/SSL-ACTX/SSL-ACTX/blob/main/images/stat.svg"
