@@ -65,7 +65,8 @@ This is just my alt, my original account got locked so I made a new one, and her
 ### :fire: My Stats :
 
 ![GitHub Streak](http://github-readme-streak-stats.herokuapp.com?user=SSL-ACTX&theme=highcontrast&border_radius=30)
-![GitHub stats](https://github-readme-stats.vercel.app/api?username=SSL-ACTX&show_icons=true&layout=compact&theme=highcontrast&border_radius=30)
+![](https://raw.githubusercontent.com/SSL-ACTX/github-stats/master/generated/overview.svg#gh-dark-mode-only)
+![](https://raw.githubusercontent.com/SSL-ACTX/github-stats/master/generated/languages.svg#gh-dark-mode-only)
 
 ### ⏲️: WakaTime Stats :
 
