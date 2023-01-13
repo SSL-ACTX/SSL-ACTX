@@ -20,7 +20,7 @@
    <img src="https://komarev.com/ghpvc/?username=your-github-username&style=flat-square&color=blue" align="center"/>
 </div>
 
-### ---
+### 🤡
 
 <div align="center">
   <img src="https://raw.githubusercontent.com/SSL-ACTX/SSL-ACTX/main/gifs/android.gif" width="250"/>
