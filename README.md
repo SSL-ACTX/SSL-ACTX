@@ -34,13 +34,12 @@
 ### :fire: My Stats :
 
 ![GitHub Streak](http://github-readme-streak-stats.herokuapp.com?user=SSL-ACTX&theme=highcontrast&border_radius=30)
-   
+![GitHub stats](https://github-readme-stats.vercel.app/api?username=SSL-ACTX&show_icons=true&count_private=true&theme=highcontrast&border_radius=30)  
 
   
 
 ![](https://raw.githubusercontent.com/SSL-ACTX/SSL-ACTX/master/generated/overview.svg#gh-dark-mode-only)
-![](https://raw.githubusercontent.com/SSL-ACTX/SSL-ACTX/master/generated/languages.svg#gh-dark-mode-only)
-![GitHub stats](https://github-readme-stats.vercel.app/api?username=SSL-ACTX&show_icons=true&count_private=true)  
+![](https://raw.githubusercontent.com/SSL-ACTX/SSL-ACTX/master/generated/languages.svg#gh-dark-mode-only)  
 </div>
 
  
