@@ -34,7 +34,9 @@
 ### :fire: My Stats :
 
 ![GitHub Streak](http://github-readme-streak-stats.herokuapp.com?user=SSL-ACTX&theme=highcontrast&border_radius=30)
-    
+   
+  </div>
+  
 ![](https://raw.githubusercontent.com/SSL-ACTX/SSL-ACTX/master/generated/overview.svg#gh-dark-mode-only)
 ![](https://raw.githubusercontent.com/SSL-ACTX/SSL-ACTX/master/generated/languages.svg#gh-dark-mode-only)
 
@@ -42,7 +44,7 @@
  
 
 
-</div>
+
   
 
  
