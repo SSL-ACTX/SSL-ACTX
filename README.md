@@ -40,6 +40,7 @@
 
 ![](https://raw.githubusercontent.com/SSL-ACTX/SSL-ACTX/master/generated/overview.svg#gh-dark-mode-only)
 ![](https://raw.githubusercontent.com/SSL-ACTX/SSL-ACTX/master/generated/languages.svg#gh-dark-mode-only)
+![GitHub stats](https://github-readme-stats.vercel.app/api?username=SSL-ACTX&show_icons=true&count_private=true)  
 </div>
 
  
