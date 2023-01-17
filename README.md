@@ -20,24 +20,13 @@
    <img src="https://komarev.com/ghpvc/?username=your-github-username&style=flat-square&color=blue" align="center"/>
 </div>
 
-### 🤡
+
 
 <div align="center">
   <img src="https://raw.githubusercontent.com/SSL-ACTX/SSL-ACTX/main/gifs/android.gif" width="250"/>
 </div>
 
 
-### :man_technologist: About:
-
-This is just my alt, my original account got locked so I made a new one, and here it is..'. <img src="https://media.giphy.com/media/WUlplcMpOCEmTGBtBW/giphy.gif" width="30"> 
-
-- :telescope: Devoted to Android Development.
-
-- :seedling: Create bots for automated log-in and interactions on Facebook :).
-
-- :mailbox: How to reach me: 
-- [![Gmail Badge](https://img.shields.io/badge/Gmail-blue?style=flat&logo=gmail&logoColor=white)](seuriin@gmail.com)
-- [![Protonmail Badge](https://img.shields.io/badge/Protonmail-blue?style=flat&logo=protonmail&logoColor=white)](degozaru@protonmail.com)
 
 ### :hammer_and_wrench: Languages & Tools :
 
@@ -69,14 +58,9 @@ This is just my alt, my original account got locked so I made a new one, and her
 ![](https://raw.githubusercontent.com/SSL-ACTX/SSL-ACTX/master/generated/overview.svg#gh-dark-mode-only)
 ![](https://raw.githubusercontent.com/SSL-ACTX/SSL-ACTX/master/generated/languages.svg#gh-dark-mode-only)
 
-### ⏲️: WakaTime Stats :
 
-<p>Stats update every UTC+8 1:00PM   --Forgot to add VSCode Extension, damn it.</p>
 
-<img
-  src="https://github.com/SSL-ACTX/SSL-ACTX/blob/main/images/stat.svg"
-  alt="WakaTime Stats"
-/>
+
 
 
 
