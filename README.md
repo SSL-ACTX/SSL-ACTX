@@ -22,9 +22,7 @@
 
 
 
-<div align="center">
-  <img src="https://raw.githubusercontent.com/SSL-ACTX/SSL-ACTX/main/gifs/android.gif" width="250"/>
-</div>
+
 
 
 
