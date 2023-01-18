@@ -25,7 +25,7 @@
   
 - :telescope: I’m a college freshman, and currently studying 'Kotlin.'
 
-- :seedling: You want to help? Feel free. You need to know Node.js and Kotlin first tho.
+- :seedling: You want to help? Feel free. 
 
 - :zap: ---
 
