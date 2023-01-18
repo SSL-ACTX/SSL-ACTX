@@ -18,28 +18,31 @@
 </div>
 <div align="center">
    <img src="https://komarev.com/ghpvc/?username=your-github-username&style=flat-square&color=blue" align="center"/>
+</div>
+
+
+### 🧑‍💻 Intro:
+  
+- :telescope: I’m a college freshman, and currently studying 'Kotlin.'
+
+- :seedling: You want to help? Feel free. You need to know Node.js and Kotlin first tho.
+
+- :zap: ---
+
+- :mailbox:How to reach me: [![Facebook Badge](https://img.shields.io/badge/-Facebook-blue?style=flat&logo=Facebook&logoColor=white)](https://facebook.com/kim.hajin91)
 
 
 
 
 
 
-
-
-
-
-    
-
+<div align='center'>
 
 ### :fire: My Stats :
-
-![GitHub Streak](http://github-readme-streak-stats.herokuapp.com?user=SSL-ACTX&theme=highcontrast&border_radius=30)
-![GitHub stats](https://github-readme-stats.vercel.app/api?username=SSL-ACTX&show_icons=true&count_private=true&theme=highcontrast&border_radius=30)  
-
   
-
-![](https://raw.githubusercontent.com/SSL-ACTX/SSL-ACTX/master/generated/overview.svg#gh-dark-mode-only)
-![](https://raw.githubusercontent.com/SSL-ACTX/SSL-ACTX/master/generated/languages.svg#gh-dark-mode-only)  
+![](https://raw.githubusercontent.com/SSL-ACTX/SSL-ACTX/main/generated/overview.svg)
+![](https://raw.githubusercontent.com/SSL-ACTX/SSL-ACTX/main/generated/languages.svg)  
+  
 </div>
 
  
