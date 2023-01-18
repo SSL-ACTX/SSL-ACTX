@@ -43,6 +43,7 @@
 ![GitHub Stats](https://github-readme-stats-sigma-five.vercel.app/api?username=SSL-ACTX&count_private=true&theme=dracula&border_radius=50&show_icons=true&card_width=300)
 ![Top Langs](https://github-readme-stats-sigma-five.vercel.app/api/top-langs/?username=SSL-ACTX&layout=compact&card_width=350&theme=dracula&border_radius=50)
 ![GitHub Stats](https://raw.githubusercontent.com/SSL-ACTX/SSL-ACTX/main/generated/overview.svg)
+![GitHub Stats](https://raw.githubusercontent.com/SSL-ACTX/SSL-ACTX/main/generated/languages.svg)
   
 </div>
   
