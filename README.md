@@ -29,7 +29,7 @@
 
 - :zap: ---
 
-- :mailbox:How to reach me: [![Facebook Badge](https://img.shields.io/badge/-Facebook-blue?style=flat&logo=Facebook&logoColor=white)](https://facebook.com/kim.hajin91)
+- :mailbox:How to reach me: --- Maybe, next time.
 
 
 
