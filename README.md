@@ -29,8 +29,6 @@
 
 - :zap: ---
 
-- :mailbox: How to reach me: --- Maybe, next time.
-
 
 
 
