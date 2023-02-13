@@ -37,8 +37,6 @@
 ### :fire: Stats
   
  <div align='center'>
-  
-![GitHub Stats](https://github-readme-stats-sigma-five.vercel.app/api?username=SSL-ACTX&count_private=true&theme=dracula&border_radius=50&show_icons=true&card_width=300)
 
 ![GitHub Stats](https://raw.githubusercontent.com/SSL-ACTX/SSL-ACTX/main/generated/overview.svg)
 ![GitHub Stats](https://raw.githubusercontent.com/SSL-ACTX/SSL-ACTX/main/generated/languages.svg)
