@@ -9,9 +9,6 @@
   <a href="https://gitlab.com/SSL-ACTX">
     <img src="https://img.shields.io/badge/GitLab-orange?style=for-the-badge&logo=gitlab&logoColor=white" alt="GitLab Badge"/>
   </a>
-  <a href="https://youtube.com/seuriin">
-    <img src="https://img.shields.io/badge/YouTube-red?style=for-the-badge&logo=youtube&logoColor=white" alt="Youtube Badge"/>
-  </a>
   <a href="https://twitter.com/seuriin">
     <img src="https://img.shields.io/badge/Twitter-blue?style=for-the-badge&logo=twitter&logoColor=white" alt="Twitter Badge"/>
   </a>
@@ -21,20 +18,18 @@
 </div>
 
 
-### 🧑‍💻 Intro:
+## 💻 Intro:
   
 - :telescope: I’m a college freshman, and currently studying 'Kotlin.'
 
 - :seedling: You want to help? Feel free. 
 
-- :zap: ---
 
 
 
 
 
-
-### :fire: Stats
+## :fire: Stats
   
  <div align='center'>
 
