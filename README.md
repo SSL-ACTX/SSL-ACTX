@@ -14,9 +14,15 @@
   </a>
 </div>
 <div align="center">
-   <img src="https://komarev.com/ghpvc/?username=SSL-ACTX&style=flat-square&color=red" align="center"/>
-</div>
+   
+<!--
+<a name="SSL-ACTX metrics"><img src="https://github.com/SSL-ACTX/ACTX/github-metrics.svg" alt="My metrics created with lowlighter/metrics"></a>
+-->
 
+<!-- hit counter -->
+<img src="https://count.getloli.com/get/@ACTX?theme=rule34" alt=":name" />
+
+</div>
 
 ## 💻 Intro:
   
