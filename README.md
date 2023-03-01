@@ -2,14 +2,7 @@
 <div id="header" align="center">
   <img src="https://raw.githubusercontent.com/SSL-ACTX/SSL-ACTX/main/gifs/term.gif" width="200"/>
 </div>
-<div id="badges" align="center">
-  <a href="https://gitlab.com/SSL-ACTX">
-    <img src="https://img.shields.io/badge/GitLab-orange?style=for-the-badge&logo=gitlab&logoColor=white" alt="GitLab Badge"/>
-  </a>
-  <a href="https://twitter.com/seuriin">
-    <img src="https://img.shields.io/badge/Twitter-blue?style=for-the-badge&logo=twitter&logoColor=white" alt="Twitter Badge"/>
-  </a>
-</div>
+
 <div align="center">
    
 <!--
