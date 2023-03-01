@@ -1,7 +1,8 @@
-
+<!--
 <div id="header" align="center">
-  <img src="https://raw.githubusercontent.com/SSL-ACTX/SSL-ACTX/main/gifs/term.gif" width="200"/>
+  <img src="https://raw.githubusercontent.com/SSL-ACTX/SSL-ACTX/main/gifs/.gif" width="200"/>
 </div>
+-->
 
 <div align="center">
    
