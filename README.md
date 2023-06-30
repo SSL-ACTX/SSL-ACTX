@@ -17,9 +17,9 @@
 
 ## 💻 Intro:
   
-- :telescope: I’m a college freshman, and currently studying 'Kotlin.'
+- :telescope: I’m currently [REDACTED].
 
-- :seedling: You want to help? Feel free. 
+- :seedling: 78 Billion / 86 Billion  neurons left.
 
 
 
