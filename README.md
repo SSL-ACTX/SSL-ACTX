@@ -1,61 +1,28 @@
-<!--
-<div id="header" align="center">
-  <img src="https://raw.githubusercontent.com/SSL-ACTX/SSL-ACTX/main/gifs/.gif" width="200"/>
-</div>
--->
+# Hello, World! 💻
 
-<div align="center">
-   
-<!--
-<a name="SSL-ACTX metrics"><img src="https://github.com/SSL-ACTX/ACTX/github-metrics.svg" alt="My metrics created with lowlighter/metrics"></a>
--->
+## About Me
 
-<!-- hit counter -->
-<img src="https://count.getloli.com/get/@ACTX?theme=rule34" alt=":name" />
+I'm a college student who's passionate about Python programming, artificial intelligence, and manga. As a newbie Python developer, I'm constantly exploring new projects and learning about the fascinating world of coding.
 
-</div>
+- 🎓 Currently studying **Bachelor of Science in Information Technology (BSIT)** at **Colegio de Montalban (CDM)** 😥
+- 💻 Python enthusiast and aspiring developer
+- 🤖 AI addict, always excited about the latest advancements in AI and machine learning
+- 📚 Avid manga reader in my free time
 
-## 💻 Intro:
-  
-- :telescope: I’m currently [REDACTED].
-
-- :seedling: 78 Billion / 86 Billion  neurons left.
-
-
-
-
-
-
-## :fire: Stats
-  
- <div align='center'>
+## GitHub Stats
 
 ![GitHub Stats](https://raw.githubusercontent.com/SSL-ACTX/SSL-ACTX/main/generated/overview.svg)
 ![GitHub Stats](https://raw.githubusercontent.com/SSL-ACTX/SSL-ACTX/main/generated/languages.svg)
-  
-</div>
-  
 
+## Current Projects
 
- 
+I'm currently working on projects that blend my interests and help me grow as a developer:
 
+- [**SimpleDDoS**](https://github.com/SSL-ACTX/SimpleDDoS): A simple Distributed Denial of Service (DDoS) script written in Python.
+- [**Code Playground**](https://github.com/SSL-ACTX/Code-Playground): An interactive Code Playground where I experiment with different coding concepts.
 
+## Get in Touch
 
-  
+I'm always eager to connect with fellow developers, AI enthusiasts, and manga fans. Feel free to reach out to me via email at [seuriin@gmail.com](mailto:seuriin@gmail.com) or on Twitter [@lord_xu777](https://twitter.com/lordxu777).
 
- 
-
- 
-
-
-
-  
-
-
-
-
-
-
-
-
-
+Let's share ideas and embark on coding adventures together! 😉
