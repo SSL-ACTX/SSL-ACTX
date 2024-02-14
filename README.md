@@ -5,7 +5,7 @@
 I'm a college student who's passionate about Python programming, artificial intelligence, and manga. As a newbie Python developer, I'm constantly exploring new projects and learning about the fascinating world of coding.
 
 - 🎓 Currently studying **Bachelor of Science in Information Technology (BSIT)** at **Colegio de Montalban (CDM)** 😥
-- 💻 Python enthusiast and aspiring developer
+- 💻 Newbie Python Dev
 - 🤖 AI addict, always excited about the latest advancements in AI and machine learning
 - 📚 Avid manga reader in my free time
 
