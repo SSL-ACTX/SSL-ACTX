@@ -23,6 +23,6 @@ I'm currently working on projects that blend my interests and help me grow as a 
 
 ## Get in Touch
 
-I'm always eager to connect with fellow developers, AI enthusiasts, and manga fans. Feel free to reach out to me via email at [seuriin@gmail.com](mailto:seuriin@gmail.com) or on Twitter [@lordxu777](https://twitter.com/lordxu777).
+I'm always eager to connect with fellow developers and AI enthusiasts. Feel free to reach out to me via email at [seuriin@gmail.com](mailto:seuriin@gmail.com) or on Twitter [@lordxu777](https://twitter.com/lordxu777).
 
 Let's share ideas and embark on coding adventures together! 😉
