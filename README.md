@@ -8,6 +8,7 @@ I'm a college student who's passionate about Python programming, artificial inte
 - 💻 Newbie Python Dev
 - 🤖 AI addict, always excited about the latest advancements in AI and machine learning
 - 📚 Avid manga reader in my free time
+- ❌ Currently studying ethical hacking...
 
 ## GitHub Stats
 
