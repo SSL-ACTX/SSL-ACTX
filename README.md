@@ -2,7 +2,7 @@
 
 ## About Me
 
-I'm a college student who's passionate about Python programming, artificial intelligence, and manga. As a newbie Python developer, I'm constantly exploring new projects and learning about the fascinating world of coding.
+I'm a college student who's passionate about Python programming, artificial intelligence, and ethical hacking. As a newbie Python developer, I'm constantly exploring new projects and learning about the fascinating world of coding.
 
 - 🎓 Currently studying **Bachelor of Science in Information Technology (BSIT)** at **Colegio de Montalban (CDM)** 😥
 - 💻 Newbie Python Dev
