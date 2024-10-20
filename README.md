@@ -20,6 +20,7 @@ I'm currently working on projects that blend my interests and help me grow as a 
 
 - [**SimpleDDoS**](https://github.com/SSL-ACTX/SimpleDDoS): A simple Distributed Denial of Service (DDoS) script written in Python.
 - [**Code Playground**](https://github.com/SSL-ACTX/Code-Playground): An interactive Code Playground where I experiment with different coding concepts.
+- [**Spatipay-G6**](https://github.com/SSL-ACTX/spatipay-g6): A goofy React Native app, for midterm project.
 
 ## Get in Touch
 
