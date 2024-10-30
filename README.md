@@ -14,13 +14,12 @@ I'm a college student who's passionate about Python programming, artificial inte
 ![GitHub Stats](https://raw.githubusercontent.com/SSL-ACTX/SSL-ACTX/main/generated/overview.svg)
 ![GitHub Stats](https://raw.githubusercontent.com/SSL-ACTX/SSL-ACTX/main/generated/languages.svg)
 
-## Current Projects
+## Projects
 
 I'm currently working on projects that blend my interests and help me grow as a developer:
 
 - [**SimpleDDoS**](https://github.com/SSL-ACTX/SimpleDDoS): A simple Distributed Denial of Service (DDoS) script written in Python.
 - [**Code Playground**](https://github.com/SSL-ACTX/Code-Playground): An interactive Code Playground where I experiment with different coding concepts.
-- [**Spatipay-G6**](https://github.com/SSL-ACTX/spatipay-g6): A goofy React Native app, for midterm project.
 
 ## Get in Touch
 
