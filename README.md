@@ -10,7 +10,7 @@
 
 ## A Little About Me
 
-So, I'm Seuriin, a college student totally hooked on Python, AI, and Ethical Hacking.  I'm a newbie coder trying to find my way, and always down to learn new stuff and maybe build something cool along the way.
+So, I'm Seuriin, a college student totally hooked on Python, AI, Web Development and Ethical Hacking.  I'm a newbie coder trying to find my way, and always down to learn new stuff and maybe build something cool along the way.
 
 -   🎓 Still trying to survive my **BSIT** degree at **Colegio de Montalban (CDM)** 😅.
 -   💻 Leveling up my Python skills one project at a time.
