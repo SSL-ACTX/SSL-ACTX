@@ -123,6 +123,13 @@ Here's the deep dive into the tech I'm familiar with:
 
 ---
 
+## GitHub Trophy  
+<a href="https://github.com/SSL-ACTX/github-profile-trophy">  
+  <img width="780" src="https://github-profile-trophy.vercel.app/?username=SSL-ACTX&column=4&row=2&theme=dracula" alt="Github Profile Trophy"/>  
+</a>
+
+---
+
 ## GitHub Stats
 
 <div align="center">
