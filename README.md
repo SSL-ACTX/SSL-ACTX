@@ -1,6 +1,6 @@
 <div align="center">
   <img src="https://wsrv.nl/?url=https://i.ibb.co/fzrGZBmk/output-onlinegiftools.gif&output=webp&n=-1&maxage=1y" width="200" height="200" alt="Seuriin's Profile Picture">
-  <h2>SSL-ACTX (Seuriin)</h2>
+  <h2>SSL-ACTX (𝖲𝖾𝗎𝗋𝗂𝗂𝗇)</h2>
   <p>
     <img src="https://visitor-badge.laobi.icu/badge?page_id=SSL-ACTX.SSL-ACTX" alt="Visitor Count">
   </p>
