@@ -176,15 +176,6 @@ Here are some of my projects. I'm always adding new ones, so check them out.
 *   **Lessons Learned:**  The importance of ethical hacking, network protocols, and resource management.
 *   **Disclaimer:**  *This project is purely for educational purposes.  Unauthorized use is strictly prohibited.*
 
-<!-- Project 3 -->
-### [YTCL_00010](https://github.com/SSL-ACTX/YTCL_00010) - Python CLI YouTube Downloader
-
-[![GitHub Stars](https://img.shields.io/github/stars/SSL-ACTX/YTCL_00010?style=social)](https://github.com/SSL-ACTX/YTCL_00010) [![GitHub Forks](https://img.shields.io/github/forks/SSL-ACTX/YTCL_00010?style=social)](https://github.com/SSL-ACTX/YTCL_00010)
-
-*   **Description:** A command-line tool for downloading YouTube videos and audio in various formats. It leverages asynchronous requests and the loader.to API for faster downloads.
-*   **Key Technologies:** Python, `httpx` (async requests), `rich` (terminal UI), `youtubesearchpython`, `configparser`.
-*   **Lessons Learned:**  Implementing asynchronous network requests, handling API rate limits, creating a user-friendly CLI, and managing configuration files.
-
 ---
 
 ## Hit Me Up!
