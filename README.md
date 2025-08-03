@@ -77,7 +77,7 @@ Here’s a snapshot of what I do (and love doing):
 ### 🧠 Languages I Speak
 
 <p align="center">
-  <img src="https://skillicons.dev/icons?i=python,cpp,php,js,java,kotlin&theme=dark" />
+  <img src="https://skillicons.dev/icons?i=python,js,kotlin,php&theme=dark" />
 </p>
 
 >                               I'm not that great with most of those languages, but I can manage.
