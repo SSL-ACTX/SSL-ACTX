@@ -1,127 +1,83 @@
 <div align="center">
-  <img src="https://wsrv.nl/?url=https://i.ibb.co/fzrGZBmk/output-onlinegiftools.gif&output=webp&n=-1&maxage=1y" width="200" height="200" alt="Seuriin's Profile Picture">
-  <h2>𝖲𝖾𝗎𝗋𝗂𝗂𝗇 (SSL-ACTX)</h2>
-  <p>
-    <img src="https://visitor-badge.laobi.icu/badge?page_id=SSL-ACTX.SSL-ACTX" alt="Visitor Count">
+  <img src="https://wsrv.nl/?url=https://i.ibb.co/fzrGZBmk/output-onlinegiftools.gif&output=webp&n=-1&maxage=1y" width="180" height="180" alt="Seuriin's Profile Picture">
+  
+  <h1>Hey, I'm Seuriin.</h1>
+  
+  <p align="center">
+    <img src="https://img.shields.io/badge/Status-Just%20a%20Random%20Coder-8b5cf6?style=flat-square" alt="Status">
+    <img src="https://img.shields.io/badge/Grind-BSIT%20@%20CDM-06b6d4?style=flat-square" alt="Education">
+    <img src="https://visitor-badge.laobi.icu/badge?page_id=SSL-ACTX.SSL-ACTX&color=06b6d4" alt="Visitors">
+  </p>
+
+  <p align="center">
+    <i>"Building things to see if they'll break. Usually, they do."</i>
   </p>
 </div>
 
+---
+
+### 🌙 About Me
+
+I'm a BSIT student at the **Colegio de Montalban**, but mostly I'm just a guy who finds joy in the deep, weird corners of computer science. My journey isn't about climbing a corporate ladder; it's about satisfying a relentless curiosity. Why does a JavaScript engine work the way it does? Can you store data in DNA? How tf does that one work? Can I try to build something like that?
+
+These are the kinds of questions that lead me down rabbit holes. I'm not an expert—I'm just a tinkerer. Most of my projects are academic explorations, born from a desire to understand systems by building them from first principles.
+
+- 🎓 **Currently:** Surmounting the BSIT grind. Life's catching up. 😿
+- 🧪 **My Playground:** Web dev, systems programming, virtualization, security and sometimes DBs.
+- 🦀 **Current Obsession:** Writing something in Rust and fighting the borrow checker _(it usually wins)_.
+- 🎨 **Confession:** I'm still _terrible_ at Frontend. I use a lot of Tailwind to hide the pain.
 
 ---
 
-## A Little About Me
+### 🔭 My Research Playground
 
-So, I'm Seuriin, a college student totally hooked on Python, AI, Web Development, and Reverse Engineering. I'm a curious builder always down to tinker, learn, and create something dope.  
-
-- 🎓 Still surviving the **BSIT** grind at **Colegio de Montalban (CDM)**.
-- 💻 Constantly sharpening my Python automation, scraping, backends, you name it.
-- 🧠 Hardcore into AI and future tech.
-- 🧩 Cooking up custom VMs. Crying in opcodes rn 😢
-- 📚 Break time? That’s manga, manhwa, or light novels all the way.
-
----
-
-## 🔍 Skills Overview
-
-Here’s a snapshot of what I do (and love doing):
-
-- 🐍 **Python Development** – scripting, web, AI, automation
-- 🕸️ **Web Scraping** – stealth, speed, data-focused crawlers
-- 🔬 **Reverse Engineering** – binaries, decompilation, static/dynamic analysis
-- 🧠 **Artificial Intelligence** – NLP, ML, LLM playgrounds, HuggingFace
-- 🌐 **Full-stack Web Dev** – REST, Flask, Quart, FastAPI, React, Node, DBs
-> I swear , I'm terrible at frontend! 😫💻
-- ⚙️ **Custom VM Architectures** – bytecode design, interpreters
-- 🐧 **Linux/Unix Wizardry** – terminals, shells, custom configs
-- 🧰 **Tooling & IDEs** – from VSCode to Vim, now with 🧡 for Kate
+I like to build impractical but fascinating things. Here are a few of the rabbit holes I've gone down.
 
 <br>
+
 <details>
-  <summary align="center"><strong>Click to expand</strong></summary>
+<summary><strong>🔬 Click to see my featured projects</strong></summary>
 
+<br>
 
----
+| Project | Description | Stack |
+| :--- | :--- | :--- |
+| **[VortexJS](https://github.com/SSL-ACTX/vortex-js)** | An experimental JavaScript virtualization engine. It's a source-to-source compiler that transforms JS into a custom bytecode format, executed by a polymorphic, stackless virtual machine to explore software protection theory. | <img src="https://skillicons.dev/icons?i=js,nodejs&theme=dark&perline=2" /> |
+| **[ChronosDB](https://github.com/SSL-ACTX/chronos-db)** | A distributed, vector-native, time-traveling database built in Rust. It combines HNSW for vector search, Raft for consensus, and a bi-temporal data model, allowing you to query the state of your data at any point in time. | <img src="https://skillicons.dev/icons?i=rust,docker&theme=dark&perline=2" /> |
+| **[Helix](https://github.com/SSL-ACTX/helix)** | A systems-level DNA storage archiver. This compiler translates binary files into biostable DNA sequences, implementing a full storage stack including AES-256 encryption, Reed-Solomon error correction, and a Viterbi decoder for indel correction. | <img src="https://skillicons.dev/icons?i=rust,py&theme=dark&perline=2" /> |
+| **[Project Aether](https://github.com/SSL-ACTX/aether)** | A user-space TCP/IP stack written from scratch in Rust to bypass the kernel. It's a raw, high-throughput experiment that prioritizes speed over reliability by stripping out features like retransmission and congestion control. | <img src="https://skillicons.dev/icons?i=rust&theme=dark&perline=1" /> |
+| **[Sigilus Security](https://github.com/SSL-ACTX/sigilus)** | A multi-stage, WebAssembly-based security framework for protecting web APIs. It uses a proof-of-execution challenge to provision a client-side request-signing WASM, making automated threats more difficult. | <img src="https://skillicons.dev/icons?i=cpp,wasm,python,redis&theme=dark&perline=4" /> |
+| **[Velhara API Defense](https://github.com/SSL-ACTX/velhara)** | A Python middleware that hardens the client-server handshake using a WASM module for integrity checks, HMAC-signed tokens for access control, and an Ed25519/AES-GCM system for payload confidentiality. | <img src="https://skillicons.dev/icons?i=python,rust,wasm,redis&theme=dark&perline=4" /> |
 
-## ⚒️ Core Tech Stack
-
-<p align="center">
-  <img src="https://skillicons.dev/icons?i=python,html,css,js,github,git,vscode,nodejs,express,react,cpp&theme=dark" />
-  <img src="https://skillicons.dev/icons?i=mongodb,mysql,firebase,bash,kotlin,java,php,powershell&theme=dark" />
-</p>
-
-
----
-
-## 🧠 Technical Skills
-
-### 🕸️ Web Dev
-
-- **Frontend:** HTML5, CSS3, JavaScript, TailwindCSS, Bootstrap, React, Next.js
-- **Backend:** Node.js, Express.js, Flask, Quart, PHP
-- **Web Automation:** Puppeteer, BeautifulSoup, Playwright
-
-### 🔐 Reverse Engineering & Systems
-
-- Static & Dynamic Analysis (Frida)
-- Decompiler Tools (Ghidra, IDA Free)
-- Custom Bytecode VM Building
-- Bash/Zsh scripting
-
-### 🧪 AI, Data & ML
-
-- ChatGPT, Google Gemini
-- TensorFlow, PyTorch, Scikit-learn
-- NumPy, Pandas, Matplotlib
-- LangChain, OpenAI APIs
-
-### 🧠 Languages I Speak
-
-<p align="center">
-  <img src="https://skillicons.dev/icons?i=python,js,kotlin,php&theme=dark" />
-</p>
-
->                               I'm not that great with most of those languages, but I can manage.
-
-### 💻 IDEs / Editors
-
-- VSCode, IntelliJ, PyCharm
-- Android Studio, Vim
-- **Kate**, Notepad++, NeoVim (cool af 😎)
-
-### ☁️ Deploy & Ops
-
-- Vercel, Netlify, Firebase Hosting
-- PythonAnywhere, Colab, Glitch (*RIP*😿)
-- Bash scripts, Linux services
-
-### 🧬 Operating Systems
-
-- Ubuntu, EndeavourOS (I use arch btw)
-- Android (rooted), Windows (dual-booted)
-- Puppy Linux (for *obscure* sht)
+</details>
 
 ---
 
-## 🏆 GitHub Trophy Cabinet
+### 🛠 The Toolbox & Philosophy
+
+My approach is simple: **build from scratch to truly understand.** I believe you can't claim to know a system until you've tried (and failed) to build a replica of it.
+
+- **Languages:** I think in **Python** & **JavaScript**, but I'll write **Rust**, or **PHP** if the problem calls for it.
+- **Backend & Data:** My go-to stack is **FastAPI** + **MongoDB**/**MySQL** + **Redis**. I'm also comfortable with **Node.js** and **Next.js** for full-stack work.
+- **Systems & Low-Level:** This is where the real fun is. I enjoy designing **bytecode** for simple **custom VMs**, do something in `babel`, and exploring the guts of technologies like **WASM**.
+- **Tools of the Trade:** I live in the terminal. My favorite editor is KDE **Kate** for its simplicity and power, but I fall back to **VSCode** when the Rust compiler starts yelling at me.
 
 <div align="center">
-  <a href="https://github.com/SSL-ACTX/github-profile-trophy">
-    <img width="780" src="https://github-profile-trophy.vercel.app/?username=SSL-ACTX&column=4&row=2&theme=nord" alt="Github Profile Trophy"/>  
-  </a>
+  <img src="https://skillicons.dev/icons?i=python,rust,js,nodejs,react,fastapi,mongodb,mysql,redis,docker,bash,git,github,vscode&theme=dark" />
 </div>
 
 ---
 
-## 📊 GitHub Stats
+### 📊 My Nonsensical Stats
 
 <div align="center">
-  <table>
+  <table border="0" cellpadding="10" cellspacing="0">
     <tr>
       <td width="50%" valign="top">
-        <img src="https://raw.githubusercontent.com/SSL-ACTX/SSL-ACTX/main/generated/overview.svg" />
+        <img src="https://raw.githubusercontent.com/SSL-ACTX/SSL-ACTX/main/generated/overview.svg" alt="Profile Overview" />
       </td>
       <td width="50%" valign="top">
-        <img src="https://raw.githubusercontent.com/SSL-ACTX/SSL-ACTX/main/generated/languages.svg" />
+        <img src="https://raw.githubusercontent.com/SSL-ACTX/SSL-ACTX/main/generated/languages.svg" alt="Language Stats" />
       </td>
     </tr>
   </table>
@@ -129,23 +85,19 @@ Here’s a snapshot of what I do (and love doing):
 
 ---
 
-<h2 align="center">☕ Hit Me Up</h2>
-<p align="center">Wanna collab, build something wicked, or just vibe about tech?</p>
+### ☕ Connect
+
+I'm always open to talking shop about weird stuff, debating why Python is slow—you're st*pid, or just asking for manga recommendations. If you're working on something weird and interesting, feel free to reach out.
 
 <p align="center">
   <a href="mailto:seuriin@gmail.com">
     <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Gmail">
-  </a>
-  <a href="https://m.me/seuriin" target="_blank">
-    <img src="https://img.shields.io/badge/Messenger-00B2FF?style=for-the-badge&logo=messenger&logoColor=white" alt="Messenger">
   </a>
   <a href="https://discord.com/users/seuriin" target="_blank">
     <img src="https://img.shields.io/badge/Discord-Seuriin-5865F2?style=for-the-badge&logo=discord&logoColor=white" alt="Discord">
   </a>
 </p>
 
-
-<br>
 <p align="center">
-  <img src="https://img.shields.io/badge/Made%20with%20❤️%20by-Seuriin-ff69b4?style=for-the-badge"/>
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=06b6d4&height=60&section=footer" width="100%"/>
 </p>
