@@ -14,6 +14,10 @@
   </p>
 </div>
 
+> [!NOTE]
+> This is a **personal profile README** — a running log of things I’ve built, broken, and learned.  
+> Not a professional portfolio. Not here to impress anyone.
+
 ---
 
 ### 🌙 About Me
