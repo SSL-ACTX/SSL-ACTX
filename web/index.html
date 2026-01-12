@@ -1,0 +1,1220 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SEURIIN | SSL-ACTX</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              void: "#020202",
+              abyss: "#0a0a0a",
+              ash: "#121212",
+              ghost: "#e5e5e5",
+              mist: "#666666",
+              crimson: "#8a1c1c",
+              neon: "#00f3ff",
+            },
+            fontFamily: {
+              serif: ["Cinzel", "serif"],
+              sans: ["Inter", "sans-serif"],
+              mono: ["Space Mono", "monospace"],
+            },
+            animation: {
+              "spin-slow": "spin 20s linear infinite",
+              flicker: "flicker 2s infinite",
+              scan: "scan 8s linear infinite",
+              "pulse-fast": "pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+            },
+            keyframes: {
+              flicker: {
+                "0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100%": {
+                  opacity: 1,
+                },
+                "20%, 21.999%, 63%, 63.999%, 65%, 69.999%": { opacity: 0.4 },
+              },
+              scan: {
+                "0%": { transform: "translateY(-100%)" },
+                "100%": { transform: "translateY(100%)" },
+              },
+            },
+          },
+        },
+      };
+    </script>
+
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+
+    <style>
+      body {
+        background-color: #020202;
+        cursor: crosshair;
+      }
+      ::-webkit-scrollbar {
+        width: 4px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #020202;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #333;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+      }
+      .noise-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 40;
+        opacity: 0.04;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+      }
+      .scanline {
+        width: 100%;
+        height: 20px;
+        z-index: 41;
+        background: linear-gradient(
+          0deg,
+          rgba(0, 0, 0, 0) 0%,
+          rgba(255, 255, 255, 0.05) 50%,
+          rgba(0, 0, 0, 0) 100%
+        );
+        opacity: 0.1;
+        position: fixed;
+        pointer-events: none;
+        animation: scan 6s linear infinite;
+      }
+      .glitch {
+        position: relative;
+      }
+      .glitch::before,
+      .glitch::after {
+        content: attr(data-text);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #020202;
+      }
+      .glitch::before {
+        left: 2px;
+        text-shadow: -1px 0 #ff00c1;
+        clip: rect(44px, 450px, 56px, 0);
+        animation: glitch-anim 5s infinite linear alternate-reverse;
+      }
+      .glitch::after {
+        left: -2px;
+        text-shadow: -1px 0 #00fff9;
+        clip: rect(44px, 450px, 56px, 0);
+        animation: glitch-anim2 5s infinite linear alternate-reverse;
+      }
+      @keyframes glitch-anim {
+        0% {
+          clip: rect(14px, 9999px, 86px, 0);
+        }
+        20% {
+          clip: rect(62px, 9999px, 14px, 0);
+        }
+        40% {
+          clip: rect(24px, 9999px, 53px, 0);
+        }
+        60% {
+          clip: rect(82px, 9999px, 36px, 0);
+        }
+        80% {
+          clip: rect(10px, 9999px, 92px, 0);
+        }
+        100% {
+          clip: rect(54px, 9999px, 21px, 0);
+        }
+      }
+      @keyframes glitch-anim2 {
+        0% {
+          clip: rect(28px, 9999px, 49px, 0);
+        }
+        20% {
+          clip: rect(74px, 9999px, 92px, 0);
+        }
+        40% {
+          clip: rect(12px, 9999px, 33px, 0);
+        }
+        60% {
+          clip: rect(58px, 9999px, 11px, 0);
+        }
+        80% {
+          clip: rect(96px, 9999px, 7px, 0);
+        }
+        100% {
+          clip: rect(33px, 9999px, 81px, 0);
+        }
+      }
+      #boot-screen {
+        background-color: #000;
+        z-index: 100;
+      }
+      .cursor-blink {
+        animation: blink 1s step-end infinite;
+      }
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body
+    class="text-ghost overflow-x-hidden selection:bg-white selection:text-black"
+    x-data="portfolioSystem()"
+    x-init="initSystem()"
+  >
+    <div
+      id="boot-screen"
+      class="fixed inset-0 flex items-center justify-center font-mono text-sm text-green-500/80 p-8"
+      x-show="!booted"
+      x-transition:leave="transition ease-in duration-1000"
+      x-transition:leave-start="opacity-100"
+      x-transition:leave-end="opacity-0 pointer-events-none"
+    >
+      <div class="w-full max-w-2xl">
+        <p class="mb-2">> KERNEL_INIT...</p>
+        <p class="mb-2">
+          > MOUNTING FILESYSTEM [MirageFS]... <span class="text-white">OK</span>
+        </p>
+        <p class="mb-2">
+          > LOADING NEURAL INTERFACE... <span class="text-white">OK</span>
+        </p>
+        <p class="mb-2">
+          > BYPASSING FIREWALL... <span class="text-white">SUCCESS</span>
+        </p>
+        <p class="mb-2">> DECRYPTING USER PROFILE 'SEURIIN'...</p>
+        <div class="w-full h-1 bg-green-900 mt-4 rounded overflow-hidden">
+          <div
+            class="h-full bg-green-500 animate-[width_3s_ease-in-out_forwards]"
+            style="width: 0%"
+          ></div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      x-show="terminalOpen"
+      x-transition:enter="transition ease-out duration-300"
+      x-transition:enter-start="opacity-0 scale-95"
+      x-transition:enter-end="opacity-100 scale-100"
+      x-transition:leave="transition ease-in duration-200"
+      x-transition:leave-start="opacity-100 scale-100"
+      x-transition:leave-end="opacity-0 scale-95"
+      class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm"
+      @keydown.escape.window="terminalOpen = false"
+    >
+      <div
+        class="w-full max-w-4xl h-[80vh] bg-black border border-green-500/30 flex flex-col font-mono text-sm shadow-[0_0_30px_rgba(0,255,0,0.1)] relative overflow-hidden"
+        @click.away="terminalOpen = false"
+      >
+        <div
+          class="bg-green-900/10 border-b border-green-500/30 p-2 flex justify-between items-center select-none"
+        >
+          <div class="flex gap-2">
+            <div class="w-3 h-3 rounded-full bg-red-500/50"></div>
+            <div class="w-3 h-3 rounded-full bg-yellow-500/50"></div>
+            <div class="w-3 h-3 rounded-full bg-green-500/50"></div>
+          </div>
+          <div class="text-green-500/70 text-xs tracking-widest">
+            ROOT_SHELL // SSL-ACTX
+          </div>
+          <button
+            @click="terminalOpen = false"
+            class="text-green-500 hover:text-white"
+          >
+            <i class="ph ph-x"></i>
+          </button>
+        </div>
+
+        <div
+          class="flex-grow p-4 overflow-y-auto font-mono text-green-500/80 space-y-2"
+          id="terminal-output"
+        >
+          <p>Welcome to SSL-ACTX Root Shell v1.0.0</p>
+          <p>
+            Type <span class="text-white">'help'</span> for available commands.
+          </p>
+          <br />
+          <template x-for="line in terminalHistory">
+            <div x-html="line"></div>
+          </template>
+        </div>
+
+        <div
+          class="p-4 border-t border-green-500/30 bg-black flex items-center gap-2"
+        >
+          <span class="text-green-500">root@seuriin:~$</span>
+          <input
+            type="text"
+            x-model="terminalInput"
+            @keydown.enter="processCommand()"
+            class="bg-transparent border-none outline-none text-white w-full font-mono focus:ring-0 placeholder-green-900"
+            placeholder="..."
+            autofocus
+          />
+        </div>
+        <div
+          class="absolute inset-0 pointer-events-none bg-[url('https://media.giphy.com/media/oEI9uBYSzLpBK/giphy.gif')] opacity-[0.02]"
+        ></div>
+      </div>
+    </div>
+
+    <div
+      x-show="modalOpen"
+      x-transition:enter="transition ease-out duration-500"
+      x-transition:enter-start="opacity-0 translate-y-10"
+      x-transition:enter-end="opacity-100 translate-y-0"
+      x-transition:leave="transition ease-in duration-300"
+      x-transition:leave-start="opacity-100 translate-y-0"
+      x-transition:leave-end="opacity-0 translate-y-10"
+      class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-void/90 backdrop-blur-md"
+      style="display: none"
+    >
+      <div
+        class="bg-abyss border border-white/20 w-full max-w-5xl max-h-[90vh] overflow-y-auto relative shadow-[0_0_50px_rgba(255,255,255,0.05)]"
+        @click.away="closeModal()"
+      >
+        <button
+          @click="closeModal()"
+          class="absolute top-6 right-6 text-mist hover:text-crimson transition-colors z-20"
+        >
+          <i class="ph ph-x text-2xl"></i>
+        </button>
+
+        <template x-if="selectedProject">
+          <div class="grid grid-cols-1 lg:grid-cols-12 min-h-[600px]">
+            <div
+              class="lg:col-span-4 bg-ash border-b lg:border-b-0 lg:border-r border-white/10 p-8 flex flex-col relative overflow-hidden"
+            >
+              <div
+                class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4xKSIvPjwvc3ZnPg==')]"
+              ></div>
+
+              <div class="relative z-10">
+                <span
+                  class="font-mono text-[10px] text-crimson mb-2 block tracking-widest"
+                  >CLASSIFIED_FILE</span
+                >
+                <h2
+                  class="font-serif text-4xl font-bold text-white mb-2"
+                  x-text="selectedProject.name"
+                ></h2>
+                <p
+                  class="font-mono text-xs text-mist mb-6"
+                  x-text="selectedProject.id.toUpperCase()"
+                ></p>
+
+                <div class="mb-8">
+                  <img
+                    :src="selectedProject.banner_url || `https://capsule-render.vercel.app/api?type=waving&color=0:121212,100:333333&height=150&section=header&text=${selectedProject.name}`"
+                    class="w-full h-32 object-cover border border-white/10 opacity-80 mix-blend-luminosity hover:mix-blend-normal transition-all duration-500"
+                  />
+                </div>
+
+                <div class="space-y-4">
+                  <div>
+                    <h5
+                      class="font-mono text-[10px] text-white/40 mb-2 border-b border-white/10 pb-1"
+                    >
+                      STATUS
+                    </h5>
+                    <span
+                      class="text-xs text-neon font-mono"
+                      x-text="selectedProject.status"
+                    ></span>
+                  </div>
+                  <div>
+                    <h5
+                      class="font-mono text-[10px] text-white/40 mb-2 border-b border-white/10 pb-1"
+                    >
+                      CATEGORY
+                    </h5>
+                    <span
+                      class="text-xs text-white font-mono"
+                      x-text="selectedProject.category"
+                    ></span>
+                  </div>
+                  <div>
+                    <h5
+                      class="font-mono text-[10px] text-white/40 mb-2 border-b border-white/10 pb-1"
+                    >
+                      LINKS
+                    </h5>
+                    <a
+                      :href="selectedProject.repo_url"
+                      target="_blank"
+                      class="flex items-center gap-2 text-xs text-white hover:text-crimson transition-colors font-mono"
+                    >
+                      <i class="ph ph-github-logo"></i> Repository Access
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="lg:col-span-8 p-8 lg:p-12 relative">
+              <p
+                class="font-serif text-lg text-white/90 leading-relaxed mb-8 border-l-2 border-crimson pl-6 italic"
+                x-text="selectedProject.description"
+              ></p>
+
+              <div class="mb-8">
+                <h4 class="font-mono text-xs text-mist mb-3">
+                  TECHNOLOGY_STACK
+                </h4>
+                <div class="flex flex-wrap gap-2">
+                  <template x-for="tech in selectedProject.tech_stack">
+                    <span
+                      class="px-2 py-1 bg-white/5 border border-white/10 text-[10px] font-mono text-white/70"
+                      x-text="tech"
+                    ></span>
+                  </template>
+                </div>
+              </div>
+
+              <template x-if="selectedProject.architecture">
+                <div class="mb-8 bg-black/30 p-6 border border-white/5">
+                  <h4
+                    class="font-mono text-xs text-crimson mb-4 flex items-center gap-2"
+                  >
+                    <i class="ph ph-circuitry"></i> SYSTEM_ARCHITECTURE
+                  </h4>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <template
+                      x-for="(desc, key) in selectedProject.architecture"
+                    >
+                      <div>
+                        <strong
+                          class="block text-[10px] text-mist uppercase mb-1"
+                          x-text="key"
+                        ></strong>
+                        <p
+                          class="text-xs text-white/80 font-mono leading-relaxed"
+                          x-text="desc"
+                        ></p>
+                      </div>
+                    </template>
+                  </div>
+                </div>
+              </template>
+
+              <div class="mb-6">
+                <h4 class="font-mono text-xs text-mist mb-3">
+                  CORE_CAPABILITIES
+                </h4>
+                <ul class="space-y-2">
+                  <template x-for="feature in selectedProject.key_features">
+                    <li class="flex items-start gap-3 text-sm text-gray-400">
+                      <span class="mt-1.5 w-1 h-1 bg-crimson shrink-0"></span>
+                      <span x-text="feature"></span>
+                    </li>
+                  </template>
+                </ul>
+              </div>
+
+              <div
+                class="absolute top-4 right-4 text-[10px] font-mono text-white/10 pointer-events-none"
+              >
+                SEC_LEVEL: ALPHA<br />
+                ENCRYPTION: ON
+              </div>
+            </div>
+          </div>
+        </template>
+      </div>
+    </div>
+
+    <div class="noise-overlay"></div>
+    <div class="scanline"></div>
+    <canvas
+      id="neural-canvas"
+      class="fixed top-0 left-0 w-full h-full -z-10 opacity-20"
+    ></canvas>
+
+    <div
+      class="max-w-[1400px] mx-auto px-6 py-8 relative z-20 opacity-0 animate-[flicker_0.5s_ease-in_3.5s_forwards]"
+    >
+      <header
+        class="flex flex-col md:flex-row justify-between items-start md:items-end border-b border-white/10 pb-6 mb-16 backdrop-blur-sm sticky top-0 z-30 pt-4 bg-void/80"
+      >
+        <div class="group cursor-default">
+          <h1
+            class="text-3xl font-serif font-bold tracking-widest text-white mb-1 group-hover:text-red-600 transition-colors duration-500"
+          >
+            SSL-ACTX
+          </h1>
+          <div
+            class="flex items-center gap-2 font-mono text-[10px] text-mist tracking-[0.2em]"
+          >
+            <span
+              class="w-2 h-2 bg-green-500 rounded-full animate-pulse"
+            ></span>
+            <span>SYSTEM.ONLINE</span>
+            <span>::</span>
+            <span>UID: 0x9F_SEURIIN</span>
+          </div>
+        </div>
+        <nav
+          class="flex gap-8 font-mono text-xs tracking-widest mt-4 md:mt-0 items-center"
+        >
+          <a
+            href="#bio"
+            class="hover:text-white text-mist transition-all hover:line-through decoration-red-500"
+            >IDENTITY</a
+          >
+          <a
+            href="#arsenal"
+            class="hover:text-white text-mist transition-all hover:line-through decoration-red-500"
+            >ARSENAL</a
+          >
+          <a
+            href="#projects"
+            class="hover:text-white text-mist transition-all hover:line-through decoration-red-500"
+            >ARCHIVES</a
+          >
+          <button
+            @click="openTerminal()"
+            class="px-3 py-1 border border-green-500/30 text-green-500 hover:bg-green-500/10 transition-colors flex items-center gap-2"
+          >
+            <i class="ph ph-terminal-window"></i> TERMINAL
+          </button>
+        </nav>
+      </header>
+
+      <section
+        id="bio"
+        class="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-32 items-center"
+      >
+        <div
+          class="lg:col-span-4 flex flex-col items-center lg:items-start relative group"
+        >
+          <div class="relative w-64 h-64 lg:w-80 lg:h-80">
+            <div
+              class="absolute inset-0 rounded-full border border-white/10 border-dashed animate-spin-slow"
+            ></div>
+            <div
+              class="absolute inset-4 rounded-full border border-white/5 animate-[spin_15s_linear_infinite_reverse]"
+            ></div>
+            <div
+              class="absolute inset-0 rounded-full border-2 border-transparent border-t-white/20 animate-spin"
+            ></div>
+
+            <img
+              src="https://cdn.jsdelivr.net/gh/SSL-ACTX/SSL-ACTX@main/images/seuriin_frz_circ.gif"
+              alt="Avatar"
+              class="w-full h-full rounded-full object-cover grayscale contrast-125 brightness-75 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-700"
+            />
+
+            <div
+              class="absolute inset-0 rounded-full bg-gradient-to-tr from-red-900/20 to-transparent mix-blend-overlay"
+            ></div>
+          </div>
+
+          <div
+            class="mt-6 border border-white/10 bg-abyss/80 p-4 font-mono text-xs w-full max-w-xs backdrop-blur-md"
+          >
+            <div
+              class="flex justify-between border-b border-white/10 pb-2 mb-2"
+            >
+              <span class="text-mist">ROLE</span>
+              <span class="text-white">BSIT Student</span>
+            </div>
+            <div
+              class="flex justify-between border-b border-white/10 pb-2 mb-2"
+            >
+              <span class="text-mist">LOC</span>
+              <span class="text-white">Philippines</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-mist">ORG</span>
+              <span class="text-white">Colegio de Montalban</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-8 space-y-8">
+          <div>
+            <h2
+              class="text-6xl md:text-8xl font-serif font-black mb-2 glitch opacity-90"
+              data-text="SEURIIN"
+            >
+              SEURIIN
+            </h2>
+            <p
+              class="font-mono text-crimson text-sm tracking-widest uppercase mb-6"
+            >
+              Building things to see if they'll break. Usually, they do.
+            </p>
+          </div>
+
+          <div
+            class="prose prose-invert max-w-none font-serif text-lg text-white/80 leading-relaxed border-l-2 border-white/10 pl-6"
+          >
+            <p class="italic mb-4">
+              "My journey isn't about climbing a corporate ladder; it's about
+              satisfying a relentless curiosity."
+            </p>
+            <p class="text-sm font-sans font-light text-mist text-justify">
+              A tinkerer fascinated by the deep, weird corners of computer
+              science. From
+              <span class="text-white">JavaScript engines</span> to
+              <span class="text-white">DNA storage</span>, I build systems from
+              scratch to understand them. Abstractions are leaks waiting to
+              happen. To control the machine, one must speak its mother tongue.
+            </p>
+          </div>
+
+          <div class="flex flex-wrap gap-4 pt-4">
+            <a
+              href="mailto:seuriin@gmail.com"
+              class="px-6 py-3 border border-white/20 hover:bg-white hover:text-black transition-colors font-mono text-sm flex items-center gap-2"
+            >
+              <i class="ph ph-envelope-simple"></i> ESTABLISH COMMS
+            </a>
+            <a
+              href="https://github.com/SSL-ACTX"
+              target="_blank"
+              class="px-6 py-3 border border-white/20 hover:border-white transition-colors font-mono text-sm flex items-center gap-2"
+            >
+              <i class="ph ph-github-logo"></i> GITHUB
+            </a>
+            <div
+              class="px-6 py-3 border border-white/10 text-mist font-mono text-sm flex items-center gap-2 cursor-help"
+              title="Discord"
+            >
+              <i class="ph ph-discord-logo"></i> Handle: Seuriin
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div
+        class="w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent mb-24"
+      ></div>
+
+      <section id="arsenal" class="mb-32">
+        <div class="flex items-center gap-4 mb-12">
+          <i class="ph ph-cpu text-2xl text-crimson"></i>
+          <h3 class="font-serif text-3xl font-bold">Technical Arsenal</h3>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div
+            class="bg-ash/30 border border-white/5 p-8 relative overflow-hidden group"
+          >
+            <div
+              class="absolute top-0 right-0 p-2 font-mono text-[10px] text-white/20"
+            >
+              MODULE_01
+            </div>
+            <h4
+              class="font-mono text-sm text-mist mb-6 border-b border-white/10 pb-2"
+            >
+              CORE_STACK
+            </h4>
+            <div class="flex flex-wrap gap-3">
+              <template
+                x-for="tech in ['Rust', 'Python', 'JavaScript', 'Node.js', 'WASM', 'Redis', 'FastAPI', 'Docker', 'MongoDB']"
+              >
+                <span
+                  class="px-3 py-1 bg-black border border-white/10 text-xs font-mono text-white/80 hover:border-white/50 hover:text-white transition-colors cursor-crosshair"
+                  x-text="tech"
+                ></span>
+              </template>
+            </div>
+          </div>
+
+          <div
+            class="bg-ash/30 border border-white/5 p-8 relative overflow-hidden group"
+          >
+            <div
+              class="absolute top-0 right-0 p-2 font-mono text-[10px] text-white/20"
+            >
+              MODULE_02
+            </div>
+            <h4
+              class="font-mono text-sm text-mist mb-6 border-b border-white/10 pb-2"
+            >
+              RESEARCH_INTERESTS
+            </h4>
+            <ul class="space-y-2 font-mono text-xs text-mist">
+              <li
+                class="flex items-center gap-3 hover:text-white transition-colors"
+              >
+                <span class="w-1.5 h-1.5 bg-crimson"></span> Systems Programming
+              </li>
+              <li
+                class="flex items-center gap-3 hover:text-white transition-colors"
+              >
+                <span class="w-1.5 h-1.5 bg-crimson"></span> Virtualization &
+                Compilers
+              </li>
+              <li
+                class="flex items-center gap-3 hover:text-white transition-colors"
+              >
+                <span class="w-1.5 h-1.5 bg-crimson"></span> Cybersecurity &
+                Steganography
+              </li>
+              <li
+                class="flex items-center gap-3 hover:text-white transition-colors"
+              >
+                <span class="w-1.5 h-1.5 bg-crimson"></span> Database Internals
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects">
+        <div class="flex items-end justify-between mb-16">
+          <div>
+            <h3 class="font-serif text-4xl font-bold mb-2">Project Archives</h3>
+            <p class="font-mono text-xs text-mist">
+              CLASSIFIED MATERIAL // CLEARANCE LEVEL: PUBLIC
+            </p>
+          </div>
+          <div class="hidden md:block font-mono text-xs text-white/20">
+            <span x-text="projects.length"></span> ARTIFACTS FOUND
+          </div>
+        </div>
+
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 auto-rows-max"
+        >
+          <template x-for="project in projects" :key="project.id">
+            <article
+              class="bg-abyss border border-white/10 hover:border-white/30 transition-all duration-500 overflow-hidden flex flex-col p-6 group cursor-pointer relative"
+              :class="{'col-span-1 md:col-span-2 xl:col-span-2': project.id === 'chronos-db'}"
+              @click="openProject(project.id)"
+            >
+              <div class="flex justify-between items-start mb-6">
+                <i
+                  class="ph text-3xl text-white/20 group-hover:text-white transition-colors"
+                  :class="{
+                                   'ph-clock-afternoon': project.id === 'chronos-db',
+                                   'ph-ghost': project.id === 'mirage-fs',
+                                   'ph-dna': project.id === 'helix',
+                                   'ph-globe-hemisphere-west': project.id === 'project-aether',
+                                   'ph-spiral': project.id === 'vortex-js',
+                                   'ph-shield-check': project.id === 'velhara' || project.id === 'sigilus'
+                               }"
+                ></i>
+                <span
+                  class="text-[10px] font-mono border px-2 py-0.5"
+                  :class="{
+                                      'border-green-500/30 text-green-500 bg-green-900/10': project.status === 'Research Prototype',
+                                      'border-blue-500/30 text-blue-400 bg-blue-900/10': project.status.includes('v'),
+                                      'border-orange-500/30 text-orange-400 bg-orange-900/10': project.status === 'Experimental',
+                                      'border-yellow-500/30 text-yellow-400 bg-yellow-900/10': project.status === 'Beta'
+                                  }"
+                  x-text="project.status"
+                ></span>
+              </div>
+
+              <div class="flex flex-col flex-grow">
+                <template x-if="project.id === 'chronos-db'">
+                  <div class="flex flex-col md:flex-row gap-8">
+                    <div
+                      class="md:w-1/3 h-48 md:h-auto bg-black border-r border-white/10 relative overflow-hidden"
+                    >
+                      <img
+                        :src="project.banner_url"
+                        class="w-full h-full object-cover opacity-50 mix-blend-screen"
+                      />
+                    </div>
+                    <div class="md:w-2/3">
+                      <h4
+                        class="font-serif text-2xl font-bold group-hover:text-white transition-colors"
+                        x-text="project.name"
+                      ></h4>
+                      <p
+                        class="font-mono text-xs text-mist mb-4 italic"
+                        x-text="project.tagline"
+                      ></p>
+                      <p
+                        class="text-sm text-gray-400 mb-6 leading-relaxed"
+                        x-text="project.description"
+                      ></p>
+
+                      <div class="mt-auto flex justify-between items-center">
+                        <div class="flex gap-2">
+                          <template
+                            x-for="tech in project.tech_stack.slice(0,3)"
+                          >
+                            <span
+                              class="text-[10px] font-mono text-white/30"
+                              x-text="tech.toUpperCase()"
+                            ></span>
+                          </template>
+                        </div>
+                        <span
+                          class="text-xs font-mono text-crimson group-hover:text-white transition-colors flex items-center gap-2"
+                        >
+                          DECRYPT_FILE <i class="ph ph-lock-key-open"></i>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </template>
+
+                <template x-if="project.id !== 'chronos-db'">
+                  <div>
+                    <h4
+                      class="font-serif text-xl font-bold mb-2 group-hover:text-white transition-colors"
+                      x-text="project.name"
+                    ></h4>
+                    <p
+                      class="font-mono text-[10px] text-mist mb-4"
+                      x-text="project.tagline"
+                    ></p>
+                    <p
+                      class="text-xs text-gray-400 mb-6 leading-relaxed line-clamp-3"
+                      x-text="project.description"
+                    ></p>
+
+                    <div class="bg-black/40 p-3 mb-6 border border-white/5">
+                      <p class="font-mono text-[10px] text-mist">
+                        <span class="text-white">STACK:</span>
+                        <span
+                          x-text="project.tech_stack.slice(0, 3).join(', ')"
+                        ></span
+                        ><br />
+                        <span class="text-white">CAT:</span>
+                        <span x-text="project.category"></span>
+                      </p>
+                    </div>
+
+                    <button
+                      class="mt-auto text-xs font-mono text-mist group-hover:text-crimson transition-colors flex items-center gap-2 w-full justify-end"
+                    >
+                      ACCESS_DATA <i class="ph ph-corners-out"></i>
+                    </button>
+                  </div>
+                </template>
+              </div>
+            </article>
+          </template>
+        </div>
+      </section>
+
+      <footer
+        class="mt-48 border-t border-white/10 pt-12 pb-12 flex flex-col md:flex-row justify-between items-end gap-6 text-mist font-mono text-xs"
+      >
+        <div>
+          <p class="mb-2 text-white">SYSTEM STATUS: STABLE</p>
+          <p>&copy; 2026 SSL-ACTX. ALL RIGHTS RESERVED.</p>
+        </div>
+        <div class="text-right">
+          <p class="mb-1">
+            LAST_LOGIN:
+            <span
+              class="text-white"
+              x-text="new Date().toLocaleDateString()"
+            ></span>
+          </p>
+          <p>LOCATION: Rodriguez, Philippines</p>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      const canvas = document.getElementById("neural-canvas");
+      const ctx = canvas.getContext("2d");
+      let width, height;
+      let particles = [];
+      const particleCount = 70;
+      const connectionDistance = 140;
+
+      window.addEventListener("resize", resize);
+      function resize() {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+        initParticles();
+      }
+
+      class Particle {
+        constructor() {
+          this.x = Math.random() * width;
+          this.y = Math.random() * height;
+          this.vx = (Math.random() - 0.5) * 0.3;
+          this.vy = (Math.random() - 0.5) * 0.3;
+          this.size = Math.random() * 1.5 + 1;
+        }
+        update() {
+          this.x += this.vx;
+          this.y += this.vy;
+          if (this.x < 0 || this.x > width) this.vx *= -1;
+          if (this.y < 0 || this.y > height) this.vy *= -1;
+        }
+        draw() {
+          ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+
+      function initParticles() {
+        particles = [];
+        for (let i = 0; i < particleCount; i++) particles.push(new Particle());
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, width, height);
+        for (let i = 0; i < particles.length; i++) {
+          particles[i].update();
+          particles[i].draw();
+          for (let j = i; j < particles.length; j++) {
+            const dx = particles[i].x - particles[j].x;
+            const dy = particles[i].y - particles[j].y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < connectionDistance) {
+              ctx.beginPath();
+              ctx.strokeStyle =
+                "rgba(100, 100, 100, " +
+                (1 - dist / connectionDistance) * 0.15 +
+                ")";
+              ctx.lineWidth = 1;
+              ctx.moveTo(particles[i].x, particles[i].y);
+              ctx.lineTo(particles[j].x, particles[j].y);
+              ctx.stroke();
+            }
+          }
+        }
+        requestAnimationFrame(animate);
+      }
+      resize();
+      animate();
+
+      function portfolioSystem() {
+        return {
+          booted: false,
+          terminalOpen: false,
+          modalOpen: false,
+          selectedProject: null,
+          terminalInput: "",
+          terminalHistory: [],
+
+          projects: [
+            {
+              id: "chronos-db",
+              name: "ChronosDB",
+              tagline: "Vector-Native. Time-Traveling. Distributed.",
+              status: "Research Prototype",
+              category: "Database Systems",
+              repo_url: "https://github.com/SSL-ACTX/chronos-db",
+              banner_url:
+                "https://capsule-render.vercel.app/api?type=waving&color=0:1a1a1a,100:ffffff&height=220&section=header&text=ChronosDB&fontSize=90&fontColor=ffffff&animation=fadeIn&fontAlignY=35&rotate=0&stroke=ffffff&strokeWidth=0&desc=Vector-Native.%20Time-Traveling.%20Distributed.&descSize=20&descAlignY=60",
+              description:
+                "A high-performance distributed database built in Rust that uniquely combines Vector Similarity Search with Bi-Temporal Data Management and Raft Consensus. It solves the problem of 'lossy' AI memory by ensuring every vector embedding ever written is preserved in a strictly append-only history.",
+              tech_stack: [
+                "Rust",
+                "Raft Consensus",
+                "HNSW",
+                "mmap",
+                "rkyv",
+                "SIMD",
+              ],
+              architecture: {
+                storage:
+                  "Immutable, append-only log structure using 64MB memory-mapped segments.",
+                indexing:
+                  "Persistent HNSW graph with priority queue-based search.",
+                consensus:
+                  "openraft implementation for linearizable writes and leader election.",
+              },
+              key_features: [
+                "Distributed Consensus via Raft protocols.",
+                "Bi-Temporal Time Travel (valid_time & tx_time).",
+                "Strict Serializability and crash safety.",
+                "Zero-Copy Serialization via rkyv.",
+                "Adaptive durability modes based on hardware profiling.",
+              ],
+            },
+            {
+              id: "mirage-fs",
+              name: "MirageFS",
+              tagline: "The Invisible Filesystem",
+              status: "v1.2.0",
+              category: "Cybersecurity / Steganography",
+              repo_url: "https://github.com/SSL-ACTX/mirage-fs",
+              description:
+                "A high-stealth steganographic filesystem implementation. It allows users to format and mount standard image files (.png, .jpg) as fully functional read/write drives, hiding data inside pixel structures or metadata without breaking the image.",
+              tech_stack: [
+                "Rust",
+                "FUSE",
+                "XChaCha20-Poly1305",
+                "Argon2id",
+                "RAID 0",
+              ],
+              architecture: {
+                mapping:
+                  "Feistel Bijective Mapping for PNG pixels; DNG Morphing for JPEG/WebP.",
+                security:
+                  "Virtual block device encrypts data with unique nonces per block.",
+                striping:
+                  "Splits data across multiple images (RAID 0) to dilute entropy.",
+              },
+              key_features: [
+                "Military-grade authenticated encryption.",
+                "Stripe-Level Steganography across multiple carrier images.",
+                "Forensic resistance against binwalk/zsteg.",
+                "Mountable via FUSE on Linux, macOS, and WSL2.",
+              ],
+            },
+            {
+              id: "helix",
+              name: "Helix",
+              tagline: "Systems-Level DNA Storage Archiver",
+              status: "Research Prototype",
+              category: "Bio-Informatics / Archival",
+              repo_url: "https://github.com/SSL-ACTX/helix",
+              description:
+                "A compiler that bridges the gap between binary data and biological storage. It transforms digital files into biostable DNA oligonucleotides, handling encryption, error correction, and biological constraints to ensure data survives deep-time archival.",
+              tech_stack: [
+                "Rust",
+                "AES-256-GCM",
+                "Reed-Solomon",
+                "Viterbi Algorithm",
+                "Zstd",
+              ],
+              architecture: {
+                pipeline:
+                  "Stream & Compress -> Encrypt -> Redundancy (RS) -> Transcode -> Biological Analysis.",
+                error_correction:
+                  "Indel-Aware Viterbi decoder for healing mutations/deletions.",
+              },
+              key_features: [
+                "Rotating Base-3 Trellis to prevent homopolymers.",
+                "Reed-Solomon Erasure Coding (33% loss recovery).",
+                "Salt & Retry mechanism for GC-content stability.",
+                "Constant memory footprint via streaming architecture.",
+                "In-Silico PCR for molecular random access.",
+              ],
+            },
+            {
+              id: "project-aether",
+              name: "Project Aether",
+              tagline: "Experimental no_std TCP/IP Stack",
+              status: "Experimental",
+              category: "Systems / Networking",
+              repo_url: "https://github.com/SSL-ACTX/aether",
+              description:
+                "A custom, no_std compatible TCP/IP implementation written from scratch. It bypasses the Linux kernel to communicate directly with TAP interfaces via raw Ethernet frames, prioritizing throughput over standard reliability features.",
+              tech_stack: [
+                "Rust (no_std)",
+                "Raw Sockets",
+                "TAP/TUN",
+                "Zero-Copy",
+              ],
+              architecture: {
+                concurrency:
+                  "Sharded multi-threaded mode with 2-tuple hashing.",
+                event_loop:
+                  "Custom spin-loop with adaptive backoff (Spin/Yield/Sleep).",
+              },
+              key_features: [
+                "Direct hardware communication via TAP.",
+                "Implements ARP, IPv4, ICMP, UDP, TCP (Handshake only), DHCP.",
+                "Zero-copy packet processing.",
+                "SYN Cookie implementation for flood protection.",
+              ],
+            },
+            {
+              id: "vortex-js",
+              name: "VortexJS",
+              tagline: "Next-Gen Stackless JavaScript Virtualization",
+              status: "Beta",
+              category: "Compiler Theory / Security",
+              repo_url: "https://github.com/SSL-ACTX/vortex-js",
+              description:
+                "An advanced virtualization engine and optimizing compiler that transforms ECMAScript into a custom bytecode instruction set. It executes code in a stackless VM using a flattened Control Flow Graph to protect logic from reverse engineering.",
+              tech_stack: [
+                "Node.js",
+                "JavaScript",
+                "AST Manipulation",
+                "Obfuscation",
+              ],
+              architecture: {
+                compilation: "AST -> IR -> Optimization (Level 3) -> Bytecode.",
+                execution:
+                  "Polymorphic dispatchers (Chaos, BST, Switch) driving a linear state machine.",
+              },
+              key_features: [
+                "Stackless 'Trampoline' execution model.",
+                "Control Flow Graph (CFG) Flattening.",
+                "Hyperwave String Encryption.",
+                "Full support for Async/Await and Generators via state suspension.",
+                "Opaque Predicates and Anti-Tamper mechanisms.",
+              ],
+            },
+            {
+              id: "velhara",
+              name: "Velhara",
+              tagline: "API Defense Middleware (WASM Core)",
+              status: "v5.0",
+              category: "Web Security",
+              repo_url: "https://github.com/SSL-ACTX/velhara",
+              description:
+                "A framework-agnostic security middleware protecting Python APIs. It establishes a trusted client-server channel using a Rust-based WASM module to generate cryptographically bound tokens, preventing bot attacks and tampering.",
+              tech_stack: [
+                "Python",
+                "Rust (WASM)",
+                "Redis",
+                "Ed25519",
+                "AES-256-GCM",
+              ],
+              architecture: {
+                handshake:
+                  "Client solves WASM proof-of-work -> Server issues Sigil.",
+                transport:
+                  "Dual-mode (Header/Envelope) with automatic fallback.",
+                crypto:
+                  "Covenant system uses HKDF derived keys for per-request encryption.",
+              },
+              key_features: [
+                "Client Integrity Verification via WASM.",
+                "Sigil System (One-time use access tokens).",
+                "Covenant System (End-to-End Encryption for POST/PUT).",
+                "Replay protection via Redis.",
+                "Framework agnostic (Flask, Quart, FastAPI).",
+              ],
+            },
+            {
+              id: "sigilus",
+              name: "Sigilus Security",
+              tagline: "Multi-stage WebAssembly Bot Protection",
+              status: "v1.0",
+              category: "Web Security",
+              repo_url: "https://github.com/SSL-ACTX/sigilus",
+              banner_url:
+                "https://ik.imagekit.io/y4xxnrbcqagasdtawd67/DEV/sigilus2.png?updatedAt=1762677244157",
+              description:
+                "A security framework that employs a two-stage initialization process. It requires clients to pass a 'Proof of Execution' challenge using a mini-VM ('Loom of Secrets') before provisioning the main request-signing VM.",
+              tech_stack: ["Python", "C++", "WASM", "Emscripten", "Redis"],
+              architecture: {
+                stage_1: "Loom of Secrets VM generates Woven Sigil.",
+                stage_2:
+                  "Server validates Sigil via bytecode simulation -> Provisions encrypted Main VM.",
+                runtime:
+                  "Main VM hooks fetch/XHR to sign requests with OblivionSig.",
+              },
+              key_features: [
+                "Multi-stage VM provisioning.",
+                "Dynamic VM encryption with rotating keys.",
+                "Server-side bytecode simulation for validation.",
+                "Payload Integrity (OblivionSig) and Timestamp Validation (ChronoMark).",
+              ],
+            },
+          ],
+
+          initSystem() {
+            setTimeout(() => {
+              this.booted = true;
+            }, 3500);
+          },
+
+          openProject(id) {
+            this.selectedProject = this.projects.find((p) => p.id === id);
+            this.modalOpen = true;
+          },
+
+          closeModal() {
+            this.modalOpen = false;
+            setTimeout(() => {
+              this.selectedProject = null;
+            }, 300);
+          },
+
+          openTerminal() {
+            this.terminalOpen = true;
+            this.terminalHistory = [];
+            setTimeout(() => {
+              document.querySelector('input[x-model="terminalInput"]').focus();
+            }, 100);
+          },
+
+          processCommand() {
+            const cmd = this.terminalInput.trim().toLowerCase();
+            const args = cmd.split(" ");
+            this.terminalHistory.push(
+              `<span class="text-green-500">root@seuriin:~$</span> ${this.terminalInput}`,
+            );
+
+            if (cmd === "help") {
+              this.terminalHistory.push(`Available commands:<br>
+                            - <span class="text-white">ls</span>: List all project artifacts<br>
+                            - <span class="text-white">whoami</span>: Display user identity<br>
+                            - <span class="text-white">open [id]</span>: Open specific project file<br>
+                            - <span class="text-white">clear</span>: Clear terminal buffer<br>
+                            - <span class="text-white">exit</span>: Close terminal session`);
+            } else if (cmd === "ls") {
+              let output = '<div class="grid grid-cols-1 gap-1">';
+              this.projects.forEach((p) => {
+                output += `<div class="flex justify-between w-full max-w-md"><span class="text-neon">${p.id}</span> <span class="text-mist">[${p.status}]</span></div>`;
+              });
+              output += "</div>";
+              this.terminalHistory.push(output);
+            } else if (cmd === "whoami") {
+              this.terminalHistory.push(
+                `<span class="text-crimson">UID: 0x9F_SEURIIN</span><br>Role: Random Ahh Dev / Tinkerer<br>Philosophy: "Build from scratch."`,
+              );
+            } else if (cmd === "clear") {
+              this.terminalHistory = [];
+            } else if (cmd === "exit") {
+              this.terminalOpen = false;
+            } else if (args[0] === "open" && args[1]) {
+              const target = this.projects.find((p) => p.id === args[1]);
+              if (target) {
+                this.terminalHistory.push(`Decrypting ${args[1]}... Success.`);
+                this.openProject(args[1]);
+              } else {
+                this.terminalHistory.push(
+                  `<span class="text-red-500">Error: Artifact '${args[1]}' not found.</span>`,
+                );
+              }
+            } else if (cmd !== "") {
+              this.terminalHistory.push(
+                `<span class="text-red-500">Command not found: ${cmd}</span>`,
+              );
+            }
+
+            this.terminalInput = "";
+            this.$nextTick(() => {
+              const terminalOutput = document.getElementById("terminal-output");
+              if (terminalOutput)
+                terminalOutput.scrollTop = terminalOutput.scrollHeight;
+            });
+          },
+        };
+      }
+    </script>
+  </body>
+</html>
