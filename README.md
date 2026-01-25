@@ -28,8 +28,8 @@ These are the kinds of questions that lead me down rabbit holes. I'm not an expe
 
 - 🎓 **Currently:** Surmounting the BSIT grind. Life's catching up. 😿
 - 🧪 **My Playground:** Web dev, systems programming, virtualization, security and sometimes DBs.
-- 🦀 **Current Obsession:** Writing something in Rust and fighting the borrow checker _(it usually wins)_.
-- 🎨 **Confession:** I'm still _terrible_ at Frontend. I use a lot of Tailwind to hide the pain.
+- 🦀 **Current Obsession:** Writing something in Rust and fighting the borrow checker _(The borrow checker is still winning, but I'm landing punches now)_.
+- 🎨 **Confession:** I'm **BAD** at things I do.
 
 ---
 
@@ -39,21 +39,17 @@ I like to build impractical but fascinating things. Here are a few of the rabbit
 
 <br>
 
-<details>
-<summary><strong>🔬 Click to see my featured projects</strong></summary>
-
-<br>
 
 | Project | Description | Stack |
 | :--- | :--- | :--- |
 | **[VortexJS](https://github.com/SSL-ACTX/vortex-js)** | An experimental JavaScript virtualization engine. It's a source-to-source compiler that transforms JS into a custom bytecode format, executed by a polymorphic, stackless virtual machine to explore software protection theory. | <img src="https://skillicons.dev/icons?i=js,nodejs&theme=dark&perline=2" /> |
-| **[ChronosDB](https://github.com/SSL-ACTX/chronos-db)** | A distributed, vector-native, time-traveling database built in Rust. It combines HNSW for vector search, Raft for consensus, and a bi-temporal data model, allowing you to query the state of your data at any point in time. | <img src="https://skillicons.dev/icons?i=rust,docker&theme=dark&perline=2" /> |
+| **[MirageFS](https://github.com/SSL-ACTX/mirage-fs)** | A high-stealth steganographic virtual block device. It mounts encrypted storage inside media (PNG/MP4/etc) via FUSE or WebDAV. Features a self-hosted Web UI, Hybrid RAID striping, and camouflages data as H.264 NAL-unit filler to defeat forensic analysis. | <img src="https://skillicons.dev/icons?i=rust&theme=dark&perline=1" /> |
 | **[Helix](https://github.com/SSL-ACTX/helix)** | A systems-level DNA storage archiver. This compiler translates binary files into biostable DNA sequences, implementing a full storage stack including AES-256 encryption, Reed-Solomon error correction, and a Viterbi decoder for indel correction. | <img src="https://skillicons.dev/icons?i=rust,py&theme=dark&perline=2" /> |
-| **[MirageFS](https://github.com/SSL-ACTX/mirage-fs)** | A high-stealth steganographic filesystem built in Rust. It mounts standard media files (`.png`, `.jpg`, `.webp`, `.mp4`, `.mov`) as fully functional encrypted read/write drives, featuring RAID 0 striping and format-specific data morphing strategies. | <img src="https://skillicons.dev/icons?i=rust&theme=dark&perline=1" /> |
+| **[ChronosDB](https://github.com/SSL-ACTX/chronos-db)** | A distributed, vector-native, time-traveling database built in Rust. It combines HNSW for vector search, Raft for consensus, and a bi-temporal data model, allowing you to query the state of your data at any point in time. | <img src="https://skillicons.dev/icons?i=rust,docker&theme=dark&perline=2" /> |
 | **[Project Aether](https://github.com/SSL-ACTX/aether)** | A user-space TCP/IP stack written from scratch in Rust to bypass the kernel. It's a raw, high-throughput experiment that prioritizes speed over reliability by stripping out features like retransmission and congestion control. | <img src="https://skillicons.dev/icons?i=rust&theme=dark&perline=1" /> |
 | **[Sigilus Security](https://github.com/SSL-ACTX/sigilus)** | A multi-stage, WebAssembly-based security framework for protecting web APIs. It uses a proof-of-execution challenge to provision a client-side request-signing WASM, making automated threats more difficult. | <img src="https://skillicons.dev/icons?i=cpp,wasm,python,redis&theme=dark&perline=4" /> |
 
-</details>
+<br>
 
 ---
 
