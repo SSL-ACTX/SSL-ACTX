@@ -43,8 +43,8 @@ I like to build impractical but fascinating things. Here are a few of the rabbit
 | Project | Description | Stack |
 | :--- | :--- | :--- |
 | **[VortexJS](https://github.com/SSL-ACTX/vortex-js)** | An experimental JavaScript virtualization engine. It's a source-to-source compiler that transforms JS into a custom bytecode format, executed by a polymorphic, stackless virtual machine to explore software protection theory. | <img src="https://skillicons.dev/icons?i=js,nodejs&theme=dark&perline=2" /> |
-| **[Myrmidon](https://github.com/SSL-ACTX/myrmidon)** | A distributed actor-model runtime bridging Rust and Python. It implements a BEAM-inspired cooperative reduction scheduler, zero-copy messaging, and atomic hot-code swapping to explore high-concurrency distributed meshes. | <img src="https://skillicons.dev/icons?i=rust,python,js,nodejs&theme=dark&perline=2" /> |
-| **[ChaosLattice](https://github.com/SSL-ACTX/chaosL)** | A research-grade Fully Homomorphic Encryption (FHE) runtime. It challenges standard cryptography by using deterministic chaotic attractors for RLWE noise. Features a custom encrypted stack VM capable of oblivious evaluation and bounded control flow. | <img src="https://skillicons.dev/icons?i=rust&theme=dark&perline=1" /> |
+| **[Iris](https://github.com/SSL-ACTX/iris)** | A distributed actor-model runtime bridging Rust and Python. It implements a BEAM-inspired cooperative reduction scheduler, zero-copy messaging, and atomic hot-code swapping to explore high-concurrency distributed meshes. | <img src="https://skillicons.dev/icons?i=rust,python,js,nodejs&theme=dark&perline=2" /> |
+| **[ChaosLattice](https://github.com/SSL-ACTX/chaosL)** | An experimental Fully Homomorphic Encryption (FHE) runtime. It challenges standard cryptography by using deterministic chaotic attractors for RLWE noise. Features a custom encrypted stack VM capable of oblivious evaluation and bounded control flow. | <img src="https://skillicons.dev/icons?i=rust&theme=dark&perline=1" /> |
 | **[MirageFS](https://github.com/SSL-ACTX/mirage-fs)** | A high-stealth steganographic virtual block device. It mounts encrypted storage inside media (PNG/MP4/etc) via FUSE or WebDAV. Features a self-hosted Web UI, Hybrid RAID striping, and camouflages data as H.264 NAL-unit filler to defeat forensic analysis. | <img src="https://skillicons.dev/icons?i=rust&theme=dark&perline=1" /> |
 | **[argus](https://github.com/SSL-ACTX/argus)** | A high-performance, entropy-based secret scanner. It combines Aho-Corasick pattern matching with Shannon entropy analysis to detect potential leaks. Features a "Story" engine that analyzes control flow and variable context to distinguish true risks from noise. | <img src="https://skillicons.dev/icons?i=rust,python,wasm&theme=dark&perline=2" /> |
 | **[Helix](https://github.com/SSL-ACTX/helix)** | A systems-level DNA storage archiver. This compiler translates binary files into biostable DNA sequences, implementing a full storage stack including XChaCha20-Poly1305 encryption, Reed-Solomon error correction, and a Viterbi decoder for indel correction. | <img src="https://skillicons.dev/icons?i=rust,py&theme=dark&perline=2" /> |
@@ -90,7 +90,7 @@ My approach is simple: **build from scratch to truly understand.** I believe you
 
 ### ☕ Connect
 
-I'm always open to talking shop about weird stuff, debating why Python is slow—you're st*pid, or just asking for manga recommendations. If you're working on something weird and interesting, feel free to reach out.
+I'm always open to talking shop about weird stuff, debating why Python is slow??, or just asking for manga recommendations. If you're working on something weird and interesting, feel free to reach out.
 
 <p align="center">
   <a href="mailto:seuriin@gmail.com">
