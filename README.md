@@ -24,7 +24,7 @@
   
 BSIT student @ **Colegio de Montalban** (4th Yr) | Systems Tinkerer | Bug Creator
 
-I spend my time reverse-engineering complex systems and rebuilding them from first principles just to see if I can. From DNA storage compilers to continuous-state virtual machines, my GitHub is a graveyard of ambitious rabbit holes and weird computer science experiments.
+I spend my time reverse-engineering complex systems and rebuilding them from first principles just to see if I can. From compilers to virtual machines, my GitHub is a graveyard of ambitious rabbit holes and weird computer science experiments.
  * 🎓 **Currently:** Trying to survive my BSIT degree.
  * 🦀 **Main Stack:** Python, JS and Rust when I'm feeling brave.
  * 🧪 **Interests:** Virtualization, Cryptography, Systems Architecture, and weird VMs.
