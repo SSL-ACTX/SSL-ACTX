@@ -61,11 +61,12 @@ My approach is simple: **build from scratch to truly understand.** I believe you
 
 - **Languages:** I've fully fallen down the **Rust** rabbit hole. It's my primary weapon of choice for building memory-safe systems, wild VMs, and high-performance backends. I fall back to **Python** & **JavaScript** for rapid prototyping, web, or scripting.
 - **Systems & Low-Level:** This is where the real fun is. I enjoy designing **custom bytecode**, building **unhinged compilers**, messing with **WASM**, and implementing raw cryptographic math from scratch.
+- **Full-Stack Web:** While I love the low-level chaos, my practical stack for shipping complete, user-facing applications is **Next.js** paired with **FastAPI**.
 - **Backend & Data:** When I need infrastructure, my go-to stack is **FastAPI/Node.js** + **MongoDB**/**MySQL** + **Redis**. 
 - **Tools of the Trade:** I live in the terminal. My favorite editor is KDE **Kate** for its simplicity and power, but I rely on **VSCode** when the Rust analyzer needs to yell at me about lifetimes.
 
 <div align="center">
-  <img src="https://skillicons.dev/icons?i=rust,python,js,nodejs,wasm,fastapi,mongodb,mysql,redis,docker,bash,git,github,vscode&theme=dark" />
+  <img src="https://skillicons.dev/icons?i=rust,python,js,nodejs,wasm,nextjs,fastapi,mongodb,mysql,redis,docker,bash,git,github,vscode&theme=dark" />
 </div>
 
 ---
