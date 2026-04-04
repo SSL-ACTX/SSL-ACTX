@@ -10,7 +10,7 @@
   </p>
 
   <p align="center">
-    <i>"Building things to see if they'll break. Usually, they do."</i>
+    <i>"The more you know, the more you know you don't know."</i>
   </p>
 </div>
 
