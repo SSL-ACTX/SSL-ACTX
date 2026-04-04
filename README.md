@@ -59,7 +59,7 @@ I like to build impractical but fascinating things. Here are a few of the rabbit
 My approach is simple: **build from scratch to truly understand.** I believe you can't claim to know a system until you've tried (and failed) to build a replica of it.
 
 - **Languages:** I've fallen down the **Rust** rabbit hole. It's my primary weapon of choice for building memory-safe systems and high-performance backends. I fall back to **Python** & **JavaScript** for rapid prototyping, web, or scripting.
-- **Systems & Low-Level:** This is where the real fun is. I enjoy designing **custom bytecode**, building ** weird compilers**, messing with **WASM**, and implementing unconventinal things.
+- **Systems & Low-Level:** This is where the real fun is. I enjoy designing **custom bytecode**, building **weird compilers**, messing with **WASM**, and implementing unconventinal things.
 - **Full-Stack Web:** While I love the low-level chaos, my practical stack for shipping complete, user-facing applications is **Next.js** paired with **FastAPI**.
 - **Backend & Data:** When I need infrastructure, my go-to stack is **FastAPI/Node.js** + **MongoDB**/**MySQL** + **Redis**. 
 - **Tools of the Trade:** I live in the terminal. My favorite editor is KDE **Kate** for its simplicity and power, but I rely on **VSCode** when the Rust analyzer needs to yell at me about lifetimes.
