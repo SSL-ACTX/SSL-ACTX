@@ -44,14 +44,15 @@ A collection of theoretical and practical explorations into systems-level engine
 
 | Repository | Project Specification | Technologies |
 | :--- | :--- | :--- |
-| **[Iris](https://github.com/SSL-ACTX/iris)** | A high-performance hybrid actor runtime implemented in Rust, featuring a Cranelift-backed JIT and BEAM-inspired scheduling for zero-copy distributed messaging. | <img src="https://skillicons.dev/icons?i=rust,python,js,nodejs&theme=dark&perline=2" /> |
-| **[Nimue](https://github.com/Iris-Seravelle/nimue)** | A selective Rust virtualization and obfuscation framework (co-authored) utilizing a polymorphic Mother/Worker VM architecture and the **Prism** non-linear string protection system for high-fidelity code protection. | <img src="https://skillicons.dev/icons?i=rust&theme=dark&perline=1" /> |
-| **[Ocular](https://github.com/SSL-ACTX/ocular)** | A zero-allocation instruction tracer for Python (PEP 669), utilizing hardware TSC cycle counting for high-fidelity profiling without fast-path disruption. | <img src="https://skillicons.dev/icons?i=rust,python&theme=dark&perline=1" /> |
-| **[MirageFS](https://github.com/SSL-ACTX/mirage-fs)** | A steganographic virtual block device that facilitates encrypted storage within multimedia containers, utilizing H.264 NAL-unit filler for forensic evasion. | <img src="https://skillicons.dev/icons?i=rust&theme=dark&perline=1" /> |
-| **[VortexJS](https://github.com/SSL-ACTX/vortex-js)** | An experimental virtualization engine for JavaScript, employing a polymorphic stackless VM to explore software protection and obfuscation theories. | <img src="https://skillicons.dev/icons?i=js,nodejs&theme=dark&perline=2" /> |
-| **[Argus](https://github.com/SSL-ACTX/argus)** | An entropy-based secret scanner combining Aho-Corasick pattern matching with Shannon entropy analysis and control-flow context for high-precision leak detection. | <img src="https://skillicons.dev/icons?i=rust,python,wasm&theme=dark&perline=2" /> |
-| **[Project Aether](https://github.com/SSL-ACTX/project-aether)** | A userspace TCP/IP stack implementation in Rust designed to bypass kernel overhead, prioritizing raw throughput for specialized networking experiments. | <img src="https://skillicons.dev/icons?i=rust&theme=dark&perline=1" /> |
-| **[Sigilus](https://github.com/SSL-ACTX/sigilus)** | A multi-stage WebAssembly-based security framework for web APIs, implementing proof-of-execution challenges to mitigate automated threat vectors. | <img src="https://skillicons.dev/icons?i=cpp,wasm,python,redis&theme=dark&perline=4" /> |
+| **[Iris](https://github.com/SSL-ACTX/iris)** | A high-performance hybrid actor runtime in Rust, featuring a Cranelift-backed JIT and BEAM-inspired scheduling for zero-copy distributed messaging and hot-swappable actor state. | <img src="https://skillicons.dev/icons?i=rust,python,js,nodejs&theme=dark&perline=2" /> |
+| **[Nimue](https://github.com/Iris-Seravelle/nimue)** | A selective Rust virtualization framework (co-authored) utilizing a polymorphic Mother/Worker VM architecture and the **Prism** non-linear string protection system for advanced software obfuscation. | <img src="https://skillicons.dev/icons?i=rust&theme=dark&perline=1" /> |
+| **[ICTL](https://github.com/SSL-ACTX/ictl)** | A domain-specific language for deterministic, time-aware concurrency, implementing isolated timelines and entropic memory decay with specialized VSCode integration. | <img src="https://skillicons.dev/icons?i=rust,ts&theme=dark&perline=2" /> |
+| **[Ocular](https://github.com/SSL-ACTX/ocular)** | A zero-allocation instruction tracer for Python (PEP 669), leveraging hardware TSC cycle counting for high-fidelity profiling without disrupting internal fast-paths. | <img src="https://skillicons.dev/icons?i=rust,python&theme=dark&perline=1" /> |
+| **[MirageFS](https://github.com/SSL-ACTX/mirage-fs)** | A steganographic virtual block device enabling encrypted storage within multimedia containers, camouflaging data as H.264 NAL-unit filler to defeat forensic analysis. | <img src="https://skillicons.dev/icons?i=rust&theme=dark&perline=1" /> |
+| **[VortexJS](https://github.com/SSL-ACTX/vortex-js)** | An experimental virtualization engine for JavaScript, transforming source into custom bytecode executed by a polymorphic stackless VM for software protection research. | <img src="https://skillicons.dev/icons?i=js,nodejs&theme=dark&perline=2" /> |
+| **[Argus](https://github.com/SSL-ACTX/argus)** | An entropy-based secret scanner utilizing Aho-Corasick pattern matching and Shannon entropy context to distinguish true cryptographic risks from noise in large codebases. | <img src="https://skillicons.dev/icons?i=rust,python,wasm&theme=dark&perline=2" /> |
+| **[Project Aether](https://github.com/SSL-ACTX/project-aether)** | A userspace TCP/IP stack implementation in Rust designed to bypass kernel overhead, prioritizing raw throughput for specialized, high-performance networking research. | <img src="https://skillicons.dev/icons?i=rust&theme=dark&perline=1" /> |
+| **[Sigilus](https://github.com/SSL-ACTX/sigilus)** | A multi-stage WebAssembly-based security framework for web APIs, implementing cryptographic proof-of-execution challenges to neutralize automated threat vectors. | <img src="https://skillicons.dev/icons?i=cpp,wasm,python,redis&theme=dark&perline=4" /> |
 
 <br>
 
@@ -59,16 +60,16 @@ A collection of theoretical and practical explorations into systems-level engine
 
 ### 🛠 Engineering Philosophy & Toolset
 
-My developmental methodology adheres to a strict "build to understand" principle: a system is only truly understood once it has been successfully (or unsuccessfully) replicated from scratch.
+My developmental methodology adheres to a strict "build to understand" principle: a system is only truly understood once it has been successfully (or unsuccessfully) replicated from fundamental axioms.
 
-- **Systems Programming:** **Rust** is my primary instrument for engineering memory-safe, high-performance systems. I utilize **Python** and **JavaScript** for rapid prototyping and high-level orchestration.
-- **Low-Level Explorations:** My interests lie in the design of **custom bytecode**, **specialized compilers**, **WebAssembly** integration, and unconventional system primitives.
-- **Web Architectures:** For production-grade applications, I employ a modern stack consisting of **Next.js** and **FastAPI**.
-- **Data & Infrastructure:** Proficient in deploying **FastAPI/Node.js** backends integrated with **MongoDB**, **MySQL**, and **Redis**.
-- **Workflow:** Operating primarily within a terminal-centric environment. While **KDE Kate** is my preference for its streamlined interface, **VSCode** is utilized for intensive development where deep language server integration is required.
+- **Systems Programming:** **Rust** is my primary instrument for engineering memory-safe, high-performance primitives. I utilize **Python** and **JavaScript** for high-level orchestration and rapid prototyping of complex logic.
+- **Language Design & Compilers:** A core pillar of my research involves the creation of **custom programming languages** and **Domain-Specific Languages (DSLs)**. This includes formal grammar specification, multi-pass semantic analysis, and the implementation of specialized register and stack-based virtual machines.
+- **Low-Level Explorations:** I am deeply invested in **custom bytecode** architectures, **WebAssembly** security frameworks, and unconventional system primitives that challenge traditional execution models.
+- **Web Architectures:** For production-grade applications, I employ a robust stack consisting of **Next.js** and **FastAPI**, prioritizing type safety and runtime performance.
+- **Workflow:** Operating primarily within a terminal-centric environment. While **KDE Kate** is my preference for its streamlined interface, **VSCode** is utilized for intensive development and the engineering of custom language server extensions.
 
 <div align="center">
-  <img src="https://skillicons.dev/icons?i=rust,python,js,nodejs,wasm,nextjs,fastapi,mongodb,mysql,redis,docker,bash,git,github,vscode&theme=dark" />
+  <img src="https://skillicons.dev/icons?i=rust,python,js,ts,nodejs,wasm,nextjs,fastapi,mongodb,mysql,redis,docker,bash,git,github,vscode&theme=dark" />
 </div>
 
 ---
