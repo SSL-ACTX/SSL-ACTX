@@ -1,7 +1,8 @@
 <div align="center">
   <img src="https://wsrv.nl/?url=https://cdn.jsdelivr.net/gh/SSL-ACTX/SSL-ACTX@main/images/seuriin_frz_circ.gif&output=webp&maxage=1y&n=-1&q=20&w=450" width="180" height="180" alt="Seuriin's Profile Picture">
   
-  <h1>Hey, I'm Seuriin.</h1>
+  <h1>Seuriin</h1>
+  <p><i>Systems Researcher | Systems Architect | Professional Bug Creator</i></p>
   
   <p align="center">
     <img src="https://img.shields.io/badge/Status-Just%20a%20Random%20Coder-8b5cf6?style=flat-square" alt="Status">
@@ -20,49 +21,51 @@
 
 ---
 
-### 🌙 About Me
+### 🌙 Technical Profile
   
-BSIT student @ **Colegio de Montalban** (4th Yr) | Systems Tinkerer | Bug Creator
+**Senior BSIT Student** at **Colegio de Montalban** (Year 4) | Systems Tinkerer | Professional Bug Creator
 
-I spend my time reverse-engineering complex systems and rebuilding them from first principles just to see if I can. From compilers to virtual machines, my GitHub is a graveyard of ambitious rabbit holes and weird computer science experiments.
- * 🎓 **Currently:** Trying to survive my BSIT degree.
- * 🦀 **Main Stack:** Python, JS and Rust when I'm feeling brave.
- * 🧪 **Interests:** Virtualization, Cryptography, Systems Architecture, and weird VMs.
- * ⚠️ **Warning:** I write code to learn, not for production. Proceed with caution.
- * 🫢 **Confession** I'm bad at programming. Just overly curious.
+I specialize in the forensic deconstruction of complex systems, frequently rebuilding them from fundamental principles to ascertain their internal mechanics. My repository serves as a curated archive of ambitious explorations and unconventional computational experiments—ranging from high-performance runtimes to cryptographic virtualization.
+
+ * 🎓 **Current Status:** Navigating the final year of my BSIT degree (barely surviving).
+ * 🦀 **Primary Stack:** **Rust** for performance-critical systems; Python and JavaScript for high-level orchestration and velocity.
+ * 🌐 **Web Development:** Engineering modern, performant web applications utilizing **Next.js** and **FastAPI**.
+ * 🧪 **Focus Areas:** System Virtualization, Applied Cryptography, Distributed Architecture, and Esoteric Virtual Machines.
+ * ⚠️ **Notice:** Code is authored for exploratory purposes rather than production environments.
+ * 🫢 **Self-Assessment:** Admitted novice in programming; merely possesses an unyielding curiosity.
 
 ---
 
-### 🔭 My Research Playground
+### 🔭 Research & Experimental Implementations
 
-I like to build impractical but fascinating things. Here are a few of the rabbit holes I've gone down.
+A collection of theoretical and practical explorations into systems-level engineering.
 
 <br>
 
-| Project | Description | Stack |
+| Repository | Project Specification | Technologies |
 | :--- | :--- | :--- |
-| **[Iris](https://github.com/SSL-ACTX/iris)** | Lightweight hybrid actor/runtime in Rust with an optional Cranelift JIT; seamless PyO3 bindings let you off‑load math and loops to native code, while the core BEAM‑inspired scheduler delivers zero‑copy messaging, cooperative reductions and hot‑swapable actors across distributed nodes. | <img src="https://skillicons.dev/icons?i=rust,python,js,nodejs&theme=dark&perline=2" /> |
-| **[Ocular](https://github.com/SSL-ACTX/ocular)** | A zero-allocation, lock-free PEP 669 Python instruction tracer. Uses hardware-level TSC cycle counting and adaptive de-instrumentation to profile code without breaking CPython's internal fast-paths. | <img src="https://skillicons.dev/icons?i=rust,python&theme=dark&perline=1" /> |
-| **[MirageFS](https://github.com/SSL-ACTX/mirage-fs)** | A high-stealth steganographic virtual block device. It mounts encrypted storage inside media (PNG/MP4/etc) via FUSE or WebDAV. Features a self-hosted Web UI, Hybrid RAID striping, and camouflages data as H.264 NAL-unit filler to defeat forensic analysis. | <img src="https://skillicons.dev/icons?i=rust&theme=dark&perline=1" /> |
-| **[VortexJS](https://github.com/SSL-ACTX/vortex-js)** | An experimental JavaScript virtualization engine. It's a source-to-source compiler that transforms JS into a custom bytecode format, executed by a polymorphic, stackless virtual machine to explore software protection theory. | <img src="https://skillicons.dev/icons?i=js,nodejs&theme=dark&perline=2" /> |
-| **[argus](https://github.com/SSL-ACTX/argus)** | A high-performance, entropy-based secret scanner. It combines Aho-Corasick pattern matching with Shannon entropy analysis to detect potential leaks. Features a "Story" engine that analyzes control flow and variable context to distinguish true risks from noise. | <img src="https://skillicons.dev/icons?i=rust,python,wasm&theme=dark&perline=2" /> |
-| **[Helix](https://github.com/SSL-ACTX/helix)** | An experimental, systems-level DNA storage archiver. This compiler translates binary files into biostable DNA sequences, implementing a full storage stack including XChaCha20-Poly1305 encryption, Reed-Solomon error correction, and a Viterbi decoder for indel correction. | <img src="https://skillicons.dev/icons?i=rust,py&theme=dark&perline=2" /> |
-| **[Project Aether](https://github.com/SSL-ACTX/project-aether)** | A user-space TCP/IP stack written from scratch in Rust to bypass the kernel. It's a raw, high-throughput experiment that prioritizes speed over reliability by stripping out features like retransmission and congestion control. | <img src="https://skillicons.dev/icons?i=rust&theme=dark&perline=1" /> |
-| **[Sigilus Security](https://github.com/SSL-ACTX/sigilus)** | A multi-stage, WebAssembly-based security framework for protecting web APIs. It uses a proof-of-execution challenge to provision a client-side request-signing WASM, making automated threats more difficult. | <img src="https://skillicons.dev/icons?i=cpp,wasm,python,redis&theme=dark&perline=4" /> |
+| **[Iris](https://github.com/SSL-ACTX/iris)** | A high-performance hybrid actor runtime implemented in Rust, featuring a Cranelift-backed JIT and BEAM-inspired scheduling for zero-copy distributed messaging. | <img src="https://skillicons.dev/icons?i=rust,python,js,nodejs&theme=dark&perline=2" /> |
+| **[Nimue](https://github.com/Iris-Seravelle/nimue)** | A selective Rust virtualization and obfuscation framework (co-authored) utilizing a polymorphic Mother/Worker VM architecture and the **Prism** non-linear string protection system for high-fidelity code protection. | <img src="https://skillicons.dev/icons?i=rust&theme=dark&perline=1" /> |
+| **[Ocular](https://github.com/SSL-ACTX/ocular)** | A zero-allocation instruction tracer for Python (PEP 669), utilizing hardware TSC cycle counting for high-fidelity profiling without fast-path disruption. | <img src="https://skillicons.dev/icons?i=rust,python&theme=dark&perline=1" /> |
+| **[MirageFS](https://github.com/SSL-ACTX/mirage-fs)** | A steganographic virtual block device that facilitates encrypted storage within multimedia containers, utilizing H.264 NAL-unit filler for forensic evasion. | <img src="https://skillicons.dev/icons?i=rust&theme=dark&perline=1" /> |
+| **[VortexJS](https://github.com/SSL-ACTX/vortex-js)** | An experimental virtualization engine for JavaScript, employing a polymorphic stackless VM to explore software protection and obfuscation theories. | <img src="https://skillicons.dev/icons?i=js,nodejs&theme=dark&perline=2" /> |
+| **[Argus](https://github.com/SSL-ACTX/argus)** | An entropy-based secret scanner combining Aho-Corasick pattern matching with Shannon entropy analysis and control-flow context for high-precision leak detection. | <img src="https://skillicons.dev/icons?i=rust,python,wasm&theme=dark&perline=2" /> |
+| **[Project Aether](https://github.com/SSL-ACTX/project-aether)** | A userspace TCP/IP stack implementation in Rust designed to bypass kernel overhead, prioritizing raw throughput for specialized networking experiments. | <img src="https://skillicons.dev/icons?i=rust&theme=dark&perline=1" /> |
+| **[Sigilus](https://github.com/SSL-ACTX/sigilus)** | A multi-stage WebAssembly-based security framework for web APIs, implementing proof-of-execution challenges to mitigate automated threat vectors. | <img src="https://skillicons.dev/icons?i=cpp,wasm,python,redis&theme=dark&perline=4" /> |
 
 <br>
 
 ---
 
-### 🛠 The Toolbox & Philosophy
+### 🛠 Engineering Philosophy & Toolset
 
-My approach is simple: **build from scratch to truly understand.** I believe you can't claim to know a system until you've tried (and failed) to build a replica of it.
+My developmental methodology adheres to a strict "build to understand" principle: a system is only truly understood once it has been successfully (or unsuccessfully) replicated from scratch.
 
-- **Languages:** I've fallen down the **Rust** rabbit hole. It's my primary weapon of choice for building memory-safe systems and high-performance backends. I fall back to **Python** & **JavaScript** for rapid prototyping, web, or scripting.
-- **Systems & Low-Level:** This is where the real fun is. I enjoy designing **custom bytecode**, building **weird compilers**, messing with **WASM**, and implementing unconventinal things.
-- **Full-Stack Web:** While I love the low-level chaos, my practical stack for shipping complete, user-facing applications is **Next.js** paired with **FastAPI**.
-- **Backend & Data:** When I need infrastructure, my go-to stack is **FastAPI/Node.js** + **MongoDB**/**MySQL** + **Redis**. 
-- **Tools of the Trade:** I live in the terminal. My favorite editor is KDE **Kate** for its simplicity and power, but I rely on **VSCode** when the Rust analyzer needs to yell at me about lifetimes.
+- **Systems Programming:** **Rust** is my primary instrument for engineering memory-safe, high-performance systems. I utilize **Python** and **JavaScript** for rapid prototyping and high-level orchestration.
+- **Low-Level Explorations:** My interests lie in the design of **custom bytecode**, **specialized compilers**, **WebAssembly** integration, and unconventional system primitives.
+- **Web Architectures:** For production-grade applications, I employ a modern stack consisting of **Next.js** and **FastAPI**.
+- **Data & Infrastructure:** Proficient in deploying **FastAPI/Node.js** backends integrated with **MongoDB**, **MySQL**, and **Redis**.
+- **Workflow:** Operating primarily within a terminal-centric environment. While **KDE Kate** is my preference for its streamlined interface, **VSCode** is utilized for intensive development where deep language server integration is required.
 
 <div align="center">
   <img src="https://skillicons.dev/icons?i=rust,python,js,nodejs,wasm,nextjs,fastapi,mongodb,mysql,redis,docker,bash,git,github,vscode&theme=dark" />
@@ -70,7 +73,7 @@ My approach is simple: **build from scratch to truly understand.** I believe you
 
 ---
 
-### 📊 My Nonsensical Stats
+### 📊 Activity & Analytics
 
 <div align="center">
   <table border="0" cellpadding="10" cellspacing="0">
@@ -87,9 +90,9 @@ My approach is simple: **build from scratch to truly understand.** I believe you
 
 ---
 
-### ☕ Connect
+### ☕ Connection
 
-I'm always open to talking shop about weird stuff, debating why Python is slow??, or just asking for manga recommendations. If you're working on something weird and interesting, feel free to reach out.
+I am consistently open to technical discourse regarding systems architecture, the nuances of performance optimization (like why Python is slow??), or recommendations for manga. If you are developing something unconventional, I would be interested in hearing about it.
 
 <p align="center">
   <a href="mailto:seuriin@gmail.com">
