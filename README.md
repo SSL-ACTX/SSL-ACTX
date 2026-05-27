@@ -2,11 +2,10 @@
   <img src="https://wsrv.nl/?url=https://cdn.jsdelivr.net/gh/SSL-ACTX/SSL-ACTX@main/images/seuriin_frz_circ.gif&output=webp&maxage=1y&n=-1&q=20&w=450" width="180" height="180" alt="Seuriin's Profile Picture">
   
   <h1>Seuriin</h1>
-  <p><i>Systems Researcher | Systems Architect | Professional Bug Creator</i></p>
+  <p><i>Systems Researcher | Compilers & Distributed Runtimes</i></p>
   
   <p align="center">
-    <img src="https://img.shields.io/badge/Status-Just%20a%20Random%20Coder-8b5cf6?style=flat-square" alt="Status">
-    <img src="https://img.shields.io/badge/Grind-BSIT%20@%20CDM-06b6d4?style=flat-square" alt="Education">
+    <img src="https://img.shields.io/badge/Degree-BSIT%20@%20CDM-06b6d4?style=flat-square" alt="Education">
     <img src="https://visitor-badge.laobi.icu/badge?page_id=SSL-ACTX.SSL-ACTX&color=06b6d4" alt="Visitors">
   </p>
 
@@ -23,20 +22,20 @@
 
 ### 🌙 Technical Profile
   
-**Senior BSIT Student** at **Colegio de Montalban** (Year 4) | Systems Tinkerer | Professional Bug Creator
+**Graduating June 2026** (BSIT) — **Colegio de Montalban**  
+*Formal Methods • Runtime Security • Systems Architecture*
 
-I specialize in the forensic deconstruction of complex systems, frequently rebuilding them from fundamental principles to ascertain their internal mechanics. My repository serves as a curated archive of ambitious explorations and unconventional computational experiments—ranging from high-performance runtimes to cryptographic virtualization.
+I enjoy building systems from scratch to understand how they work under the hood. This profile is just a collection of my projects and experiments—ranging from custom runtimes to security research.
 
- * 🎓 **Current Status:** Navigating the final year of my BSIT degree (barely surviving).
- * 🦀 **Primary Stack:** **Rust** for performance-critical systems; Python and JavaScript for high-level orchestration and velocity.
+ * 🎓 **Current Status:** Graduating June 2026 (BSIT) | Colegio de Montalban.
+ * 🦀 **Focus:** Formal Methods, Runtime Security, Systems Architecture.
+ * 🧪 **Primary Stack:** **Rust** (Performance Primitives), **Zig** (Native Interception), **Python & JavaScript** (Orchestration).
  * 🌐 **Web Development:** Engineering modern, performant web applications utilizing **Next.js** and **FastAPI**.
- * 🧪 **Focus Areas:** System Virtualization, Applied Cryptography, Distributed Architecture, and Esoteric Virtual Machines.
- * ⚠️ **Notice:** Code is authored for exploratory purposes rather than production environments.
- * 🫢 **Self-Assessment:** Admitted novice in programming; merely possesses an unyielding curiosity.
+ * 🫢 **Notice:** I prefer building something from scratch over reading about it. Currently diving deeper into formal methods and runtime internals.
 
 ---
 
-### 🔭 Research & Experimental Implementations
+### 🔭 Systems Research & Technical Explorations
 
 A collection of theoretical and practical explorations into systems-level engineering.
 
@@ -44,11 +43,13 @@ A collection of theoretical and practical explorations into systems-level engine
 
 | Repository | Project Specification | Technologies |
 | :--- | :--- | :--- |
-| **[Iris](https://github.com/SSL-ACTX/iris)** | A high-performance hybrid actor runtime in Rust, featuring a Cranelift-backed JIT and BEAM-inspired scheduling for zero-copy distributed messaging and hot-swappable actor state. | <img src="https://skillicons.dev/icons?i=rust,python,js,nodejs&theme=dark&perline=2" /> |
-| **[Nimue](https://github.com/Iris-Seravelle/nimue)** | A selective Rust virtualization framework (co-authored) utilizing a polymorphic Mother/Worker VM architecture and the **Prism** non-linear string protection system for advanced software obfuscation. | <img src="https://skillicons.dev/icons?i=rust&theme=dark&perline=1" /> |
-| **[Causm](https://github.com/SSL-ACTX/Causm)** | A domain-specific research language designed to address the inherent non-determinism in concurrent systems. By treating time as a first-class execution primitive and implementing an entropic memory model, Causm provides a framework where race conditions are eliminated through mathematical enforcement of temporal invariants. | <img src="https://skillicons.dev/icons?i=rust,ts&theme=dark&perline=2" /> |
-| **[Ocular](https://github.com/SSL-ACTX/ocular)** | A zero-allocation instruction tracer for Python (PEP 669), leveraging hardware TSC cycle counting for high-fidelity profiling without disrupting internal fast-paths. | <img src="https://skillicons.dev/icons?i=rust,python&theme=dark&perline=1" /> |
-| **[MirageFS](https://github.com/SSL-ACTX/mirage-fs)** | A steganographic virtual block device enabling encrypted storage within multimedia containers, camouflaging data as H.264 NAL-unit filler to defeat forensic analysis. | <img src="https://skillicons.dev/icons?i=rust&theme=dark&perline=1" /> |
+| **[Lila](https://github.com/SSL-ACTX/Lila)** | A formally verified, affine-typed JIT compiler for Python. By leveraging the Z3 SMT solver and Cranelift, Lila enforces Liquid Types (logical invariants) and Fractional Permissions (memory safety) at compile-time, enabling GIL-less execution of Python at bare-metal speeds. | <img src="https://skillicons.dev/icons?i=rust,python&theme=dark&perline=1" /> |
+| **[Astraea](https://github.com/SSL-ACTX/astraea)** | A zero-trust security middleware for Node.js implementing an Object-Capability (O-Cap) enforcement layer. It utilizes dynamic linker hijacking via a Zig interceptor and a Rust engine to perform context-aware attribution and Seccomp-BPF kernel hardening against supply-chain attacks. | <img src="https://skillicons.dev/icons?i=rust,zig,nodejs&theme=dark&perline=2" /> |
+| **[Iris](https://github.com/SSL-ACTX/iris)** | A high-performance distributed actor runtime in Rust with first-class Python bindings. It features a **reduction-based cooperative scheduler** (Vortex) and a location-transparent messaging fabric, enabling zero-downtime hot-swapping of actor logic and resilient, cross-language service orchestration. | <img src="https://skillicons.dev/icons?i=rust,python,js,nodejs&theme=dark&perline=2" /> |
+| **[Nimue](https://github.com/Iris-Seravelle/nimue)** | A selective Rust virtualization framework (co-authored) utilizing a polymorphic Mother/Worker VM architecture and the **Prism** non-linear string protection system for advanced software obfuscation. | <img src="https://skillicons.dev/icons?i=rust,zig&theme=dark&perline=2" /> |
+| **[Causm](https://github.com/SSL-ACTX/Causm)** | A domain-specific research language targeting non-determinism in concurrent systems. It implements an **Entropic Memory Model** (state decay) and **Isochronous Scheduling**, using a Z3-governed correctness kernel to mathematically prove temporal invariants and race-freedom at compile-time. | <img src="https://skillicons.dev/icons?i=rust,ts&theme=dark&perline=2" /> |
+| **[Ocular](https://github.com/SSL-ACTX/ocular)** | A high-performance, zero-allocation instruction tracer for Python 3.12+ (PEP 669). It leverages hardware TSC cycle counting for nanosecond-precision profiling and implements **dynamic de-instrumentation**, automatically unhooking from hot loops to allow CPython's native quickening while generating Chrome Perfetto timelines. | <img src="https://skillicons.dev/icons?i=rust,python&theme=dark&perline=1" /> |
+| **[MirageFS](https://github.com/SSL-ACTX/mirage-fs)** | A steganographic virtual block device enabling encrypted storage within multimedia containers. By camouflaging data as **Adobe DNG metadata** or **H.264 NAL-unit filler**, it creates a FUSE-mounted filesystem that is mathematically indistinguishable from standard media noise to defeat forensic analysis. | <img src="https://skillicons.dev/icons?i=rust&theme=dark&perline=1" /> |
 | **[Argus](https://github.com/SSL-ACTX/argus)** | An entropy-based secret scanner utilizing Aho-Corasick pattern matching and Shannon entropy context to distinguish true cryptographic risks from noise in large codebases. | <img src="https://skillicons.dev/icons?i=rust,python,wasm&theme=dark&perline=2" /> |
 | **[Project Aether](https://github.com/SSL-ACTX/project-aether)** | A userspace TCP/IP stack implementation in Rust designed to bypass kernel overhead, prioritizing raw throughput for specialized, high-performance networking research. | <img src="https://skillicons.dev/icons?i=rust&theme=dark&perline=1" /> |
 | **[Sigilus](https://github.com/SSL-ACTX/sigilus)** | A multi-stage WebAssembly-based security framework for web APIs, implementing cryptographic proof-of-execution challenges to neutralize automated threat vectors. | <img src="https://skillicons.dev/icons?i=cpp,wasm,python,redis&theme=dark&perline=4" /> |
@@ -57,18 +58,18 @@ A collection of theoretical and practical explorations into systems-level engine
 
 ---
 
-### 🛠 Engineering Philosophy & Toolset
+### 🛠 Engineering & Toolset
 
-My developmental methodology adheres to a strict "build to understand" principle: a system is only truly understood once it has been successfully (or unsuccessfully) replicated from fundamental axioms.
+I'm a big believer in learning by building. To really understand a complex concept, I try to implement it from scratch. 
 
-- **Systems Programming:** **Rust** is my primary instrument for engineering memory-safe, high-performance primitives. I utilize **Python** and **JavaScript** for high-level orchestration and rapid prototyping of complex logic.
-- **Language Design & Compilers:** A core pillar of my research involves the creation of **custom programming languages** and **Domain-Specific Languages (DSLs)**. This includes formal grammar specification, multi-pass semantic analysis, and the implementation of specialized register and stack-based virtual machines.
-- **Low-Level Explorations:** I am deeply invested in **custom bytecode** architectures, **WebAssembly** security frameworks, and unconventional system primitives that challenge traditional execution models.
-- **Web Architectures:** For production-grade applications, I employ a robust stack consisting of **Next.js** and **FastAPI**, prioritizing type safety and runtime performance.
-- **Workflow:** Operating primarily within a terminal-centric environment. While **KDE Kate** is my preference for its streamlined interface, **VSCode** is utilized for intensive development and the engineering of custom language server extensions.
+- **Systems & Runtimes:** **Rust** is my go-to for memory safety and performance. I use it to build core infrastructure like distributed actor runtimes and custom schedulers, pairing it with **Python** and **JavaScript** for high-level orchestration.
+- **Compilers & Formal Methods:** I spend a lot of time exploring language design and compiler architecture. I'm especially interested in integrating **SMT solvers (Z3)** to mathematically prove memory safety, type constraints, and temporal invariants.
+- **Security & Low-Level Internals:** I like digging into the OS boundary. This involves native C-ABI interception (often using **Zig**), kernel-level sandboxing (Seccomp-BPF), and researching steganography and anti-forensics.
+- **Web Architectures:** When building standard applications or APIs, I stick to reliable stacks like **Next.js** and **FastAPI**, focusing on type safety and fast development cycles.
+- **Workflow:** Mostly terminal-based. I use **KDE Kate** for most of my editing, but switch to **VSCode** when I'm working on language support or larger projects.
 
 <div align="center">
-  <img src="https://skillicons.dev/icons?i=rust,python,js,ts,nodejs,wasm,nextjs,fastapi,mongodb,mysql,redis,docker,bash,git,github,vscode&theme=dark" />
+  <img src="https://skillicons.dev/icons?i=rust,zig,python,js,ts,nodejs,wasm,nextjs,fastapi,mongodb,mysql,redis,docker,bash,git,github,vscode&theme=dark&perline=9" />
 </div>
 
 ---
@@ -92,7 +93,7 @@ My developmental methodology adheres to a strict "build to understand" principle
 
 ### ☕ Connection
 
-I am consistently open to technical discourse regarding systems architecture, the nuances of performance optimization (like why Python is slow??), or recommendations for manga. If you are developing something unconventional, I would be interested in hearing about it.
+I'm always down to chat about systems, performance (like why Python is slow), or nerdy/weeb stuff. If you're building something weird or unconventional, feel free to reach out.
 
 <p align="center">
   <a href="mailto:seuriin@gmail.com">
@@ -100,6 +101,9 @@ I am consistently open to technical discourse regarding systems architecture, th
   </a>
   <a href="https://discord.com/users/seuriin" target="_blank">
     <img src="https://img.shields.io/badge/Discord-Seuriin-5865F2?style=for-the-badge&logo=discord&logoColor=white" alt="Discord">
+  </a>
+  <a href="https://m.me/seuriin" target="_blank">
+    <img src="https://img.shields.io/badge/Messenger-Seuriin-0084FF?style=for-the-badge&logo=facebook-messenger&logoColor=white" alt="Messenger">
   </a>
 </p>
 
