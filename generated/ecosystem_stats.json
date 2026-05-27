@@ -1,0 +1,134 @@
+{
+  "total_loc": 121641,
+  "repositories": {
+    "Causm": {
+      "loc": 17179,
+      "primary_lang": "Rust"
+    },
+    "Lila": {
+      "loc": 10093,
+      "primary_lang": "Rust"
+    },
+    "argus": {
+      "loc": 10704,
+      "primary_lang": "Rust"
+    },
+    "iris": {
+      "loc": 29184,
+      "primary_lang": "Rust"
+    },
+    "nimue-prism": {
+      "loc": 3701,
+      "primary_lang": "Rust"
+    },
+    "nimue-zig": {
+      "loc": 7963,
+      "primary_lang": "Zig"
+    },
+    "nimue": {
+      "loc": 25034,
+      "primary_lang": "Rust"
+    },
+    "ocular": {
+      "loc": 1784,
+      "primary_lang": "Rust"
+    },
+    "mirage-fs": {
+      "loc": 6376,
+      "primary_lang": "Rust"
+    },
+    "astraea": {
+      "loc": 3372,
+      "primary_lang": "Rust"
+    },
+    "Sigilus": {
+      "loc": 2738,
+      "primary_lang": "Python"
+    },
+    "Project-Aether": {
+      "loc": 2126,
+      "primary_lang": "Rust"
+    },
+    "vizx": {
+      "loc": 1387,
+      "primary_lang": "Rust"
+    }
+  },
+  "languages": [
+    {
+      "name": "Rust",
+      "loc": 92688,
+      "files": 425
+    },
+    {
+      "name": "Zig",
+      "loc": 8187,
+      "files": 48
+    },
+    {
+      "name": "Markdown",
+      "loc": 7800,
+      "files": 121
+    },
+    {
+      "name": "Python",
+      "loc": 5670,
+      "files": 53
+    },
+    {
+      "name": "F*",
+      "loc": 3842,
+      "files": 10
+    },
+    {
+      "name": "JavaScript",
+      "loc": 1212,
+      "files": 20
+    },
+    {
+      "name": "TOML",
+      "loc": 703,
+      "files": 41
+    },
+    {
+      "name": "C",
+      "loc": 324,
+      "files": 27
+    },
+    {
+      "name": "C++",
+      "loc": 256,
+      "files": 2
+    },
+    {
+      "name": "YAML",
+      "loc": 252,
+      "files": 5
+    },
+    {
+      "name": "Shell",
+      "loc": 250,
+      "files": 6
+    },
+    {
+      "name": "C/C++ Header",
+      "loc": 177,
+      "files": 2
+    },
+    {
+      "name": "HTML",
+      "loc": 133,
+      "files": 1
+    },
+    {
+      "name": "TypeScript",
+      "loc": 106,
+      "files": 1
+    },
+    {
+      "name": "Lean",
+      "loc": 41,
+      "files": 1
+    }
+  ]
+}

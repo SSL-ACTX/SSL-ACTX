@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
-<style>html{scroll-behavior:smooth;} .fade-in{opacity:0;transform:translateY(1rem);transition:opacity .6s ease,transform .6s ease;} .fade-in.visible{opacity:1;transform:translateY(0);} .nav-link{font-size:.875rem;font-weight:500;color:#475569;} .nav-link.active{color:#E29578;}</style>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,10 +29,6 @@
                             200: '#FAD5C9',
                             500: '#E29578', // accent
                         },
-                        mauve: {
-                            100: '#F3EDF7',
-                            500: '#9B7EBD',
-                        },
                         // dark mode pallete
                         ink: {
                             900: '#151518',
@@ -52,8 +47,23 @@
     </script>
 
     <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(1rem);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
         body {
             transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        section {
+            scroll-margin-top: 5rem;
         }
         .text-balance {
             text-wrap: balance;
@@ -71,35 +81,82 @@
         .dark .bg-grid-light {
             background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
         }
+        
+        /* Hex/Binary Accents */
+        .hex-accent {
+            position: fixed;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            font-size: 11px;
+            color: rgba(0,0,0,0.12);
+            pointer-events: none;
+            z-index: 1;
+            white-space: nowrap;
+            user-select: none;
+        }
+        .dark .hex-accent {
+            color: rgba(255,255,255,0.08);
+        }
+        .hex-float {
+            animation: drift 60s linear infinite;
+        }
+        @keyframes drift {
+            from { transform: translate(0, 0) rotate(0deg); }
+            to { transform: translate(100px, -100px) rotate(5deg); }
+        }
+        
+        .nav-link.active {
+            color: #E29578 !important; /* blush-500 */
+            border-bottom: 2px solid #E29578;
+        }
     </style>
 </head>
 <body class="bg-paper text-slate-800 dark:bg-ink-900 dark:text-ink-100 font-sans antialiased selection:bg-blush-200 selection:text-slate-900 dark:selection:bg-blush-500/30 dark:selection:text-white min-h-screen relative overflow-x-hidden">
 
     <!-- Background Grid -->
     <div class="fixed inset-0 pointer-events-none bg-grid-light z-0"></div>
+    
+    <!-- Hex/Binary Background Accents -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+        <div class="hex-accent hex-float top-20 left-10 opacity-60">0x4A 0x61 0x6D 0x65 0x65 0x6C 0x20 0x54 0x75 0x74 0x75 0x6E 0x67 0x61 0x6E</div>
+        <div class="hex-accent hex-float top-1/2 right-20 opacity-40" style="animation-duration: 80s; animation-direction: reverse;">01110011 01110100 01100001 01110100 01110101 01110011 00111010 00100000 01101111 01101011</div>
+        <div class="hex-accent hex-float bottom-40 left-1/4 opacity-30" style="animation-duration: 120s;">73 79 73 74 65 6D 5F 6B 65 72 6E 65 6C 5F 76 32</div>
+        <div class="hex-accent hex-float top-1/3 left-1/2 opacity-20" style="animation-duration: 90s;">0xDEADBEEF 0xCAFEBABE 0xBAADF00D</div>
+    </div>
+    
+    <!-- Architectural Accents -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0 opacity-20 dark:opacity-10">
+        <div class="absolute top-10 left-10 font-mono text-[10px] uppercase tracking-tighter text-slate-400">Coord: 14.5967° N, 121.0437° E</div>
+        <div class="absolute bottom-10 right-10 font-mono text-[10px] uppercase tracking-tighter text-slate-400">Ref: System_Kernel_v2.04</div>
+        <div class="absolute top-0 bottom-0 left-1/4 w-px bg-slate-200 dark:bg-ink-800"></div>
+        <div class="absolute left-0 right-0 top-1/3 h-px bg-slate-200 dark:bg-ink-800"></div>
+    </div>
 
     <!-- Theme Toggle -->
-    <button id="theme-toggle" class="fixed top-14 right-6 z-50 p-3 rounded-full bg-white dark:bg-ink-800 shadow-elegant dark:shadow-elegant-dark document-border text-slate-600 dark:text-ink-100 hover:scale-105 transition-transform duration-200 focus:outline-none">
+    <button id="theme-toggle" class="fixed bottom-6 right-6 z-50 p-3 rounded-full bg-white dark:bg-ink-800 shadow-elegant dark:shadow-elegant-dark border border-slate-200 dark:border-ink-700 text-slate-600 dark:text-ink-100 hover:scale-105 transition-transform duration-200 focus:outline-none">
         <i id="theme-icon" class="ph ph-moon text-xl"></i>
     </button>
 
     <!-- Scroll Header -->
-    <div id="scroll-header" class="hidden fixed top-0 left-0 right-0 bg-paper dark:bg-ink-800 shadow-elegant dark:shadow-elegant-dark document-border py-2 px-6 flex items-center justify-between z-50">
-        <div class="flex items-center gap-6">
-            <div class="font-sans font-bold text-base tracking-wide text-slate-800 dark:text-ink-100 uppercase">seuriin</div>
-            <nav class="flex gap-4">
-                <a href="#profile-section" class="nav-link" id="link-profile">Profile</a>
-                <a href="#projects" class="nav-link" id="link-projects">Projects</a>
+    <div id="scroll-header" class="opacity-0 pointer-events-none fixed top-0 left-0 right-0 bg-white/80 dark:bg-ink-900/90 backdrop-blur-md border-b border-slate-200 dark:border-ink-800 py-3 px-6 flex items-center justify-between z-50 transition-all duration-500">
+        <div class="flex items-center gap-8">
+            <a href="#" class="flex items-center gap-2 hover:opacity-80 transition-opacity">
+                <div class="font-mono text-xs font-bold tracking-[0.2em] text-slate-900 dark:text-white uppercase">seuriin</div>
+            </a>
+            <nav class="flex gap-6">
+                <a href="#profile-section" class="nav-link text-[10px] font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400 hover:text-blush-500 dark:hover:text-blush-500 transition-colors" id="link-profile">Profile</a>
+                <a href="#projects" class="nav-link text-[10px] font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400 hover:text-blush-500 dark:hover:text-blush-500 transition-colors" id="link-projects">Projects</a>
             </nav>
         </div>
-        <div class="flex items-center gap-4 text-sm text-slate-600 dark:text-slate-400">
-            <a href="mailto:seuriin@gmail.com" class="hover:text-blush-500 dark:hover:text-blush-500"><i class="ph ph-envelope-simple"></i></a>
-            <a href="https://m.me/seuriin" class="hover:text-blush-500 dark:hover:text-blush-500"><i class="ph ph-facebook-logo"></i></a>
-            <a href="https://github.com/SSL-ACTX" class="hover:text-blush-500 dark:hover:text-blush-500"><i class="ph ph-github-logo"></i></a>
+        <div class="flex items-center gap-6 text-slate-400 dark:text-slate-500">
+            <div class="hidden md:block font-mono text-[9px] uppercase tracking-tighter">Status: Researchers_Active</div>
+            <div class="flex items-center gap-4">
+                <a href="https://github.com/SSL-ACTX" target="_blank" class="hover:text-blush-500 transition-colors"><i class="ph ph-github-logo text-lg"></i></a>
+                <a href="mailto:seuriin@gmail.com" class="hover:text-blush-500 transition-colors"><i class="ph ph-envelope-simple text-lg"></i></a>
+            </div>
         </div>
     </div>
 
-    <div class="max-w-6xl mx-auto px-6 py-12 md:py-24 relative z-10">
+    <div class="max-w-6xl mx-auto px-6 pt-24 pb-12 md:py-24 relative z-10">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
 
             <!-- LCOL: Profile & Info (Sticky) -->
@@ -118,9 +175,15 @@
                         <h1 class="font-serif text-2xl sm:text-3xl md:text-4xl font-semibold text-slate-900 dark:text-white mb-2 leading-tight">
                                 Seuriin <span class="text-base font-normal block sm:inline">(Jameel Tutungan)</span>
                             </h1>
-                        <p class="text-blush-500 dark:text-blush-500 font-medium tracking-wide text-sm uppercase">Systems Architect</p>
+                        <div class="space-y-2 mt-3">
+                            <p class="text-blush-500 dark:text-blush-500 font-bold tracking-[0.2em] text-xs uppercase">Systems Researcher</p>
+                            <div class="flex items-center justify-center lg:justify-start gap-3">
+                                <span class="h-px w-8 bg-slate-200 dark:bg-ink-700 hidden sm:block"></span>
+                                <p class="text-slate-400 dark:text-slate-500 font-medium tracking-[0.15em] text-[10px] uppercase">Compilers & Distributed Runtimes</p>
+                            </div>
+                        </div>
                         <p class="mt-4 text-slate-500 dark:text-slate-400 text-sm leading-relaxed text-balance">
-                            Researching and building high-performance compilers, custom programming languages, and virtualized systems from first principles.
+                            I enjoy building systems from scratch to understand how they work under the hood—ranging from custom runtimes to security research.
                         </p>
                     </div>
 
@@ -170,16 +233,16 @@
                         </h3>
                         <div class="flex flex-wrap gap-2">
                             <span class="px-3 py-1 text-xs font-medium rounded-full bg-blush-100 text-blush-500 dark:bg-blush-500/10 dark:text-blush-500 document-border">Rust</span>
+                            <span class="px-3 py-1 text-xs font-medium rounded-full bg-slate-100 text-slate-600 dark:bg-ink-800 dark:text-slate-300 document-border">Zig</span>
                             <span class="px-3 py-1 text-xs font-medium rounded-full bg-slate-100 text-slate-600 dark:bg-ink-800 dark:text-slate-300 document-border">Python</span>
                             <span class="px-3 py-1 text-xs font-medium rounded-full bg-slate-100 text-slate-600 dark:bg-ink-800 dark:text-slate-300 document-border">TypeScript / JS</span>
-                            <span class="px-3 py-1 text-xs font-medium rounded-full bg-slate-100 text-slate-600 dark:bg-ink-800 dark:text-slate-300 document-border">Next.js / FastAPI</span>
-                            <span class="px-3 py-1 text-xs font-medium rounded-full bg-slate-100 text-slate-600 dark:bg-ink-800 dark:text-slate-300 document-border">Systems Virtualization</span>
-                            <span class="px-3 py-1 text-xs font-medium rounded-full bg-slate-100 text-slate-600 dark:bg-ink-800 dark:text-slate-300 document-border">Custom DSLs / VMs</span>
+                            <span class="px-3 py-1 text-xs font-medium rounded-full bg-slate-100 text-slate-600 dark:bg-ink-800 dark:text-slate-300 document-border">Formal Methods (Z3)</span>
+                            <span class="px-3 py-1 text-xs font-medium rounded-full bg-slate-100 text-slate-600 dark:bg-ink-800 dark:text-slate-300 document-border">Runtime Security</span>
+                            <span class="px-3 py-1 text-xs font-medium rounded-full bg-slate-100 text-slate-600 dark:bg-ink-800 dark:text-slate-300 document-border">Systems Architecture</span>
                             <span class="px-3 py-1 text-xs font-medium rounded-full bg-slate-100 text-slate-600 dark:bg-ink-800 dark:text-slate-300 document-border">Distributed Runtimes</span>
+                            <span class="px-3 py-1 text-xs font-medium rounded-full bg-slate-100 text-slate-600 dark:bg-ink-800 dark:text-slate-300 document-border">Next.js / FastAPI</span>
                             <span class="px-3 py-1 text-xs font-medium rounded-full bg-slate-100 text-slate-600 dark:bg-ink-800 dark:text-slate-300 document-border">WebAssembly</span>
-                            <span class="px-3 py-1 text-xs font-medium rounded-full bg-slate-100 text-slate-600 dark:bg-ink-800 dark:text-slate-300 document-border">Cryptography</span>
                             <span class="px-3 py-1 text-xs font-medium rounded-full bg-slate-100 text-slate-600 dark:bg-ink-800 dark:text-slate-300 document-border">FUSE / Block Storage</span>
-                            <span class="px-3 py-1 text-xs font-medium rounded-full bg-slate-100 text-slate-600 dark:bg-ink-800 dark:text-slate-300 document-border">MongoDB / Redis</span>
                             <span class="px-3 py-1 text-xs font-medium rounded-full bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-300 document-border">Docker / Git</span>
                         </div>
                     </div>
@@ -205,11 +268,14 @@
                         <span class="absolute bottom-0 left-0 w-16 border-b-4 border-blush-500"></span>
                     </h2>
                     <div class="prose prose-slate dark:prose-invert text-base leading-relaxed text-slate-600 dark:text-slate-400">
+                        <p class="mb-4 text-lg font-light italic text-slate-400 dark:text-slate-500">
+                            "The more you know, the more you know you don't know."
+                        </p>
                         <p class="mb-4 text-lg font-light">
-                            I specialize in the <span class="font-semibold italic">forensic deconstruction</span> of complex systems, frequently rebuilding them from fundamental axioms to ascertain their internal mechanics.
+                            I enjoy building systems from scratch to understand how they work under the hood. My work is a running log of things I’ve built, broken, and researched.
                         </p>
                         <p class="text-md">
-                            My focus resides in the <span class="font-semibold">low-level trenches</span> — compilers, virtual machines, and high-performance runtimes. While my primary instrument is <span class="font-medium text-blush-500">Rust</span>, I maintain a robust web stack in <span class="italic">Next.js and FastAPI</span> for modern, performant orchestration.
+                            My focus resides in the <span class="font-semibold">low-level trenches</span> — compilers, distributed runtimes, and security internals. I'm especially interested in integrating <span class="font-medium text-blush-500">formal methods (Z3)</span> to mathematically prove safety and invariants in concurrent systems.
                         </p>
                     </div>
                 </section>
@@ -227,209 +293,361 @@
                     </h3>
                     <div class="space-y-8">
 
+                        <!-- Project: Lila -->
+                        <article class="relative border-l-4 border-blush-500 dark:border-blush-500 pl-6 p-4 md:p-6 mb-6 document-border">
+                            <div class="flex justify-between items-start mb-2">
+                                <div>
+                                    <div class="flex flex-wrap gap-2 mb-2">
+                                        <span class="px-2 py-0.5 text-[9px] font-bold uppercase tracking-widest bg-slate-100 dark:bg-ink-800 text-slate-500 dark:text-slate-400 rounded-sm">Formal Methods</span>
+                                        <span class="px-2 py-0.5 text-[9px] font-bold uppercase tracking-widest bg-slate-100 dark:bg-ink-800 text-slate-500 dark:text-slate-400 rounded-sm">JIT Compiler</span>
+                                    </div>
+                                    <h3 class="font-serif text-xl font-semibold text-slate-900 dark:text-white group-hover:text-blush-500 dark:group-hover:text-blush-500 transition-colors">
+                                        Lila
+                                    </h3>
+                                    <p class="text-xs text-slate-500 mt-1">Formally Verified Affine-Typed JIT</p>
+                                </div>
+                                <a href="https://github.com/SSL-ACTX/Lila" target="_blank" class="text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">
+                                    <i class="ph ph-arrow-up-right text-xl"></i>
+                                </a>
+                            </div>
+                            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
+                                Developed an affine-typed JIT compiler for Python that leverages Z3 to enforce Liquid Types and Fractional Permissions. Enables GIL-less execution at bare-metal speeds by proving memory safety at compile-time.
+                            </p>
+                            
+                            <!-- Tech Spec Block -->
+                            <div class="mb-6 p-3 bg-slate-50 dark:bg-ink-800/50 rounded-sm border-l-2 border-slate-200 dark:border-ink-700">
+                                <p class="text-[10px] font-mono text-slate-400 dark:text-slate-500 leading-tight">
+                                    <span class="text-blush-500 dark:text-blush-500 font-bold">SPEC:</span> Z3 SMT Solver Integration • Cranelift Backend • Liquid Type System • Static Memory Safety Proofs
+                                </p>
+                            </div>
+
+                            <div class="flex flex-wrap items-center gap-4 text-xs font-medium text-slate-500">
+                                <span class="flex items-center gap-1"><i class="ph-fill ph-code text-[8px] text-slate-400"></i> 10,093 LOC</span>
+                                <span class="flex items-center gap-1"><i class="ph-fill ph-circle text-[8px] text-orange-500"></i> Rust</span>
+                                <span class="flex items-center gap-1"><i class="ph-fill ph-circle text-[8px] text-blue-500"></i> Python</span>
+                                <span class="flex items-center gap-1"><i class="ph-fill ph-circle text-[8px] text-purple-500"></i> Cranelift</span>
+                            </div>
+                        </article>
+
+                        <!-- Project: Astraea -->
+                        <article class="relative border-l-4 border-blush-500 dark:border-blush-500 pl-6 p-4 md:p-6 mb-6 document-border">
+                            <div class="flex justify-between items-start mb-2">
+                                <div>
+                                    <div class="flex flex-wrap gap-2 mb-2">
+                                        <span class="px-2 py-0.5 text-[9px] font-bold uppercase tracking-widest bg-slate-100 dark:bg-ink-800 text-slate-500 dark:text-slate-400 rounded-sm">Security Internals</span>
+                                        <span class="px-2 py-0.5 text-[9px] font-bold uppercase tracking-widest bg-slate-100 dark:bg-ink-800 text-slate-500 dark:text-slate-400 rounded-sm">Kernel Sandboxing</span>
+                                    </div>
+                                    <h3 class="font-serif text-xl font-semibold text-slate-900 dark:text-white group-hover:text-blush-500 dark:group-hover:text-blush-500 transition-colors">
+                                        Astraea
+                                    </h3>
+                                    <p class="text-xs text-slate-500 mt-1">Zero-Trust O-Cap Middleware</p>
+                                </div>
+                                <a href="https://github.com/SSL-ACTX/astraea" target="_blank" class="text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">
+                                    <i class="ph ph-arrow-up-right text-xl"></i>
+                                </a>
+                            </div>
+                            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
+                                Engineered an Object-Capability enforcement layer for Node.js. Utilizes Zig-based dynamic linker hijacking and a Rust engine for Seccomp-BPF kernel hardening against supply-chain attacks.
+                            </p>
+
+                            <!-- Tech Spec Block -->
+                            <div class="mb-6 p-3 bg-slate-50 dark:bg-ink-800/50 rounded-sm border-l-2 border-slate-200 dark:border-ink-700">
+                                <p class="text-[10px] font-mono text-slate-400 dark:text-slate-500 leading-tight">
+                                    <span class="text-blush-500 dark:text-blush-500 font-bold">SPEC:</span> Zig Native Interceptor • Seccomp-BPF Hardening • Dynamic Linker Hijacking • Context-Aware Attribution
+                                </p>
+                            </div>
+
+                            <div class="flex flex-wrap items-center gap-4 text-xs font-medium text-slate-500">
+                                <span class="flex items-center gap-1"><i class="ph-fill ph-code text-[8px] text-slate-400"></i> 3,372 LOC</span>
+                                <span class="flex items-center gap-1"><i class="ph-fill ph-circle text-[8px] text-orange-500"></i> Rust</span>
+                                <span class="flex items-center gap-1"><i class="ph-fill ph-circle text-[8px] text-yellow-600"></i> Zig</span>
+                                <span class="flex items-center gap-1"><i class="ph-fill ph-circle text-[8px] text-green-500"></i> Node.js</span>
+                            </div>
+                        </article>
+
                         <!-- Project: Iris -->
                         <article class="relative border-l-4 border-blush-500 dark:border-blush-500 pl-6 p-4 md:p-6 mb-6 document-border">
-                            <div class="flex justify-between items-start mb-4">
+                            <div class="flex justify-between items-start mb-2">
                                 <div>
+                                    <div class="flex flex-wrap gap-2 mb-2">
+                                        <span class="px-2 py-0.5 text-[9px] font-bold uppercase tracking-widest bg-slate-100 dark:bg-ink-800 text-slate-500 dark:text-slate-400 rounded-sm">Distributed Systems</span>
+                                        <span class="px-2 py-0.5 text-[9px] font-bold uppercase tracking-widest bg-slate-100 dark:bg-ink-800 text-slate-500 dark:text-slate-400 rounded-sm">Runtime Engine</span>
+                                    </div>
                                     <h3 class="font-serif text-xl font-semibold text-slate-900 dark:text-white group-hover:text-blush-500 dark:group-hover:text-blush-500 transition-colors">
-                                        Iris Runtime
+                                        Iris
                                     </h3>
-                                    <p class="text-xs text-slate-500 mt-1">Hybrid Distributed Actor Mesh</p>
+                                    <p class="text-xs text-slate-500 mt-1">Distributed Actor Runtime</p>
                                 </div>
                                 <a href="https://github.com/SSL-ACTX/iris" target="_blank" class="text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">
                                     <i class="ph ph-arrow-up-right text-xl"></i>
                                 </a>
                             </div>
-                            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-6">
-                                Architected a lightweight, hybrid actor runtime in Rust featuring an integrated Cranelift JIT compiler. Implements a custom BEAM-inspired cooperative reduction scheduler, enabling zero-copy messaging and scaling to 100k+ concurrent actors processing over 1.2M messages/second.
+                            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
+                                Architected a high-performance actor mesh in Rust featuring a reduction-based cooperative scheduler (Vortex). Enables location-transparent messaging and zero-downtime hot-swapping of actor logic.
                             </p>
+
+                            <!-- Tech Spec Block -->
+                            <div class="mb-6 p-3 bg-slate-50 dark:bg-ink-800/50 rounded-sm border-l-2 border-slate-200 dark:border-ink-700">
+                                <p class="text-[10px] font-mono text-slate-400 dark:text-slate-500 leading-tight">
+                                    <span class="text-blush-500 dark:text-blush-500 font-bold">SPEC:</span> Vortex Cooperative Scheduler • Zero-Copy Messaging Fabric • Python FFI Bindings • Hot-Logic Swapping
+                                </p>
+                            </div>
+
                             <div class="flex flex-wrap items-center gap-4 text-xs font-medium text-slate-500">
+                                <span class="flex items-center gap-1"><i class="ph-fill ph-code text-[8px] text-slate-400"></i> 29,184 LOC</span>
                                 <span class="flex items-center gap-1"><i class="ph-fill ph-circle text-[8px] text-orange-500"></i> Rust</span>
-                                <span class="flex items-center gap-1"><i class="ph-fill ph-circle text-[8px] text-purple-500"></i> Cranelift JIT</span>
-                                <span class="flex items-center gap-1"><i class="ph-fill ph-circle text-[8px] text-blue-500"></i> Actor Model</span>
+                                <span class="flex items-center gap-1"><i class="ph-fill ph-circle text-[8px] text-blue-500"></i> Python</span>
+                                <span class="flex items-center gap-1"><i class="ph-fill ph-circle text-[8px] text-indigo-500"></i> Distributed Systems</span>
                             </div>
                         </article>
 
                         <!-- Project: Nimue -->
                         <article class="relative border-l-4 border-blush-500 dark:border-blush-500 pl-6 p-4 md:p-6 mb-6 document-border">
-                            <div class="flex justify-between items-start mb-4">
+                            <div class="flex justify-between items-start mb-2">
                                 <div>
+                                    <div class="flex flex-wrap gap-2 mb-2">
+                                        <span class="px-2 py-0.5 text-[9px] font-bold uppercase tracking-widest bg-slate-100 dark:bg-ink-800 text-slate-500 dark:text-slate-400 rounded-sm">Virtualization</span>
+                                        <span class="px-2 py-0.5 text-[9px] font-bold uppercase tracking-widest bg-slate-100 dark:bg-ink-800 text-slate-500 dark:text-slate-400 rounded-sm">Obfuscation</span>
+                                    </div>
                                     <h3 class="font-serif text-xl font-semibold text-slate-900 dark:text-white group-hover:text-blush-500 dark:group-hover:text-blush-500 transition-colors">
                                         Nimue
                                         <span class="inline-block ml-2 px-2 py-0.5 text-xs font-semibold rounded-full bg-blush-100 text-blush-500 dark:bg-blush-500/10 dark:text-blush-500">Co-authored</span>
                                     </h3>
-                                    <p class="text-xs text-slate-500 mt-1">Selective Rust Virtualization Framework</p>
+                                    <p class="text-xs text-slate-500 mt-1">Polymorphic Virtualization Framework</p>
                                 </div>
                                 <a href="https://github.com/Iris-Seravelle/nimue" target="_blank" class="text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">
                                     <i class="ph ph-arrow-up-right text-xl"></i>
                                 </a>
                             </div>
-                            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-6">
-                                Developed a polymorphic Mother/Worker VM architecture for advanced software protection. Features the <b>Prism</b> non-linear string protection system and hardware-bound execution to neutralize automated threat vectors.
+                            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
+                                Developed a selective Rust virtualization framework using a Mother/Worker VM architecture. Features the Prism non-linear string protection system for advanced software obfuscation and anti-forensics.
                             </p>
+
+                            <!-- Tech Spec Block -->
+                            <div class="mb-6 p-3 bg-slate-50 dark:bg-ink-800/50 rounded-sm border-l-2 border-slate-200 dark:border-ink-700">
+                                <p class="text-[10px] font-mono text-slate-400 dark:text-slate-500 leading-tight">
+                                    <span class="text-blush-500 dark:text-blush-500 font-bold">SPEC:</span> Mother/Worker VM Topology • Prism String Obfuscation • Hardware-Bound Execution • Polymorphic Bytecode
+                                </p>
+                            </div>
+
                             <div class="flex flex-wrap items-center gap-4 text-xs font-medium text-slate-500">
+                                <span class="flex items-center gap-1"><i class="ph-fill ph-code text-[8px] text-slate-400"></i> 25,034 LOC</span>
                                 <span class="flex items-center gap-1"><i class="ph-fill ph-circle text-[8px] text-orange-500"></i> Rust</span>
+                                <span class="flex items-center gap-1"><i class="ph-fill ph-circle text-[8px] text-yellow-600"></i> Zig</span>
                                 <span class="flex items-center gap-1"><i class="ph-fill ph-circle text-[8px] text-red-500"></i> Virtualization</span>
-                                <span class="flex items-center gap-1"><i class="ph-fill ph-circle text-[8px] text-indigo-500"></i> Obfuscation</span>
                             </div>
                         </article>
 
-                        <!-- Project: ICTL -->
+                        <!-- Project: Causm -->
                         <article class="relative border-l-4 border-blush-500 dark:border-blush-500 pl-6 p-4 md:p-6 mb-6 document-border">
-                            <div class="flex justify-between items-start mb-4">
+                            <div class="flex justify-between items-start mb-2">
                                 <div>
+                                    <div class="flex flex-wrap gap-2 mb-2">
+                                        <span class="px-2 py-0.5 text-[9px] font-bold uppercase tracking-widest bg-slate-100 dark:bg-ink-800 text-slate-500 dark:text-slate-400 rounded-sm">PL Design</span>
+                                        <span class="px-2 py-0.5 text-[9px] font-bold uppercase tracking-widest bg-slate-100 dark:bg-ink-800 text-slate-500 dark:text-slate-400 rounded-sm">Formal Methods</span>
+                                    </div>
                                     <h3 class="font-serif text-xl font-semibold text-slate-900 dark:text-white group-hover:text-blush-500 dark:group-hover:text-blush-500 transition-colors">
-                                        ICTL (Isolate Concurrent Temporal Language)
+                                        Causm
                                     </h3>
-                                    <p class="text-xs text-slate-500 mt-1">Deterministic Time-Aware DSL</p>
+                                    <p class="text-xs text-slate-500 mt-1">Deterministic Temporal Language</p>
                                 </div>
-                                <a href="https://github.com/SSL-ACTX/ictl" target="_blank" class="text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">
+                                <a href="https://github.com/SSL-ACTX/Causm" target="_blank" class="text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">
                                     <i class="ph ph-arrow-up-right text-xl"></i>
                                 </a>
                             </div>
-                            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-6">
-                                A custom programming language engineered for high-fidelity concurrency research. Implements isolated timelines, entropic memory decay, and specialized temporal effect handling. Includes a dedicated VSCode extension and language server integration.
+                            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
+                                A domain-specific research language for concurrent systems. Implements an Entropic Memory Model and Isochronous Scheduling, using a Z3 correctness kernel to prove temporal invariants and race-freedom.
                             </p>
+
+                            <!-- Tech Spec Block -->
+                            <div class="mb-6 p-3 bg-slate-50 dark:bg-ink-800/50 rounded-sm border-l-2 border-slate-200 dark:border-ink-700">
+                                <p class="text-[10px] font-mono text-slate-400 dark:text-slate-500 leading-tight">
+                                    <span class="text-blush-500 dark:text-blush-500 font-bold">SPEC:</span> Z3-Governed Correctness Kernel • Entropic Memory Model • Temporal Invariant Verification • Isochronous Scheduling
+                                </p>
+                            </div>
+
                             <div class="flex flex-wrap items-center gap-4 text-xs font-medium text-slate-500">
+                                <span class="flex items-center gap-1"><i class="ph-fill ph-code text-[8px] text-slate-400"></i> 17,179 LOC</span>
                                 <span class="flex items-center gap-1"><i class="ph-fill ph-circle text-[8px] text-orange-500"></i> Rust</span>
                                 <span class="flex items-center gap-1"><i class="ph-fill ph-circle text-[8px] text-blue-500"></i> TypeScript</span>
-                                <span class="flex items-center gap-1"><i class="ph-fill ph-circle text-[8px] text-green-500"></i> Pest Grammar</span>
+                                <span class="flex items-center gap-1"><i class="ph-fill ph-circle text-[8px] text-green-500"></i> Z3 SMT</span>
                             </div>
                         </article>
 
                         <!-- Project: Ocular -->
                         <article class="relative border-l-4 border-blush-500 dark:border-blush-500 pl-6 p-4 md:p-6 mb-6 document-border">
-                            <div class="flex justify-between items-start mb-4">
+                            <div class="flex justify-between items-start mb-2">
                                 <div>
+                                    <div class="flex flex-wrap gap-2 mb-2">
+                                        <span class="px-2 py-0.5 text-[9px] font-bold uppercase tracking-widest bg-slate-100 dark:bg-ink-800 text-slate-500 dark:text-slate-400 rounded-sm">Performance</span>
+                                        <span class="px-2 py-0.5 text-[9px] font-bold uppercase tracking-widest bg-slate-100 dark:bg-ink-800 text-slate-500 dark:text-slate-400 rounded-sm">Instrumentation</span>
+                                    </div>
                                     <h3 class="font-serif text-xl font-semibold text-slate-900 dark:text-white group-hover:text-blush-500 dark:group-hover:text-blush-500 transition-colors">
                                         Ocular
                                     </h3>
-                                    <p class="text-xs text-slate-500 mt-1">Zero-Allocation Python Tracer (PEP 669)</p>
+                                    <p class="text-xs text-slate-500 mt-1">Hardware-Accelerated Python Tracer</p>
                                 </div>
                                 <a href="https://github.com/SSL-ACTX/ocular" target="_blank" class="text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">
                                     <i class="ph ph-arrow-up-right text-xl"></i>
                                 </a>
                             </div>
-                            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-6">
-                                Developed a high-fidelity instruction tracer for Python utilizing the PEP 669 monitoring API. Leverages hardware TSC cycle counting for nanosecond-precision profiling without disrupting internal fast-paths.
+                            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
+                                Developed a zero-allocation instruction tracer for Python 3.12+. Leverages hardware TSC cycle counting for nanosecond-precision profiling and implements dynamic de-instrumentation for native performance.
                             </p>
+
+                            <!-- Tech Spec Block -->
+                            <div class="mb-6 p-3 bg-slate-50 dark:bg-ink-800/50 rounded-sm border-l-2 border-slate-200 dark:border-ink-700">
+                                <p class="text-[10px] font-mono text-slate-400 dark:text-slate-500 leading-tight">
+                                    <span class="text-blush-500 dark:text-blush-500 font-bold">SPEC:</span> Hardware TSC Integration • Dynamic De-instrumentation • Zero-Allocation Engine • Perfetto Timeline Generation
+                                </p>
+                            </div>
+
                             <div class="flex flex-wrap items-center gap-4 text-xs font-medium text-slate-500">
+                                <span class="flex items-center gap-1"><i class="ph-fill ph-code text-[8px] text-slate-400"></i> 1,784 LOC</span>
                                 <span class="flex items-center gap-1"><i class="ph-fill ph-circle text-[8px] text-orange-500"></i> Rust</span>
                                 <span class="flex items-center gap-1"><i class="ph-fill ph-circle text-[8px] text-blue-500"></i> Python</span>
-                                <span class="flex items-center gap-1"><i class="ph-fill ph-circle text-[8px] text-gray-500"></i> Performance</span>
+                                <span class="flex items-center gap-1"><i class="ph-fill ph-circle text-[8px] text-gray-500"></i> PEP 669</span>
                             </div>
                         </article>
 
                         <!-- Project: MirageFS -->
                         <article class="relative border-l-4 border-blush-500 dark:border-blush-500 pl-6 p-4 md:p-6 mb-6 document-border">
-                            <div class="flex justify-between items-start mb-4">
+                            <div class="flex justify-between items-start mb-2">
                                 <div>
+                                    <div class="flex flex-wrap gap-2 mb-2">
+                                        <span class="px-2 py-0.5 text-[9px] font-bold uppercase tracking-widest bg-slate-100 dark:bg-ink-800 text-slate-500 dark:text-slate-400 rounded-sm">Steganography</span>
+                                        <span class="px-2 py-0.5 text-[9px] font-bold uppercase tracking-widest bg-slate-100 dark:bg-ink-800 text-slate-500 dark:text-slate-400 rounded-sm">Cryptography</span>
+                                    </div>
                                     <h3 class="font-serif text-xl font-semibold text-slate-900 dark:text-white group-hover:text-blush-500 dark:group-hover:text-blush-500 transition-colors">
                                         MirageFS
                                     </h3>
-                                    <p class="text-xs text-slate-500 mt-1">Steganographic Virtual Block Device</p>
+                                    <p class="text-xs text-slate-500 mt-1">Steganographic Block Storage</p>
                                 </div>
                                 <a href="https://github.com/SSL-ACTX/mirage-fs" target="_blank" class="text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">
                                     <i class="ph ph-arrow-up-right text-xl"></i>
                                 </a>
                             </div>
-                            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-6">
-                                Developed a highly stealthy POSIX-compliant filesystem that mounts encrypted block storage invisibly inside standard media files (PNG/MP4). Engineered a tiered Hybrid RAID controller and mathematically mapped pixels to hide ciphertext.
+                            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
+                                A steganographic virtual block device hiding encrypted storage in Adobe DNG metadata or H.264 NAL-unit filler. Engineered to be mathematically indistinguishable from standard media noise.
                             </p>
+
+                            <!-- Tech Spec Block -->
+                            <div class="mb-6 p-3 bg-slate-50 dark:bg-ink-800/50 rounded-sm border-l-2 border-slate-200 dark:border-ink-700">
+                                <p class="text-[10px] font-mono text-slate-400 dark:text-slate-500 leading-tight">
+                                    <span class="text-blush-500 dark:text-blush-500 font-bold">SPEC:</span> Adobe DNG Metadata Camouflage • FUSE-Mounted Filesystem • AES-256-GCM Layer • NAL-Unit Injection
+                                </p>
+                            </div>
+
                             <div class="flex items-center gap-4 text-xs font-medium text-slate-500">
+                                <span class="flex items-center gap-1"><i class="ph-fill ph-code text-[8px] text-slate-400"></i> 6,376 LOC</span>
                                 <span class="flex items-center gap-1"><i class="ph-fill ph-circle text-[8px] text-orange-500"></i> Rust</span>
                                 <span class="flex items-center gap-1"><i class="ph-fill ph-circle text-[8px] text-rose-500"></i> Cryptography</span>
                                 <span class="flex items-center gap-1"><i class="ph-fill ph-circle text-[8px] text-cyan-500"></i> Steganography</span>
                             </div>
                         </article>
 
-                        <!-- Project: VortexJS -->
-                        <article class="relative border-l-4 border-blush-500 dark:border-blush-500 pl-6 p-4 md:p-6 mb-6 document-border">
-                            <div class="flex justify-between items-start mb-4">
-                                <div>
-                                    <h3 class="font-serif text-xl font-semibold text-slate-900 dark:text-white group-hover:text-blush-500 dark:group-hover:text-blush-500 transition-colors">
-                                        VortexJS
-                                    </h3>
-                                    <p class="text-xs text-slate-500 mt-1">Stackless JavaScript Virtualization Engine</p>
-                                </div>
-                                <a href="https://github.com/SSL-ACTX/vortex-js" target="_blank" class="text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">
-                                    <i class="ph ph-arrow-up-right text-xl"></i>
-                                </a>
-                            </div>
-                            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-6">
-                                Designed and built a source-to-source compiler that translates JavaScript into a custom bytecode executed by a polymorphic, stackless virtual machine for software protection research.
-                            </p>
-                            <div class="flex items-center gap-4 text-xs font-medium text-slate-500">
-                                <span class="flex items-center gap-1"><i class="ph-fill ph-circle text-[8px] text-yellow-500"></i> JavaScript</span>
-                                <span class="flex items-center gap-1"><i class="ph-fill ph-circle text-[8px] text-green-500"></i> Compiler</span>
-                                <span class="flex items-center gap-1"><i class="ph-fill ph-circle text-[8px] text-blue-500"></i> Virtualization</span>
-                            </div>
-                        </article>
-
                         <!-- Project: Argus -->
                         <article class="relative border-l-4 border-blush-500 dark:border-blush-500 pl-6 p-4 md:p-6 mb-6 document-border">
-                            <div class="flex justify-between items-start mb-4">
+                            <div class="flex justify-between items-start mb-2">
                                 <div>
+                                    <div class="flex flex-wrap gap-2 mb-2">
+                                        <span class="px-2 py-0.5 text-[9px] font-bold uppercase tracking-widest bg-slate-100 dark:bg-ink-800 text-slate-500 dark:text-slate-400 rounded-sm">DevSecOps</span>
+                                        <span class="px-2 py-0.5 text-[9px] font-bold uppercase tracking-widest bg-slate-100 dark:bg-ink-800 text-slate-500 dark:text-slate-400 rounded-sm">Pattern Matching</span>
+                                    </div>
                                     <h3 class="font-serif text-xl font-semibold text-slate-900 dark:text-white group-hover:text-blush-500 dark:group-hover:text-blush-500 transition-colors">
                                         Argus
                                     </h3>
-                                    <p class="text-xs text-slate-500 mt-1">Entropy-based secret scanner</p>
+                                    <p class="text-xs text-slate-500 mt-1">Entropy-based Secret Scanner</p>
                                 </div>
                                 <a href="https://github.com/SSL-ACTX/argus" target="_blank" class="text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">
                                     <i class="ph ph-arrow-up-right text-xl"></i>
                                 </a>
                             </div>
-                            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-6">
-                                A high-performance secret scanner combining Aho-Corasick pattern matching with Shannon entropy analysis to distinguish true cryptographic risks from noise in large codebases.
+                            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
+                                A high-performance scanner combining Aho-Corasick pattern matching with Shannon entropy analysis to distinguish true cryptographic risks from noise in large codebases.
                             </p>
+
+                            <!-- Tech Spec Block -->
+                            <div class="mb-6 p-3 bg-slate-50 dark:bg-ink-800/50 rounded-sm border-l-2 border-slate-200 dark:border-ink-700">
+                                <p class="text-[10px] font-mono text-slate-400 dark:text-slate-500 leading-tight">
+                                    <span class="text-blush-500 dark:text-blush-500 font-bold">SPEC:</span> Aho-Corasick DFA Optimization • Shannon Entropy Filtering • Multi-Threaded Recursive Walker • WebAssembly Port
+                                </p>
+                            </div>
+
                             <div class="flex flex-wrap items-center gap-4 text-xs font-medium text-slate-500">
+                                <span class="flex items-center gap-1"><i class="ph-fill ph-code text-[8px] text-slate-400"></i> 10,704 LOC</span>
                                 <span class="flex items-center gap-1"><i class="ph-fill ph-circle text-[8px] text-orange-500"></i> Rust</span>
-                                <span class="flex items-center gap-1"><i class="ph-fill ph-circle text-[8px] text-purple-500"></i> Python</span>
-                                <span class="flex items-center gap-1"><i class="ph-fill ph-circle text-[8px] text-blue-500"></i> WebAssembly</span>
+                                <span class="flex items-center gap-1"><i class="ph-fill ph-circle text-[8px] text-blue-500"></i> Python</span>
+                                <span class="flex items-center gap-1"><i class="ph-fill ph-circle text-[8px] text-purple-500"></i> WebAssembly</span>
                             </div>
                         </article>
 
                         <!-- Project: Project Aether -->
                         <article class="relative border-l-4 border-blush-500 dark:border-blush-500 pl-6 p-4 md:p-6 mb-6 document-border">
-                            <div class="flex justify-between items-start mb-4">
+                            <div class="flex justify-between items-start mb-2">
                                 <div>
+                                    <div class="flex flex-wrap gap-2 mb-2">
+                                        <span class="px-2 py-0.5 text-[9px] font-bold uppercase tracking-widest bg-slate-100 dark:bg-ink-800 text-slate-500 dark:text-slate-400 rounded-sm">Networking</span>
+                                        <span class="px-2 py-0.5 text-[9px] font-bold uppercase tracking-widest bg-slate-100 dark:bg-ink-800 text-slate-500 dark:text-slate-400 rounded-sm">Systems</span>
+                                    </div>
                                     <h3 class="font-serif text-xl font-semibold text-slate-900 dark:text-white group-hover:text-blush-500 dark:group-hover:text-blush-500 transition-colors">
                                         Project Aether
                                     </h3>
-                                    <p class="text-xs text-slate-500 mt-1">User-space TCP/IP stack <span class="ml-2 inline-block px-2 py-0.5 text-xs font-semibold rounded-full bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-300">no‑std</span></p>
+                                    <p class="text-xs text-slate-500 mt-1">Userspace TCP/IP Stack</p>
                                 </div>
                                 <a href="https://github.com/SSL-ACTX/project-aether" target="_blank" class="text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">
                                     <i class="ph ph-arrow-up-right text-xl"></i>
                                 </a>
                             </div>
-                            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-6">
-                                A user-space TCP/IP stack written from scratch in Rust designed to bypass kernel overhead, prioritizing raw throughput for specialized networking research.
+                            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
+                                A userspace TCP/IP stack written from scratch in Rust designed to bypass kernel overhead, prioritizing raw throughput for specialized networking research.
                             </p>
+
+                            <!-- Tech Spec Block -->
+                            <div class="mb-6 p-3 bg-slate-50 dark:bg-ink-800/50 rounded-sm border-l-2 border-slate-200 dark:border-ink-700">
+                                <p class="text-[10px] font-mono text-slate-400 dark:text-slate-500 leading-tight">
+                                    <span class="text-blush-500 dark:text-blush-500 font-bold">SPEC:</span> Zero-Copy Packet Ring • custom L3/L4 Logic • Kernel-Bypass Architecture • No-Std Rust Implementation
+                                </p>
+                            </div>
+
                             <div class="flex flex-wrap items-center gap-4 text-xs font-medium text-slate-500">
+                                <span class="flex items-center gap-1"><i class="ph-fill ph-code text-[8px] text-slate-400"></i> 2,126 LOC</span>
                                 <span class="flex items-center gap-1"><i class="ph-fill ph-circle text-[8px] text-orange-500"></i> Rust</span>
                             </div>
                         </article>
 
                         <!-- Project: Sigilus -->
                         <article class="relative border-l-4 border-blush-500 dark:border-blush-500 pl-6 p-4 md:p-6 mb-6 document-border">
-                            <div class="flex justify-between items-start mb-4">
+                            <div class="flex justify-between items-start mb-2">
                                 <div>
+                                    <div class="flex flex-wrap gap-2 mb-2">
+                                        <span class="px-2 py-0.5 text-[9px] font-bold uppercase tracking-widest bg-slate-100 dark:bg-ink-800 text-slate-500 dark:text-slate-400 rounded-sm">Web Security</span>
+                                        <span class="px-2 py-0.5 text-[9px] font-bold uppercase tracking-widest bg-slate-100 dark:bg-ink-800 text-slate-500 dark:text-slate-400 rounded-sm">WASM</span>
+                                    </div>
                                     <h3 class="font-serif text-xl font-semibold text-slate-900 dark:text-white group-hover:text-blush-500 dark:group-hover:text-blush-500 transition-colors">
                                         Sigilus
                                     </h3>
-                                    <p class="text-xs text-slate-500 mt-1">WASM-based Security Framework</p>
+                                    <p class="text-xs text-slate-500 mt-1">WASM Security Framework</p>
                                 </div>
                                 <a href="https://github.com/SSL-ACTX/sigilus" target="_blank" class="text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">
                                     <i class="ph ph-arrow-up-right text-xl"></i>
                                 </a>
                             </div>
-                            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-6">
-                                A multi-stage WebAssembly-based security framework for web APIs, implementing cryptographic proof-of-execution challenges to neutralize automated threat vectors.
+                            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
+                                A WebAssembly-based security framework for web APIs, implementing cryptographic proof-of-execution challenges to neutralize automated threat vectors.
                             </p>
+
+                            <!-- Tech Spec Block -->
+                            <div class="mb-6 p-3 bg-slate-50 dark:bg-ink-800/50 rounded-sm border-l-2 border-slate-200 dark:border-ink-700">
+                                <p class="text-[10px] font-mono text-slate-400 dark:text-slate-500 leading-tight">
+                                    <span class="text-blush-500 dark:text-blush-500 font-bold">SPEC:</span> Multi-Stage WASM Challenges • Proof-of-Execution Logic • Anti-Bot Cryptographic Puzzles
+                                </p>
+                            </div>
+
                             <div class="flex items-center gap-4 text-xs font-medium text-slate-500">
+                                <span class="flex items-center gap-1"><i class="ph-fill ph-code text-[8px] text-slate-400"></i> 2,738 LOC</span>
                                 <span class="flex items-center gap-1"><i class="ph-fill ph-circle text-[8px] text-purple-500"></i> WebAssembly</span>
                                 <span class="flex items-center gap-1"><i class="ph-fill ph-circle text-[8px] text-red-500"></i> Security</span>
-                                <span class="flex items-center gap-1"><i class="ph-fill ph-circle text-[8px] text-blue-500"></i> API Protection</span>
                             </div>
                         </article>
 
@@ -505,106 +723,36 @@
                         <i class="ph ph-chart-bar text-blush-500"></i>
                         Language Statistics
                     </h2>
-                    <p class="text-xs text-slate-400 dark:text-slate-500 mt-1 font-sans">by file size &mdash; all public repositories</p>
+                    <p class="text-xs text-slate-400 dark:text-slate-500 mt-1 font-sans">121,641 Lines of Code across all public repositories</p>
                 </div>
                 <button onclick="closeStats()" class="mt-0.5 p-1.5 text-slate-400 hover:text-blush-500 dark:hover:text-blush-500 transition-colors">
                     <i class="ph ph-x text-lg"></i>
                 </button>
             </div>
             <!-- Modal Body -->
-            <div class="px-6 py-6">
-                <!-- Segmented Progress Bar -->
-                <div class="flex h-2.5 overflow-hidden rounded-full mb-6" style="gap:1px">
-                    <div style="background:#f1e05a;width:39.114%" title="JavaScript 39.11%" class="transition-all"></div>
-                    <div style="background:#dea584;width:18.253%" title="Rust 18.25%" class="transition-all"></div>
-                    <div style="background:#3572A5;width:10.350%" title="Python 10.35%" class="transition-all"></div>
-                    <div style="background:#4F5D95;width:9.385%" title="PHP 9.38%" class="transition-all"></div>
-                    <div style="background:#663399;width:8.033%" title="CSS 8.03%" class="transition-all"></div>
-                    <div style="background:#3178c6;width:6.099%" title="TypeScript 6.10%" class="transition-all"></div>
-                    <div style="background:#e34c26;width:5.339%" title="HTML 5.34%" class="transition-all"></div>
-                    <div style="background:#718096;flex:1" title="Others" class="transition-all"></div>
+            <div class="px-6 py-6" id="stats-modal-body">
+                <div id="stats-loading" class="flex flex-col items-center justify-center py-12 space-y-4">
+                    <div class="w-8 h-8 border-4 border-blush-500 border-t-transparent rounded-full animate-spin"></div>
+                    <p class="text-xs text-slate-400 uppercase tracking-widest font-semibold">Fetching Analytics...</p>
                 </div>
+                
+                <div id="stats-content" class="hidden">
+                    <!-- Segmented Progress Bar -->
+                    <div id="stats-progress-bar" class="flex h-2.5 overflow-hidden rounded-full mb-6" style="gap:1px"></div>
 
-                <!-- Top Languages (bar chart) -->
-                <p class="font-sans text-[10px] font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-4">Top Languages</p>
-                <div class="space-y-3 mb-8">
-                    <div class="flex items-center gap-3">
-                        <div class="w-2.5 h-2.5 rounded-full flex-shrink-0" style="background:#f1e05a"></div>
-                        <div class="flex-1">
-                            <div class="flex justify-between text-xs mb-1"><span class="font-semibold text-slate-700 dark:text-slate-200">JavaScript</span><span class="text-slate-400">39.11%</span></div>
-                            <div class="h-1.5 bg-slate-100 dark:bg-ink-800 rounded-full overflow-hidden"><div class="stats-fill h-full rounded-full" style="background:#f1e05a;width:0" data-w="39.114%"></div></div>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-3">
-                        <div class="w-2.5 h-2.5 rounded-full flex-shrink-0" style="background:#dea584"></div>
-                        <div class="flex-1">
-                            <div class="flex justify-between text-xs mb-1"><span class="font-semibold text-slate-700 dark:text-slate-200">Rust</span><span class="text-slate-400">18.25%</span></div>
-                            <div class="h-1.5 bg-slate-100 dark:bg-ink-800 rounded-full overflow-hidden"><div class="stats-fill h-full rounded-full" style="background:#dea584;width:0" data-w="18.253%"></div></div>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-3">
-                        <div class="w-2.5 h-2.5 rounded-full flex-shrink-0" style="background:#3572A5"></div>
-                        <div class="flex-1">
-                            <div class="flex justify-between text-xs mb-1"><span class="font-semibold text-slate-700 dark:text-slate-200">Python</span><span class="text-slate-400">10.35%</span></div>
-                            <div class="h-1.5 bg-slate-100 dark:bg-ink-800 rounded-full overflow-hidden"><div class="stats-fill h-full rounded-full" style="background:#3572A5;width:0" data-w="10.350%"></div></div>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-3">
-                        <div class="w-2.5 h-2.5 rounded-full flex-shrink-0" style="background:#4F5D95"></div>
-                        <div class="flex-1">
-                            <div class="flex justify-between text-xs mb-1"><span class="font-semibold text-slate-700 dark:text-slate-200">PHP</span><span class="text-slate-400">9.38%</span></div>
-                            <div class="h-1.5 bg-slate-100 dark:bg-ink-800 rounded-full overflow-hidden"><div class="stats-fill h-full rounded-full" style="background:#4F5D95;width:0" data-w="9.385%"></div></div>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-3">
-                        <div class="w-2.5 h-2.5 rounded-full flex-shrink-0" style="background:#663399"></div>
-                        <div class="flex-1">
-                            <div class="flex justify-between text-xs mb-1"><span class="font-semibold text-slate-700 dark:text-slate-200">CSS</span><span class="text-slate-400">8.03%</span></div>
-                            <div class="h-1.5 bg-slate-100 dark:bg-ink-800 rounded-full overflow-hidden"><div class="stats-fill h-full rounded-full" style="background:#663399;width:0" data-w="8.033%"></div></div>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-3">
-                        <div class="w-2.5 h-2.5 rounded-full flex-shrink-0" style="background:#3178c6"></div>
-                        <div class="flex-1">
-                            <div class="flex justify-between text-xs mb-1"><span class="font-semibold text-slate-700 dark:text-slate-200">TypeScript</span><span class="text-slate-400">6.10%</span></div>
-                            <div class="h-1.5 bg-slate-100 dark:bg-ink-800 rounded-full overflow-hidden"><div class="stats-fill h-full rounded-full" style="background:#3178c6;width:0" data-w="6.099%"></div></div>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-3">
-                        <div class="w-2.5 h-2.5 rounded-full flex-shrink-0" style="background:#e34c26"></div>
-                        <div class="flex-1">
-                            <div class="flex justify-between text-xs mb-1"><span class="font-semibold text-slate-700 dark:text-slate-200">HTML</span><span class="text-slate-400">5.34%</span></div>
-                            <div class="h-1.5 bg-slate-100 dark:bg-ink-800 rounded-full overflow-hidden"><div class="stats-fill h-full rounded-full" style="background:#e34c26;width:0" data-w="5.339%"></div></div>
-                        </div>
-                    </div>
+                    <!-- Top Languages (bar chart) -->
+                    <p class="font-sans text-[10px] font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-4">Top Languages</p>
+                    <div id="stats-top-languages" class="space-y-3 mb-8"></div>
+
+                    <!-- All Languages Grid -->
+                    <p class="font-sans text-[10px] font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-3">All Languages</p>
+                    <div id="stats-all-languages" class="grid grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-2"></div>
                 </div>
-
-                <!-- All Languages Grid -->
-                <p class="font-sans text-[10px] font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-3">All Languages</p>
-                <div class="grid grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-2">
-                    <div class="flex items-center gap-2 text-xs"><span class="w-2.5 h-2.5 rounded-full flex-shrink-0" style="background:#f1e05a"></span><span class="text-slate-600 dark:text-slate-300 truncate flex-1">JavaScript</span><span class="text-slate-400 dark:text-slate-500 flex-shrink-0">39.11%</span></div>
-                    <div class="flex items-center gap-2 text-xs"><span class="w-2.5 h-2.5 rounded-full flex-shrink-0" style="background:#dea584"></span><span class="text-slate-600 dark:text-slate-300 truncate flex-1">Rust</span><span class="text-slate-400 dark:text-slate-500 flex-shrink-0">18.25%</span></div>
-                    <div class="flex items-center gap-2 text-xs"><span class="w-2.5 h-2.5 rounded-full flex-shrink-0" style="background:#3572A5"></span><span class="text-slate-600 dark:text-slate-300 truncate flex-1">Python</span><span class="text-slate-400 dark:text-slate-500 flex-shrink-0">10.35%</span></div>
-                    <div class="flex items-center gap-2 text-xs"><span class="w-2.5 h-2.5 rounded-full flex-shrink-0" style="background:#4F5D95"></span><span class="text-slate-600 dark:text-slate-300 truncate flex-1">PHP</span><span class="text-slate-400 dark:text-slate-500 flex-shrink-0">9.38%</span></div>
-                    <div class="flex items-center gap-2 text-xs"><span class="w-2.5 h-2.5 rounded-full flex-shrink-0" style="background:#663399"></span><span class="text-slate-600 dark:text-slate-300 truncate flex-1">CSS</span><span class="text-slate-400 dark:text-slate-500 flex-shrink-0">8.03%</span></div>
-                    <div class="flex items-center gap-2 text-xs"><span class="w-2.5 h-2.5 rounded-full flex-shrink-0" style="background:#3178c6"></span><span class="text-slate-600 dark:text-slate-300 truncate flex-1">TypeScript</span><span class="text-slate-400 dark:text-slate-500 flex-shrink-0">6.10%</span></div>
-                    <div class="flex items-center gap-2 text-xs"><span class="w-2.5 h-2.5 rounded-full flex-shrink-0" style="background:#e34c26"></span><span class="text-slate-600 dark:text-slate-300 truncate flex-1">HTML</span><span class="text-slate-400 dark:text-slate-500 flex-shrink-0">5.34%</span></div>
-                    <div class="flex items-center gap-2 text-xs"><span class="w-2.5 h-2.5 rounded-full flex-shrink-0" style="background:#555555"></span><span class="text-slate-600 dark:text-slate-300 truncate flex-1">C</span><span class="text-slate-400 dark:text-slate-500 flex-shrink-0">0.71%</span></div>
-                    <div class="flex items-center gap-2 text-xs"><span class="w-2.5 h-2.5 rounded-full flex-shrink-0" style="background:#945db7"></span><span class="text-slate-600 dark:text-slate-300 truncate flex-1">Visual Basic .NET</span><span class="text-slate-400 dark:text-slate-500 flex-shrink-0">0.68%</span></div>
-                    <div class="flex items-center gap-2 text-xs"><span class="w-2.5 h-2.5 rounded-full flex-shrink-0" style="background:#878787"></span><span class="text-slate-600 dark:text-slate-300 truncate flex-1">Hack</span><span class="text-slate-400 dark:text-slate-500 flex-shrink-0">0.62%</span></div>
-                    <div class="flex items-center gap-2 text-xs"><span class="w-2.5 h-2.5 rounded-full flex-shrink-0" style="background:#f34b7d"></span><span class="text-slate-600 dark:text-slate-300 truncate flex-1">C++</span><span class="text-slate-400 dark:text-slate-500 flex-shrink-0">0.44%</span></div>
-                    <div class="flex items-center gap-2 text-xs"><span class="w-2.5 h-2.5 rounded-full flex-shrink-0" style="background:#41b883"></span><span class="text-slate-600 dark:text-slate-300 truncate flex-1">Vue</span><span class="text-slate-400 dark:text-slate-500 flex-shrink-0">0.33%</span></div>
-                    <div class="flex items-center gap-2 text-xs"><span class="w-2.5 h-2.5 rounded-full flex-shrink-0" style="background:#89e051"></span><span class="text-slate-600 dark:text-slate-300 truncate flex-1">Shell</span><span class="text-slate-400 dark:text-slate-500 flex-shrink-0">0.24%</span></div>
-                    <div class="flex items-center gap-2 text-xs"><span class="w-2.5 h-2.5 rounded-full flex-shrink-0" style="background:#b07219"></span><span class="text-slate-600 dark:text-slate-300 truncate flex-1">Java</span><span class="text-slate-400 dark:text-slate-500 flex-shrink-0">0.16%</span></div>
-                    <div class="flex items-center gap-2 text-xs"><span class="w-2.5 h-2.5 rounded-full flex-shrink-0" style="background:#DA5B0B"></span><span class="text-slate-600 dark:text-slate-300 truncate flex-1">Jupyter Notebook</span><span class="text-slate-400 dark:text-slate-500 flex-shrink-0">0.10%</span></div>
-                    <div class="flex items-center gap-2 text-xs"><span class="w-2.5 h-2.5 rounded-full flex-shrink-0" style="background:#ff5a03"></span><span class="text-slate-600 dark:text-slate-300 truncate flex-1">Astro</span><span class="text-slate-400 dark:text-slate-500 flex-shrink-0">0.09%</span></div>
-                    <div class="flex items-center gap-2 text-xs"><span class="w-2.5 h-2.5 rounded-full flex-shrink-0" style="background:#15dcdc"></span><span class="text-slate-600 dark:text-slate-300 truncate flex-1">VBScript</span><span class="text-slate-400 dark:text-slate-500 flex-shrink-0">0.02%</span></div>
-                    <div class="flex items-center gap-2 text-xs"><span class="w-2.5 h-2.5 rounded-full flex-shrink-0" style="background:#6E4C13"></span><span class="text-slate-600 dark:text-slate-300 truncate flex-1">Assembly</span><span class="text-slate-400 dark:text-slate-500 flex-shrink-0">0.02%</span></div>
-                    <div class="flex items-center gap-2 text-xs"><span class="w-2.5 h-2.5 rounded-full flex-shrink-0" style="background:#C1F12E"></span><span class="text-slate-600 dark:text-slate-300 truncate flex-1">Batchfile</span><span class="text-slate-400 dark:text-slate-500 flex-shrink-0">0.01%</span></div>
-                    <div class="flex items-center gap-2 text-xs"><span class="w-2.5 h-2.5 rounded-full flex-shrink-0" style="background:#384d54"></span><span class="text-slate-600 dark:text-slate-300 truncate flex-1">Dockerfile</span><span class="text-slate-400 dark:text-slate-500 flex-shrink-0">0.01%</span></div>
-                    <div class="flex items-center gap-2 text-xs"><span class="w-2.5 h-2.5 rounded-full flex-shrink-0" style="background:#012456"></span><span class="text-slate-600 dark:text-slate-300 truncate flex-1">PowerShell</span><span class="text-slate-400 dark:text-slate-500 flex-shrink-0">0.00%</span></div>
-                    <div class="flex items-center gap-2 text-xs"><span class="w-2.5 h-2.5 rounded-full flex-shrink-0" style="background:#427819"></span><span class="text-slate-600 dark:text-slate-300 truncate flex-1">Makefile</span><span class="text-slate-400 dark:text-slate-500 flex-shrink-0">0.00%</span></div>
-                    <div class="flex items-center gap-2 text-xs"><span class="w-2.5 h-2.5 rounded-full flex-shrink-0" style="background:#3B2F63"></span><span class="text-slate-600 dark:text-slate-300 truncate flex-1">Procfile</span><span class="text-slate-400 dark:text-slate-500 flex-shrink-0">0.00%</span></div>
+                
+                <div id="stats-error" class="hidden flex flex-col items-center justify-center py-12 text-center">
+                    <i class="ph ph-warning-circle text-4xl text-rose-500 mb-3"></i>
+                    <p class="text-sm text-slate-600 dark:text-slate-400">Failed to load language statistics.</p>
+                    <button onclick="fetchStats()" class="mt-4 text-xs font-bold text-blush-500 uppercase tracking-widest hover:underline">Try Again</button>
                 </div>
             </div>
         </div>
@@ -615,7 +763,6 @@
         const themeToggleBtn = document.getElementById('theme-toggle');
         const themeIcon = document.getElementById('theme-icon');
 
-        // simple theme checker
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
             themeIcon.classList.replace('ph-moon', 'ph-sun');
@@ -625,7 +772,6 @@
         }
 
         themeToggleBtn.addEventListener('click', function() {
-            // Toggle icon
             if (document.documentElement.classList.contains('dark')) {
                 document.documentElement.classList.remove('dark');
                 localStorage.setItem('color-theme', 'light');
@@ -637,44 +783,134 @@
             }
         });
 
-        // Scroll header visibility and scroll-spy
         const scrollHeader = document.getElementById('scroll-header');
         const profileSection = document.getElementById('profile-section');
         const projectsSection = document.getElementById('projects');
+        
+        const observerOptions = {
+            root: null,
+            rootMargin: '-10% 0px -80% 0px',
+            threshold: 0
+        };
+
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
                 if (entry.target === profileSection) {
                     if (entry.isIntersecting) {
-                        scrollHeader.classList.add('hidden');
+                        scrollHeader.classList.add('opacity-0', 'pointer-events-none');
+                        scrollHeader.classList.remove('opacity-100');
                     } else {
-                        scrollHeader.classList.remove('hidden');
+                        scrollHeader.classList.remove('opacity-0', 'pointer-events-none');
+                        scrollHeader.classList.add('opacity-100');
                     }
                 }
-                // update active link
-                if (entry.target === profileSection) document.getElementById('link-profile').classList.toggle('active', entry.isIntersecting === false);
-                if (entry.target === projectsSection) document.getElementById('link-projects').classList.toggle('active', entry.isIntersecting);
+                
+                if (entry.isIntersecting) {
+                    document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+                    if (entry.target === profileSection) document.getElementById('link-profile').classList.add('active');
+                    if (entry.target === projectsSection) document.getElementById('link-projects').classList.add('active');
+                }
             });
-        }, { root: null, threshold: 0.1 });
+        }, observerOptions);
+        
         observer.observe(profileSection);
         observer.observe(projectsSection);
 
-        // fade-in animation for articles
         document.querySelectorAll('article').forEach(el => el.classList.add('fade-in'));
         const fadeObserver = new IntersectionObserver(entries => {
             entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
         }, { threshold: 0.1 });
         document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
 
-        // Stats modal
+        let statsFetched = false;
+        async function fetchStats() {
+            const loading = document.getElementById('stats-loading');
+            const content = document.getElementById('stats-content');
+            const error = document.getElementById('stats-error');
+            
+            loading.classList.remove('hidden');
+            content.classList.add('hidden');
+            error.classList.add('hidden');
+
+            try {
+                const response = await fetch('../generated/ecosystem_stats.json');
+                if (!response.ok) throw new Error('Network response was not ok');
+                
+                const data = await response.json();
+                
+                const colorMap = {
+                    "Rust": "#E29578", 
+                    "Zig": "#D97706",
+                    "Python": "#3B82F6",
+                    "Markdown": "#64748B",
+                    "TypeScript": "#10B981",
+                    "F*": "#8B5CF6",
+                    "JavaScript": "#F59E0B",
+                    "TOML": "#9CA3AF",
+                    "C": "#6B7280",
+                    "C++": "#4B5563"
+                };
+                const getColor = (name) => colorMap[name] || "#94A3B8";
+
+                const topLanguages = data.languages.slice(0, 5);
+
+                document.getElementById('stats-progress-bar').innerHTML = topLanguages.map(lang => {
+                    const percent = ((lang.loc / data.total_loc) * 100).toFixed(1) + '%';
+                    return `<div style="background:${getColor(lang.name)};width:${percent}" title="${lang.name} ${lang.loc.toLocaleString()} LOC" class="transition-all"></div>`;
+                }).join('');
+
+                document.getElementById('stats-top-languages').innerHTML = topLanguages.map(lang => {
+                    const percent = ((lang.loc / data.total_loc) * 100).toFixed(1) + '%';
+                    return `
+                    <div class="flex items-center gap-3">
+                        <div class="w-2.5 h-2.5 rounded-full flex-shrink-0" style="background:${getColor(lang.name)}"></div>
+                        <div class="flex-1">
+                            <div class="flex justify-between text-xs mb-1">
+                                <span class="font-semibold text-slate-700 dark:text-slate-200">${lang.name}</span>
+                                <span class="text-slate-400">${lang.loc.toLocaleString()} LOC (${percent})</span>
+                            </div>
+                            <div class="h-1.5 bg-slate-100 dark:bg-ink-800 rounded-full overflow-hidden">
+                                <div class="stats-fill h-full rounded-full" style="background:${getColor(lang.name)};width:0" data-w="${percent}"></div>
+                            </div>
+                        </div>
+                    </div>`;
+                }).join('');
+
+                document.getElementById('stats-all-languages').innerHTML = data.languages.map(lang => `
+                    <div class="flex items-center gap-2 text-xs">
+                        <span class="w-2.5 h-2.5 rounded-full flex-shrink-0" style="background:${getColor(lang.name)}"></span>
+                        <span class="text-slate-600 dark:text-slate-300 truncate flex-1">${lang.name}</span>
+                        <span class="text-slate-400 dark:text-slate-500 flex-shrink-0">${lang.loc.toLocaleString()} LOC</span>
+                    </div>
+                `).join('');
+
+                loading.classList.add('hidden');
+                content.classList.remove('hidden');
+                statsFetched = true;
+                
+                setTimeout(animateStats, 100);
+            } catch (err) {
+                console.error('Stats fetch error:', err);
+                loading.classList.add('hidden');
+                error.classList.remove('hidden');
+            }
+        }
+
+        function animateStats() {
+            document.querySelectorAll('.stats-fill').forEach(el => {
+                el.style.transition = 'width 1s cubic-bezier(0.4,0,0.2,1)';
+                el.style.width = el.dataset.w;
+            });
+        }
+
         function openStats() {
             document.getElementById('stats-modal').classList.remove('hidden');
             document.body.style.overflow = 'hidden';
-            setTimeout(() => {
-                document.querySelectorAll('.stats-fill').forEach(el => {
-                    el.style.transition = 'width 1s cubic-bezier(0.4,0,0.2,1)';
-                    el.style.width = el.dataset.w;
-                });
-            }, 80);
+            if (!statsFetched) {
+                fetchStats();
+            } else {
+                setTimeout(animateStats, 80);
+            }
         }
         function closeStats() {
             document.getElementById('stats-modal').classList.add('hidden');

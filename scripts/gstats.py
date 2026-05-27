@@ -1,0 +1,980 @@
+#!/usr/bin/env python3
+import os
+import sys
+import argparse
+import tempfile
+import subprocess
+import mimetypes
+import json
+import re
+import unicodedata
+from pathlib import Path
+from urllib.parse import urlparse
+from concurrent.futures import ThreadPoolExecutor
+from dataclasses import dataclass, field, asdict
+from typing import Dict, List, Optional
+from collections import Counter
+from datetime import datetime
+
+try:
+    from rich.console import Console
+    from rich.table import Table
+    from rich.progress import Progress, SpinnerColumn, TextColumn, BarColumn, TaskProgressColumn
+    from rich.panel import Panel
+    from rich.columns import Columns
+    from rich.status import Status
+    from rich import box
+except ImportError:
+    print("Error: The 'rich' library is required. Install it with: pip install rich")
+    sys.exit(1)
+
+# Extended language extensions mapping
+EXTENSION_MAPPING = {
+    '.py': 'Python', '.js': 'JavaScript', '.ts': 'TypeScript',
+    '.jsx': 'React JS', '.tsx': 'React TS', '.html': 'HTML',
+    '.css': 'CSS', '.scss': 'Sass', '.java': 'Java',
+    '.c': 'C', '.cpp': 'C++', '.h': 'C/C++ Header',
+    '.hpp': 'C++ Header', '.cs': 'C#', '.go': 'Go',
+    '.rs': 'Rust', '.rb': 'Ruby', '.php': 'PHP',
+    '.sh': 'Shell', '.bash': 'Shell', '.swift': 'Swift',
+    '.kt': 'Kotlin', '.sql': 'SQL', '.json': 'JSON',
+    '.xml': 'XML', '.zig': 'Zig', '.yaml': 'YAML',
+    '.yml': 'YAML', '.md': 'Markdown', '.toml': 'TOML',
+    '.dockerfile': 'Docker', '.r': 'R', '.lua': 'Lua',
+    '.pl': 'Perl', '.dart': 'Dart', '.vue': 'Vue.js',
+    '.svelte': 'Svelte', '.fst': 'F*', '.lean': 'Lean',
+}
+
+# Comment style mapping
+COMMENT_MAP = {
+    '#': ['.py', '.rb', '.sh', '.bash', '.yaml', '.yml', '.toml', '.dockerfile', '.pl'],
+    '//': ['.js', '.ts', '.jsx', '.tsx', '.java', '.c', '.cpp', '.h', '.hpp', '.cs', '.go', '.rs', '.swift', '.kt', '.dart', '.vue', '.svelte', '.zig'],
+    '--': ['.sql', '.lua'],
+    '<!--': ['.html', '.xml']
+}
+
+REVERSE_COMMENT_MAP = {}
+for char, exts in COMMENT_MAP.items():
+    for ext in exts:
+        REVERSE_COMMENT_MAP[ext] = char
+
+IGNORE_DIRS = {
+    '.git', '.svn', '.hg', 'node_modules', 'venv', 'env', 
+    '__pycache__', 'dist', 'build', 'out', 'target', 'vendor', 
+    '.idea', '.vscode', '.next', '.cache'
+}
+
+TODO_PATTERN = re.compile(r'(TODO|FIXME|HACK|XXX):?\s*(.*)', re.IGNORECASE)
+SECRET_PATTERN = re.compile(r'(?i)(password|secret|api_key|token|auth|key|cred)["\']?\s*[:=]\s*["\']([a-zA-Z0-9_\-\.]{15,})["\']', re.IGNORECASE)
+ASM_PATTERN_MATCH = re.compile(r'asm!\s*\(')
+UNSAFE_PATTERN_MATCH = re.compile(r'\bunsafe\b')
+COMPLEXITY_PATTERN = re.compile(r'\b(if|match|for|while|else|try|catch|switch|&&|\|\|)\b')
+BOILERPLATE_PATTERNS = [
+    re.compile(r"^\s*(#\[|impl\s+|pub\s+use|extern\s+crate|use\s+)"),
+    re.compile(r"^\s*(use\s+[\w:]+;|pub\s+struct\s+\w+\s+\{|pub\s+enum\s+\w+\s+\{)")
+]
+
+DOC_COMMENT_PATTERNS = {
+    '.rs': [re.compile(r'^\s*///'), re.compile(r'^\s*//!'), re.compile(r'^\s*/\*\*'), re.compile(r'^\s*/\*!')],
+    '.py': [re.compile(r'^\s*"""'), re.compile(r'^\s*\'\'\'')],
+    '.js': [re.compile(r'^\s*/\*\*')],
+    '.ts': [re.compile(r'^\s*/\*\*')],
+    '.tsx': [re.compile(r'^\s*/\*\*')],
+    '.jsx': [re.compile(r'^\s*/\*\*')],
+}
+
+@dataclass
+class AuthorStats:
+    name: str
+    commits: int = 0
+    lines_added: int = 0
+    bugfixes: int = 0
+    todos: int = 0
+    asm_count: int = 0
+    unsafe_count: int = 0
+    first_contribution: Optional[datetime] = None
+    last_contribution: Optional[datetime] = None
+    # Conventional commit types
+    feat_count: int = 0
+    refactor_count: int = 0
+    docs_count: int = 0
+    chore_count: int = 0
+    test_count: int = 0
+
+@dataclass
+class FileGitStats:
+    commits: int = 0
+    authors: Counter = field(default_factory=Counter)
+    bugfixes: int = 0
+    first_commit: Optional[datetime] = None
+    last_modified: Optional[datetime] = None
+
+@dataclass
+class FileStats:
+    total_lines: int = 0
+    blank_lines: int = 0
+    comment_lines: int = 0
+    code_lines: int = 0
+    todo_count: int = 0
+    size_bytes: int = 0
+    files_count: int = 0
+    asm_count: int = 0
+    unsafe_count: int = 0
+    doc_lines: int = 0
+    complexity_score: int = 0
+    test_lines: int = 0
+    logic_lines: int = 0
+    boilerplate_lines: int = 0
+    is_test: bool = False
+    internal_deps: List[str] = field(default_factory=list)
+
+    def add(self, other: 'FileStats'):
+        self.total_lines += other.total_lines
+        self.blank_lines += other.blank_lines
+        self.comment_lines += other.comment_lines
+        self.code_lines += other.code_lines
+        self.todo_count += other.todo_count
+        self.size_bytes += other.size_bytes
+        self.files_count += other.files_count
+        self.asm_count += other.asm_count
+        self.unsafe_count += other.unsafe_count
+        self.doc_lines += other.doc_lines
+        self.complexity_score += other.complexity_score
+        self.test_lines += other.test_lines
+        self.logic_lines += other.logic_lines
+        self.boilerplate_lines += other.boilerplate_lines
+        self.internal_deps.extend(other.internal_deps)
+
+@dataclass
+class TechDebt:
+    path: str
+    line_num: int
+    type: str
+    text: str
+
+@dataclass
+class Outlier:
+    path: str
+    lines: int
+    language: str
+
+console = Console()
+tech_debt_items: List[TechDebt] = []
+security_flags: List[TechDebt] = []
+file_git_map: Dict[str, FileGitStats] = {}
+
+# Dependency extraction regexes
+DEP_PATTERNS = [
+    re.compile(r'import\s+([a-zA-Z0-9_\.]+)'),
+    re.compile(r'from\s+([a-zA-Z0-9_\.]+)\s+import'),
+    re.compile(r'use\s+([a-zA-Z0-9_:]+)'),
+    re.compile(r'require\(["\']([a-zA-Z0-9_\-\./]+)["\']\)'),
+    re.compile(r'extern\s+crate\s+([a-zA-Z0-9_]+)')
+]
+
+def analyze_file(file_path: Path) -> Optional[tuple[str, FileStats, str]]:
+    ext = file_path.suffix.lower()
+    if not ext:
+        if file_path.name.lower() == 'dockerfile':
+            language = 'Docker'
+            ext = '.dockerfile'
+        else: return None
+    elif ext in EXTENSION_MAPPING: language = EXTENSION_MAPPING[ext]
+    else: return None
+
+    try:
+        size = file_path.stat().st_size
+        total, blank, comment, todos, asm, unsafes, docs, complexity, test_lines, logic_lines, boilerplate_lines = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+        internal_deps = []
+        comment_char = REVERSE_COMMENT_MAP.get(ext)
+        doc_regexes = DOC_COMMENT_PATTERNS.get(ext, [])
+        
+        # Heuristic for test files
+        is_test_file = any(p in str(file_path).lower() for p in ['/tests/', '/test/', 'test_']) or file_path.name.startswith('test_')
+
+        with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
+            for idx, line in enumerate(f, 1):
+                total += 1
+                stripped = line.strip()
+                
+                # Dependency extraction
+                for pattern in DEP_PATTERNS:
+                    match = pattern.search(line)
+                    if match:
+                        dep = match.group(1).split('.')[0].split(':')[0]
+                        if dep and dep not in internal_deps:
+                            internal_deps.append(dep)
+
+                if not stripped: blank += 1
+                elif comment_char and stripped.startswith(comment_char):
+                    comment += 1
+                    # Doc comment check
+                    if any(r.search(line) for r in doc_regexes):
+                        docs += 1
+                    # Tech debt check
+                    match = TODO_PATTERN.search(stripped)
+                    if match:
+                        todos += 1
+                        if len(tech_debt_items) < 20:
+                            tech_debt_items.append(TechDebt(str(file_path), idx, match.group(1).upper(), match.group(2)[:50]))
+                else:
+                    # Code line analysis
+                    if is_test_file: test_lines += 1
+                    
+                    # Semantic classification
+                    is_boilerplate = any(p.search(line) for p in BOILERPLATE_PATTERNS) or stripped in ["}", "{", "};"]
+                    if is_boilerplate: boilerplate_lines += 1
+                    else: logic_lines += 1
+
+                    # Complexity check (branches/logic)
+                    complexity += len(COMPLEXITY_PATTERN.findall(line))
+
+                # Low-level checks (Rust-specific)
+                if ext == '.rs':
+                    if ASM_PATTERN_MATCH.search(line): asm += 1
+                    if UNSAFE_PATTERN_MATCH.search(line): unsafes += 1
+
+                # Security check (every line) - skip test directories/files
+                if not is_test_file:
+                    s_match = SECRET_PATTERN.search(line)
+                    if s_match:
+                        secret_val = s_match.group(2)
+                        redacted = f"{secret_val[:4]}***{secret_val[-4:]}"
+                        security_flags.append(TechDebt(str(file_path), idx, "SECRET", f"{s_match.group(1)}={redacted}"))
+        
+        return language, FileStats(
+            total_lines=total, blank_lines=blank, comment_lines=comment,
+            todo_count=todos, code_lines=total - blank - comment,
+            size_bytes=size, files_count=1, internal_deps=internal_deps,
+            asm_count=asm, unsafe_count=unsafes, doc_lines=docs, complexity_score=complexity,
+            test_lines=test_lines, is_test=is_test_file,
+            logic_lines=logic_lines, boilerplate_lines=boilerplate_lines
+        ), str(file_path)
+    except Exception: return None
+
+def is_valid_url(url: str) -> bool:
+    try:
+        result = urlparse(url)
+        return all([result.scheme, result.netloc])
+    except ValueError: return False
+
+def clone_repo(repo_url: str, dest_dir: str, deep: bool = False) -> bool:
+    depth_flag = ['--depth', '500'] if deep else ['--depth', '1']
+    with Status(f"[bold blue]Cloning repository[/] {repo_url} ({"deep" if deep else "shallow"})...", console=console, spinner="dots"):
+        try:
+            subprocess.run(['git', 'clone'] + depth_flag + [repo_url, dest_dir],
+                         check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            return True
+        except (subprocess.CalledProcessError, FileNotFoundError): return False
+
+author_stats_map: Dict[str, AuthorStats] = {}
+
+def analyze_git_history(repo_path: str):
+    """Deep analysis of git history with normalized paths and author metrics."""
+    try:
+        if not os.path.exists(os.path.join(repo_path, '.git')): return
+        # Format: COMMIT|Author|Date|Subject
+        # Followed by --numstat for line counts
+        cmd = ['git', '-C', repo_path, 'log', '--numstat', '--format=COMMIT|%aN|%ai|%s']
+        process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, text=True)
+        
+        current_author, current_date, is_fix = None, None, False
+        
+        for line in process.stdout:
+            line = line.strip()
+            if not line: continue
+            if line.startswith('COMMIT|'):
+                parts = line.split('|')
+                raw_author = parts[1]
+                ascii_author = unicodedata.normalize('NFKD', raw_author).encode('ASCII', 'ignore').decode('utf-8')
+                normalized_author = re.sub(r'[^a-zA-Z0-9]', ' ', ascii_author).strip().title()
+                current_author = normalized_author if normalized_author else raw_author
+                
+                try: current_date = datetime.strptime(parts[2][:19], "%Y-%m-%d %H:%M:%S")
+                except: current_date = datetime.now()
+                subject = parts[3].lower()
+                is_fix = any(word in subject for word in ['fix', 'bug', 'issue', 'close', 'resolve'])
+                
+                if current_author not in author_stats_map:
+                    author_stats_map[current_author] = AuthorStats(name=current_author)
+                
+                a = author_stats_map[current_author]
+                a.commits += 1
+                if is_fix: a.bugfixes += 1
+                
+                # Conventional commit detection
+                if subject.startswith('feat'): a.feat_count += 1
+                elif subject.startswith('refactor'): a.refactor_count += 1
+                elif subject.startswith('docs'): a.docs_count += 1
+                elif subject.startswith('chore'): a.chore_count += 1
+                elif subject.startswith('test'): a.test_count += 1
+                
+                if not a.first_contribution or current_date < a.first_contribution: a.first_contribution = current_date
+                if not a.last_contribution or current_date > a.last_contribution: a.last_contribution = current_date
+            else:
+                # Parse numstat: added deleted path
+                parts = line.split('\t')
+                if len(parts) < 3: continue
+                
+                added = 0
+                try: added = int(parts[0]) if parts[0] != '-' else 0
+                except: pass
+                
+                path = parts[2].replace('\\', '/')
+                if any(d in path for d in IGNORE_DIRS): continue
+                
+                # Update file-specific git stats
+                if path not in file_git_map: file_git_map[path] = FileGitStats()
+                s = file_git_map[path]
+                s.commits += 1
+                s.authors[current_author] += 1
+                if is_fix: s.bugfixes += 1
+                if not s.first_commit or current_date < s.first_commit: s.first_commit = current_date
+                if not s.last_modified or current_date > s.last_modified: s.last_modified = current_date
+
+                # Update author-specific aggregate stats
+                if current_author in author_stats_map:
+                    author_stats_map[current_author].lines_added += added
+        process.wait()
+
+        # Cross-reference with file analysis for technical debt and low-level features
+        # This is an approximation based on current file state and major contributors
+        for path, fs in path_to_stats.items():
+            rel_path = os.path.relpath(path, repo_path).replace('\\', '/')
+            if rel_path in file_git_map:
+                top_author = file_git_map[rel_path].authors.most_common(1)[0][0]
+                if top_author in author_stats_map:
+                    a = author_stats_map[top_author]
+                    a.todos += fs.todo_count
+                    a.asm_count += fs.asm_count
+                    a.unsafe_count += fs.unsafe_count
+
+    except Exception: pass
+
+def get_git_timeline(repo_path: str) -> Dict[str, str]:
+    try:
+        if not os.path.exists(os.path.join(repo_path, '.git')): return {}
+        start_cmd = ['git', '-C', repo_path, 'log', '--reverse', '--format=%ai']
+        end_cmd = ['git', '-C', repo_path, 'log', '-1', '--format=%ai']
+        
+        start_date_str = subprocess.check_output(start_cmd, stderr=subprocess.DEVNULL, text=True).split('\n')[0]
+        end_date_str = subprocess.check_output(end_cmd, stderr=subprocess.DEVNULL, text=True).strip()
+        
+        start_date = datetime.strptime(start_date_str[:10], "%Y-%m-%d")
+        end_date = datetime.strptime(end_date_str[:10], "%Y-%m-%d")
+        days = (end_date - start_date).days
+        
+        return {
+            "start": start_date_str[:10],
+            "last": end_date_str[:10],
+            "age_days": days,
+            "velocity": f"{days/30:.1f} months" if days > 30 else f"{days} days"
+        }
+    except Exception: return {}
+
+def get_dependencies(repo_path: str) -> Dict[str, List[str]]:
+    aggregated_deps = {"Node (NPM)": set(), "Rust (Cargo)": set(), "Python (PIP)": set()}
+    for root, dirs, files in os.walk(repo_path):
+        dirs[:] = [d for d in dirs if d not in IGNORE_DIRS]
+        for file in files:
+            file_path = os.path.join(root, file)
+            if file == 'package.json':
+                try:
+                    with open(file_path, 'r') as f:
+                        data = json.load(f)
+                        deps = list(data.get('dependencies', {}).keys()) + list(data.get('devDependencies', {}).keys())
+                        aggregated_deps["Node (NPM)"].update(deps)
+                except Exception: pass
+            elif file == 'Cargo.toml':
+                try:
+                    with open(file_path, 'r') as f:
+                        in_deps = False
+                        for line in f:
+                            line = line.strip()
+                            if any(line.startswith(s) for s in ['[dependencies]', '[dev-dependencies]', '[build-dependencies]']):
+                                in_deps = True
+                                continue
+                            if in_deps:
+                                if line.startswith('['): in_deps = False
+                                elif line and not line.startswith('#'):
+                                    name = line.split('=')[0].strip().strip('"')
+                                    if name: aggregated_deps["Rust (Cargo)"].add(name)
+                except Exception: pass
+            elif file == 'requirements.txt':
+                try:
+                    with open(file_path, 'r') as f:
+                        for line in f:
+                            line = line.strip()
+                            if line and not line.startswith('#'):
+                                match = re.match(r'^([a-zA-Z0-9\-_]+)', line)
+                                if match: aggregated_deps["Python (PIP)"].add(match.group(1))
+                except Exception: pass
+    return {k: sorted(list(v))[:20] for k, v in aggregated_deps.items() if v}
+
+def calculate_cocomo(code_lines: int) -> Dict[str, any]:
+    kloc = code_lines / 1000
+    if kloc == 0: return {"effort": 0, "cost": 0}
+    effort = 2.4 * (kloc ** 1.05)
+    cost = effort * 10000 # $10,000 per person-month
+    return {"effort": effort, "cost": cost}
+
+def format_size(size_bytes: int) -> str:
+    for unit in ['B', 'KB', 'MB', 'GB']:
+        if size_bytes < 1024: return f"{size_bytes:.1f} {unit}"
+        size_bytes /= 1024
+    return f"{size_bytes:.1f} TB"
+
+def print_summary(stats: Dict[str, FileStats], target: str, args, outliers: List[Outlier], deps: Dict[str, List[str]], timeline: dict, path_to_stats: Dict[str, FileStats]):
+    total = FileStats()
+    for s in stats.values(): total.add(s)
+    cocomo = calculate_cocomo(total.code_lines)
+    abs_target = os.path.abspath(target)
+
+    # Pre-calculate Staff Data
+    risk_list = []
+    bus_factor_list = []
+    blast_radius = Counter()
+    drift_list = []
+    # 1. Map Modules/Subsystems to their names (for dependency matching)
+    module_to_subsys = {}
+    for fp, fs in path_to_stats.items():
+        if fs.is_test or fp.lower().endswith('.md'): continue
+        rel_path = os.path.relpath(fp, abs_target).replace('\\', '/')
+        parts = rel_path.split('/')
+        subsys_name = parts[0]
+        if subsys_name == 'crates' and len(parts) > 1:
+            subsys_name = f"crates/{parts[1]}"
+        
+        # Heuristic: module name is often the last part of the path or the subsys name
+        module_name = os.path.splitext(os.path.basename(fp))[0].replace('-', '_')
+        module_to_subsys[module_name] = subsys_name
+        # Also map the subsys name itself (e.g. nimue_vm)
+        subsys_id = subsys_name.split('/')[-1].replace('-', '_')
+        module_to_subsys[subsys_id] = subsys_name
+
+    # 2. Subsystem Analysis with Advanced Test Attribution
+    subsystems: Dict[str, FileStats] = {}
+    test_attributions = [] # List of (test_fs, target_subsys)
+
+    for fp, fs in path_to_stats.items():
+        if fp.lower().endswith('.md'): continue
+
+        rel_path = os.path.relpath(fp, abs_target).replace('\\', '/')
+        parts = rel_path.split('/')
+        subsys = parts[0]
+        if subsys == 'crates' and len(parts) > 1:
+            subsys = f"crates/{parts[1]}"
+        elif subsys in IGNORE_DIRS or subsys.startswith('.'):
+            continue
+
+        if subsys not in subsystems: subsystems[subsys] = FileStats()
+
+        if fs.is_test:
+            # ADVANCED HEURISTIC: Find the best target for this test
+            target_subsys = None
+
+            # Match 1: Path Mirroring (e.g. tests/parser.rs -> src/parser.rs)
+            potential_target_name = os.path.basename(fp).replace('test_', '').replace('_test', '').replace('.test', '')
+            potential_target_id = os.path.splitext(potential_target_name)[0].replace('-', '_')
+            if potential_target_id in module_to_subsys:
+                target_subsys = module_to_subsys[potential_target_id]
+
+            # Match 2: Dependency Analysis (what does this test import?)
+            if not target_subsys:
+                for dep in fs.internal_deps:
+                    dep_id = dep.replace('-', '_')
+                    if dep_id in module_to_subsys:
+                        target_subsys = module_to_subsys[dep_id]
+                        break
+
+            # Match 3: Fallback to its own subsystem
+            if not target_subsys:
+                target_subsys = subsys
+
+            test_attributions.append((fs, target_subsys))
+        else:
+            subsystems[subsys].add(fs)
+
+    # 3. Apply Test Attributions
+    for test_fs, target_subsys in test_attributions:
+        if target_subsys in subsystems:
+            subsystems[target_subsys].test_lines += test_fs.total_lines
+        else:
+            # Fallback for tests targeting non-existent subsystems
+            if "external_tests" not in subsystems: subsystems["external_tests"] = FileStats()
+            subsystems["external_tests"].test_lines += test_fs.total_lines
+
+    # 4. Identify Hotspots (High Churn + High Complexity)
+    hotspots = []
+    for path, fs in path_to_stats.items():
+        if path.lower().endswith('.md'): continue
+        rel_path = os.path.relpath(path, abs_target).replace('\\', '/')
+        g_stats = file_git_map.get(rel_path, FileGitStats())
+        if g_stats.commits > 5:
+            # Score: Churn * Complexity Density
+            density = (fs.complexity_score / fs.code_lines) if fs.code_lines > 0 else 0
+            hotspot_score = g_stats.commits * density * 10
+            if hotspot_score > 5:
+                hotspots.append({
+                    "path": rel_path,
+                    "score": hotspot_score,
+                    "churn": g_stats.commits,
+                    "complexity": density * 100
+                })
+    hotspots.sort(key=lambda x: x['score'], reverse=True)
+
+    # ... existing risk_list logic ...
+    for path, fs in path_to_stats.items():
+        if path.lower().endswith('.md'): continue
+        
+        abs_path = os.path.abspath(path)
+        try:
+            rel_path = os.path.relpath(abs_path, abs_target).replace('\\', '/')
+        except: rel_path = path
+
+        g_stats = file_git_map.get(rel_path, FileGitStats())
+        
+        # 1. Risk Score
+        # Enhanced Risk: Size * 0.1 + Churn * 0.5 + Bugfixes * 2 + Complexity * 0.4
+        score = (fs.code_lines / 500) + (g_stats.commits * 0.5) + (g_stats.bugfixes * 2.0) + (fs.complexity_score * 0.4)
+        num_authors = len(g_stats.authors)
+        if num_authors == 1 and g_stats.commits > 3: score += 8 # Heavy single owner
+        elif num_authors > 3: score -= 3 # Good distribution
+        
+        reason = "Consistent"
+        if g_stats.bugfixes > 3: reason = "Maintenance Required"
+        elif fs.complexity_score > 100: reason = "Complex Logic"
+        elif g_stats.commits > 15: reason = "High Churn"
+        elif fs.code_lines > 800: reason = "High Complexity"
+        elif num_authors == 1 and g_stats.commits > 5: reason = "Single Contributor"
+        
+        risk_list.append({"path": rel_path, "score": score, "reason": reason})
+
+        # 2. Bus Factor
+        if g_stats.commits >= 3:
+            top_author, top_commits = g_stats.authors.most_common(1)[0]
+            pct = top_commits / g_stats.commits
+            if pct >= 0.75:
+                bus_factor_list.append({"path": rel_path, "author": top_author, "pct": pct})
+
+        # 3. Blast Radius
+        for d in fs.internal_deps:
+            blast_radius[d] += 1
+
+        # 4. Drift
+        if g_stats.first_commit and g_stats.last_modified:
+            age_days = (datetime.now() - g_stats.first_commit).days
+            if age_days < 1: age_days = 1 # Born today
+            
+            growth = fs.code_lines / age_days
+            if growth > 3:
+                drift_list.append({"path": rel_path, "growth": growth, "type": "Rapid Growth"})
+            elif (datetime.now() - g_stats.last_modified).days > 90:
+                drift_list.append({"path": rel_path, "growth": 0, "type": "Stable (Inactive)"})
+
+    # Filter Blast Radius for noise
+    NOISE_DEPS = {'std', 'core', 'alloc', 'crate', 'super', 'self', 'prelude', 'iris', 'nimue', 'vortex', 'io'}
+    clean_blast = Counter({k: v for k, v in blast_radius.items() if k.lower() not in NOISE_DEPS})
+
+    risk_list.sort(key=lambda x: x['score'], reverse=True)
+    bus_factor_list.sort(key=lambda x: x['pct'], reverse=True)
+    drift_list.sort(key=lambda x: x['growth'], reverse=True)
+
+    if args.json:
+        data = {
+            "target": target, "summary": asdict(total),
+            "languages": {lang: asdict(s) for lang, s in stats.items()},
+            "outliers": [asdict(o) for o in outliers],
+            "dependencies": deps,
+            "tech_debt": [asdict(t) for t in tech_debt_items],
+            "security": [asdict(s) for s in security_flags],
+            "cocomo": cocomo,
+            "timeline": timeline,
+            "staff_insights": {
+                "risk_scores": risk_list[:20],
+                "bus_factor": bus_factor_list[:20],
+                "blast_radius": dict(clean_blast.most_common(20)),
+                "drift": drift_list[:20]
+            }
+        }
+        print(json.dumps(data, indent=2))
+        return
+
+    if not stats:
+        console.print("\n[bold yellow]No recognized source code files found.[/]")
+        return
+
+    # Category Flags
+    show_all = args.all
+    show_activity = show_all or args.activity
+    show_arch = show_all or args.arch
+    show_health = show_all or args.health
+    show_security = show_all or args.security
+    show_staff = show_all or args.staff
+
+    # Overview Category
+    doc_density = (total.doc_lines / total.code_lines * 100) if total.code_lines > 0 else 0
+    test_density = (total.test_lines / total.code_lines * 100) if total.code_lines > 0 else 0
+    summary_cols = [
+        Panel(f"[bold cyan]{total.files_count}[/]\nFiles", title="Inventory", box=box.ROUNDED),
+        Panel(f"[bold green]{total.code_lines:,}[/]\nLines", title="Code Base", box=box.ROUNDED),
+        Panel(f"[bold blue]{doc_density:.1f}%[/]\nDocs", title="Documentation", box=box.ROUNDED),
+        Panel(f"[bold magenta]{test_density:.1f}%[/]\nTests", title="Coverage", box=box.ROUNDED),
+        Panel(f"[bold green]${cocomo['cost']:,.0f}[/]\nEst. Value", title="COCOMO II", box=box.ROUNDED)
+    ]
+    
+    console.print(f"\n[bold underline]Analysis for: {target}[/]\n")
+    console.print(Columns(summary_cols))
+    console.print()
+
+    table = Table(title="Language Breakdown", box=box.SIMPLE_HEAVY, show_footer=True)
+    table.add_column("Language", style="cyan", footer="Total")
+    table.add_column("Files", justify="right", footer=str(total.files_count))
+    table.add_column("Code", justify="right", style="green", footer=f"{total.code_lines:,}")
+    table.add_column("Comments", justify="right", style="yellow", footer=f"{total.comment_lines:,}")
+    table.add_column("Blank", justify="right", style="dim", footer=f"{total.blank_lines:,}")
+    table.add_column("Size", justify="right", style="magenta", footer=format_size(total.size_bytes))
+    table.add_column("Distribution", justify="left")
+
+    key_map = {'lines': lambda x: x[1].code_lines, 'files': lambda x: x[1].files_count, 'size': lambda x: x[1].size_bytes, 'name': lambda x: x[0]}
+    sorted_stats = sorted(stats.items(), key=key_map.get(args.sort, key_map['lines']), reverse=(args.sort != 'name'))
+
+    for lang, s in sorted_stats:
+        pct = (s.code_lines / total.code_lines * 100) if total.code_lines > 0 else 0
+        bar_len = int(pct / 5)
+        bar = "█" * bar_len + "░" * (20 - bar_len)
+        table.add_row(lang, str(s.files_count), f"{s.code_lines:,}", f"{s.comment_lines:,}", f"{s.blank_lines:,}", format_size(s.size_bytes), f"[yellow]{bar}[/] {pct:>5.1f}%")
+    console.print(table)
+    console.print()
+
+    # System Insights
+    if show_staff:
+        staff_panels = []
+        
+        # Risk Table
+        risk_table = Table(title="🔍 Maintenance Hotspots", box=box.SIMPLE)
+        risk_table.add_column("File Path", style="bold red")
+        risk_table.add_column("Score", justify="right", style="bold")
+        risk_table.add_column("Primary Risk", style="dim")
+        for r in risk_list[:5]:
+            risk_table.add_row(r['path'][:35], f"{r['score']:.1f}", r['reason'])
+        staff_panels.append(risk_table)
+
+        # Bus Factor Table
+        bus_table = Table(title="👥 Single Contributors", box=box.SIMPLE)
+        bus_table.add_column("File Path", style="dim")
+        bus_table.add_column("Key Owner", style="bold cyan")
+        bus_table.add_column("Ownership", justify="right")
+        if bus_factor_list:
+            for b in bus_factor_list[:5]:
+                bus_table.add_row(b['path'][:35], b['author'], f"{b['pct']*100:.0f}%")
+        else:
+            bus_table.add_row("[dim italic]No high-risk silos found[/]", "-", "-")
+        staff_panels.append(bus_table)
+
+        # Blast Radius
+        blast_table = Table(title="🔗 Architectural Centrality", box=box.SIMPLE)
+        blast_table.add_column("Dependency", style="bold magenta")
+        blast_table.add_column("Reach", justify="right", style="green")
+        if clean_blast:
+            for d, count in clean_blast.most_common(5):
+                blast_table.add_row(d, f"{count} files")
+        else:
+            blast_table.add_row("[dim italic]No major dependencies detected[/]", "-")
+        staff_panels.append(blast_table)
+
+        # Drift
+        drift_table = Table(title="📈 Growth Analysis", box=box.SIMPLE)
+        drift_table.add_column("Module/File", style="dim")
+        drift_table.add_column("Type", style="bold")
+        drift_table.add_column("Growth", justify="right")
+        drift_table.add_column("Logic %", justify="right", style="green")
+        if drift_list:
+            for d in drift_list[:5]:
+                logic_pct = "-"
+                match_fs = None
+                d_path = d["path"].replace("\\", "/")
+                for fp, fs in path_to_stats.items():
+                    fp_norm = fp.replace("\\", "/")
+                    if d_path in fp_norm or fp_norm in d_path:
+                        match_fs = fs
+                        break
+                if match_fs and match_fs.code_lines > 0:
+                    logic_pct = f"{(match_fs.logic_lines/match_fs.code_lines)*100:.0f}%"
+                drift_table.add_row(d["path"][:35], d["type"], f"{d["growth"]:.1f} loc/d", logic_pct)
+        else:
+            drift_table.add_row("[dim italic]Codebase appears statistically stable[/]", "-", "-", "-")
+        staff_panels.append(drift_table)
+
+        # Low-Level Rust Insights (if applicable)
+        if total.asm_count > 0 or total.unsafe_count > 0:
+            low_level_table = Table(title="🛠️ Low-Level Surface (Rust)", box=box.SIMPLE)
+            low_level_table.add_column("Feature", style="bold yellow")
+            low_level_table.add_column("Count", justify="right", style="bold")
+            low_level_table.add_column("Density", justify="right", style="dim")
+            
+            if total.asm_count > 0:
+                low_level_table.add_row("Inline Assembly (asm!)", str(total.asm_count), f"{total.asm_count/total.code_lines*100:.2f}%")
+            if total.unsafe_count > 0:
+                low_level_table.add_row("Unsafe Blocks/Fn", str(total.unsafe_count), f"{total.unsafe_count/total.code_lines*100:.2f}%")
+            staff_panels.append(low_level_table)
+
+        console.print(Panel(Columns(staff_panels, equal=True, expand=True), title="[bold white]System Insights[/]", border_style="white"))
+        console.print()
+
+    # Architecture Category
+    if show_arch:
+        # Hotspots Table
+        if hotspots:
+            hot_table = Table(title="📐 Refactoring Candidates", box=box.SIMPLE_HEAVY)
+            hot_table.add_column("File Path", style="bold red")
+            hot_table.add_column("Churn", justify="right", style="orange1")
+            hot_table.add_column("Complexity", justify="right", style="yellow")
+            hot_table.add_column("Priority Score", justify="right", style="bold red")
+            
+            for h in hotspots[:5]:
+                hot_table.add_row(
+                    h['path'][:35], str(h['churn']), f"{h['complexity']:.1f}%", f"{h['score']:.1f}"
+                )
+            console.print(hot_table)
+            console.print()
+
+        # Subsystem Intelligence Table
+        if subsystems:
+            sub_table = Table(title="🏗️ Subsystem Metrics", box=box.SIMPLE_HEAVY)
+            sub_table.add_column("Subsystem/Crate", style="bold cyan")
+            sub_table.add_column("Files", justify="right")
+            sub_table.add_column("LOC", justify="right", style="green")
+            sub_table.add_column("Docs", justify="right", style="blue")
+            sub_table.add_column("Tests", justify="right", style="magenta")
+            sub_table.add_column("Complexity", justify="right", style="yellow")
+            sub_table.add_column("Health Score", justify="right")
+            
+            for name, s in sorted(subsystems.items(), key=lambda x: x[1].code_lines, reverse=True):
+                # Calculate metrics
+                total_code = s.code_lines
+                test_ratio = (s.test_lines / total_code * 100) if total_code > 0 else 0
+                doc_pct = (s.doc_lines / total_code * 100) if total_code > 0 else 0
+                comp_density = (s.complexity_score / total_code * 100) if total_code > 0 else 0
+                
+                # Health Score (0-100) - Refined Heuristics
+                # 1. Logic vs Boilerplate (25 pts): High logic density is "valuable" but harder to maintain
+                logic_ratio = (s.logic_lines / total_code * 100) if total_code > 0 else 0
+                logic_score = min(25, logic_ratio * 0.5)
+
+                # 2. Complexity Penalty (30 pts): Accidental complexity vs Essential complexity
+                # We penalize complexity that exceeds logic density
+                comp_penalty_factor = (comp_density / logic_ratio) if logic_ratio > 0 else 1
+                comp_score = max(0, 30 - (comp_penalty_factor * 10))
+                
+                # 3. Test Coverage (30 pts): Gold standard is 30%
+                test_score = min(30, test_ratio) 
+                
+                # 4. Documentation & Debt (15 pts): Docs minus TODO density penalty
+                todo_density = (s.todo_count / total_code * 1000) if total_code > 0 else 0
+                doc_score = min(15, doc_pct * 1.5) - (todo_density * 2)
+                
+                health = max(0, min(100, logic_score + comp_score + test_score + doc_score))
+                health_color = "green" if health > 70 else "yellow" if health > 40 else "red"
+                
+                sub_table.add_row(
+                    name, str(s.files_count), f"{total_code:,}", 
+                    f"{doc_pct:.1f}%", f"{test_ratio:.1f}%", f"{comp_density:.1f}%", f"[{health_color}]{health:.1f}/100[/]"
+                )
+            console.print(sub_table)
+            console.print()
+
+        arch_cols = []
+        if outliers:
+            outlier_table = Table(title="Top 5 Largest Files", box=box.SIMPLE)
+            outlier_table.add_column("File Path", style="dim")
+            outlier_table.add_column("LOC", justify="right", style="bold red")
+            for o in outliers:
+                dp = o.path.replace(target, "").lstrip("/")
+                if len(dp) > 35: dp = "..." + dp[-32:]
+                outlier_table.add_row(dp, f"{o.lines:,}")
+            arch_cols.append(outlier_table)
+        
+        # Danger Zone Logic
+        danger_zone = [r for r in risk_list if r['score'] > 20][:5]
+        if danger_zone:
+            danger_table = Table(title="⚠️ High Risk Files", box=box.SIMPLE)
+            danger_table.add_column("File Path", style="bold red")
+            danger_table.add_column("Risk Factor", justify="right", style="bold red")
+            for d in danger_zone:
+                dp = d['path']
+                if len(dp) > 35: dp = "..." + dp[-32:]
+                danger_table.add_row(dp, d['reason'])
+            arch_cols.append(danger_table)
+
+        if deps:
+            dep_table = Table(title="📦 Core Dependencies", box=box.SIMPLE)
+            dep_table.add_column("Manifest", style="bold magenta")
+            dep_table.add_column("Top Packages", style="dim")
+            for m, d in deps.items(): dep_table.add_row(m, ", ".join(d))
+            arch_cols.append(dep_table)
+
+        if arch_cols:
+            console.print(Panel(Columns(arch_cols, equal=True, expand=True), title="[bold blue]Architecture & Risk[/]", border_style="blue"))
+            console.print()
+
+    # Activity Category
+    if show_activity:
+        act_cols = []
+        if timeline:
+            time_table = Table(title="Project Timeline", box=box.SIMPLE)
+            time_table.add_column("Metric", style="bold cyan")
+            time_table.add_column("Value", style="green")
+            time_table.add_row("Born On", timeline['start'])
+            time_table.add_row("Last Pulse", timeline['last'])
+            time_table.add_row("Age", timeline['velocity'])
+            act_cols.append(time_table)
+
+        # Calculate churn and contributors from file_git_map
+        churn_counter = Counter()
+        author_counter = Counter()
+        for p, g in file_git_map.items():
+            churn_counter[p] = g.commits
+            author_counter.update(g.authors)
+
+        top_churn = churn_counter.most_common(5)
+        if top_churn:
+            churn_table = Table(title="📊 High Churn Files", box=box.SIMPLE)
+            churn_table.add_column("File Path", style="dim")
+            churn_table.add_column("Changes", justify="right", style="bold orange1")
+            for p, c in top_churn:
+                dp = p
+                if len(dp) > 35: dp = "..." + dp[-32:]
+                churn_table.add_row(dp, str(c))
+            act_cols.append(churn_table)
+
+        # Unified Top Contributors with Behavioral Profile
+        top_contributors = sorted(author_stats_map.values(), key=lambda x: x.commits, reverse=True)[:5]
+        if top_contributors:
+            git_table = Table(title="Top Contributors (Behavioral Profile)", box=box.SIMPLE)
+            git_table.add_column("Author", style="bold cyan")
+            git_table.add_column("Commits", justify="right", style="green")
+            git_table.add_column("Impact", justify="right", style="magenta")
+            git_table.add_column("Specialization", style="dim")
+            git_table.add_column("TODOs", justify="right", style="yellow")
+            
+            for a in top_contributors:
+                # Calculate Impact
+                impact = f"{a.lines_added:,} loc"
+                
+                # Determine Specialization & Focus
+                specs = []
+                # Behavioral roles
+                if a.bugfixes / a.commits > 0.15: specs.append("Bug Fixer")
+                if a.asm_count > 0: specs.append("Asm Expert")
+                if a.unsafe_count > 5: specs.append("Low-Level")
+                if a.lines_added > 5000: specs.append("Core Contributor")
+                
+                # Intent focus
+                if a.feat_count / a.commits > 0.3: specs.append("Feature Driven")
+                elif a.refactor_count / a.commits > 0.3: specs.append("Architect")
+                elif a.docs_count / a.commits > 0.3: specs.append("Documentation")
+                elif a.test_count / a.commits > 0.2: specs.append("Quality Assurance")
+                
+                spec_str = ", ".join(specs[:2]) if specs else "Generalist"
+                
+                # Debt introduced
+                debt = f"{a.todos} TODOs"
+                
+                git_table.add_row(a.name, str(a.commits), impact, spec_str, debt)
+            act_cols.append(git_table)
+
+        if act_cols:
+            console.print(Panel(Columns(act_cols, equal=True, expand=True), title="[bold orange1]Development Activity[/]", border_style="orange1"))
+            console.print()
+
+    # Health & Security Category
+    if show_health or show_security:
+        health_cols = []
+        if show_health and tech_debt_items:
+            debt_table = Table(title="Tech Debt Tracker", box=box.SIMPLE)
+            debt_table.add_column("Type", style="bold red")
+            debt_table.add_column("Location", style="dim")
+            debt_table.add_column("Snippet", style="italic")
+            for t in tech_debt_items[:10]:
+                loc = f"{os.path.basename(t.path)}:{t.line_num}"
+                debt_table.add_row(t.type, loc, t.text.strip())
+            health_cols.append(debt_table)
+
+        if show_security and security_flags:
+            sec_table = Table(title="⚠️ Potential Secrets Leak", box=box.SIMPLE)
+            sec_table.add_column("Type", style="bold red")
+            sec_table.add_column("Location", style="dim")
+            sec_table.add_column("Flagged Line", style="red italic")
+            for s in security_flags[:10]:
+                loc = f"{os.path.basename(s.path)}:{s.line_num}"
+                sec_table.add_row(s.type, loc, s.text.strip())
+            health_cols.append(sec_table)
+
+        if health_cols:
+            console.print(Panel(Columns(health_cols, equal=True, expand=True), title="[bold red]Health & Security[/]", border_style="red"))
+
+def main():
+    parser = argparse.ArgumentParser(description="Advanced Risk & Intelligence Repo Statistics Analyzer")
+    parser.add_argument("target", help="Local directory path or Git repository URL")
+    parser.add_argument("--sort", choices=['lines', 'files', 'size', 'name'], default='lines', help="Sort breakdown by")
+    parser.add_argument("--exclude", help="Additional comma-separated directories to ignore")
+    parser.add_argument("--json", action="store_true", help="Export statistics as JSON")
+    parser.add_argument("--all", action="store_true", help="Show all intelligence categories")
+    parser.add_argument("--activity", action="store_true", help="Show Git activity (churn, contributors, timeline)")
+    parser.add_argument("--arch", action="store_true", help="Show architecture (outliers, dependencies, danger zone)")
+    parser.add_argument("--health", action="store_true", help="Show project health (tech debt)")
+    parser.add_argument("--security", action="store_true", help="Show security flags (secrets scanning)")
+    parser.add_argument("--staff", action="store_true", help="Show staff engineer insights (risk, bus factor, blast radius)")
+    args = parser.parse_args()
+
+    if args.exclude: IGNORE_DIRS.update(d.strip() for d in args.exclude.split(','))
+    target = args.target
+    temp_dir_obj, analysis_path = None, target
+
+    try:
+        if is_valid_url(target):
+            temp_dir_obj = tempfile.TemporaryDirectory()
+            is_deep = args.staff or args.all
+            if clone_repo(target, temp_dir_obj.name, deep=is_deep): analysis_path = temp_dir_obj.name
+            else:
+                console.print(f"[bold red]Error:[/] Failed to clone repository {target}", style="red")
+                return
+        elif not os.path.isdir(target):
+            console.print(f"[bold red]Error:[/] Directory '{target}' does not exist.", style="red")
+            return
+
+        all_files = []
+        for root, dirs, files in os.walk(analysis_path):
+            dirs[:] = [d for d in dirs if d not in IGNORE_DIRS]
+            for file in files: all_files.append(Path(root) / file)
+
+        stats_map: Dict[str, FileStats] = {}
+        path_to_stats: Dict[str, FileStats] = {}
+        outliers: List[Outlier] = []
+        
+        with Progress(SpinnerColumn(), TextColumn("[progress.description]{task.description}"), BarColumn(), TaskProgressColumn(), console=console, disable=args.json) as progress:
+            task = progress.add_task("[cyan]Analyzing repository...", total=len(all_files))
+            with ThreadPoolExecutor() as executor:
+                futures = [executor.submit(analyze_file, f) for f in all_files]
+                for future in futures:
+                    res = future.result()
+                    if res:
+                        lang, fs, fp = res
+                        if lang not in stats_map: stats_map[lang] = FileStats()
+                        stats_map[lang].add(fs)
+                        path_to_stats[fp] = fs
+                        outliers.append(Outlier(fp, fs.code_lines, lang))
+                    progress.advance(task)
+
+        outliers.sort(key=lambda x: x.lines, reverse=True)
+        
+        # Unified Git History
+        analyze_git_history(analysis_path)
+        
+        print_summary(stats_map, target, args, outliers[:5], get_dependencies(analysis_path), get_git_timeline(analysis_path), path_to_stats)
+    finally:
+        if temp_dir_obj: temp_dir_obj.cleanup()
+
+if __name__ == "__main__":
+    main()
