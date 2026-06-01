@@ -59,9 +59,11 @@ for char, exts in COMMENT_MAP.items():
         REVERSE_COMMENT_MAP[ext] = char
 
 IGNORE_DIRS = {
-    '.git', '.svn', '.hg', 'node_modules', 'venv', 'env', 
-    '__pycache__', 'dist', 'build', 'out', 'target', 'vendor', 
-    '.idea', '.vscode', '.next', '.cache'
+    '.git', '.svn', '.hg', 'node_modules', 'venv', '.venv', 'env', '.env', 
+    '__pycache__', '.ruff_cache', '.pytest_cache', '.mypy_cache', '.cache',
+    'dist', 'build', 'out', 'target', 'vendor', '.idea', '.vscode', '.next',
+    '.turbo', '.vercel', '.yarn', '.npm', '.pnpm-store', '.tox', '.nox',
+    '.pants.d', '.buildcache', '__pypackages__', '.DS_Store', 'Thumbs.db'
 }
 
 TODO_PATTERN = re.compile(r'(TODO|FIXME|HACK|XXX):?\s*(.*)', re.IGNORECASE)
@@ -321,7 +323,7 @@ def analyze_git_history(repo_path: str):
                 except: pass
                 
                 path = parts[2].replace('\\', '/')
-                if any(d in path for d in IGNORE_DIRS): continue
+                if any(part in IGNORE_DIRS or part.startswith('.') for part in path.split('/')): continue
                 
                 # Update file-specific git stats
                 if path not in file_git_map: file_git_map[path] = FileGitStats()
@@ -375,7 +377,7 @@ def get_git_timeline(repo_path: str) -> Dict[str, str]:
 def get_dependencies(repo_path: str) -> Dict[str, List[str]]:
     aggregated_deps = {"Node (NPM)": set(), "Rust (Cargo)": set(), "Python (PIP)": set()}
     for root, dirs, files in os.walk(repo_path):
-        dirs[:] = [d for d in dirs if d not in IGNORE_DIRS]
+        dirs[:] = [d for d in dirs if d not in IGNORE_DIRS and not d.startswith('.')]
         for file in files:
             file_path = os.path.join(root, file)
             if file == 'package.json':
@@ -946,8 +948,10 @@ def main():
 
         all_files = []
         for root, dirs, files in os.walk(analysis_path):
-            dirs[:] = [d for d in dirs if d not in IGNORE_DIRS]
-            for file in files: all_files.append(Path(root) / file)
+            dirs[:] = [d for d in dirs if d not in IGNORE_DIRS and not d.startswith('.')]
+            for file in files:
+                if file.startswith('.'): continue
+                all_files.append(Path(root) / file)
 
         stats_map: Dict[str, FileStats] = {}
         path_to_stats: Dict[str, FileStats] = {}

@@ -1,20 +1,20 @@
 {
-  "total_loc": 121641,
+  "total_loc": 148060,
   "repositories": {
     "Causm": {
-      "loc": 17179,
+      "loc": 17838,
       "primary_lang": "Rust"
     },
     "Lila": {
-      "loc": 10093,
+      "loc": 14078,
       "primary_lang": "Rust"
     },
     "argus": {
-      "loc": 10704,
+      "loc": 10505,
       "primary_lang": "Rust"
     },
     "iris": {
-      "loc": 29184,
+      "loc": 29101,
       "primary_lang": "Rust"
     },
     "nimue-prism": {
@@ -26,7 +26,7 @@
       "primary_lang": "Zig"
     },
     "nimue": {
-      "loc": 25034,
+      "loc": 24875,
       "primary_lang": "Rust"
     },
     "ocular": {
@@ -38,12 +38,8 @@
       "primary_lang": "Rust"
     },
     "astraea": {
-      "loc": 3372,
+      "loc": 3370,
       "primary_lang": "Rust"
-    },
-    "Sigilus": {
-      "loc": 2738,
-      "primary_lang": "Python"
     },
     "Project-Aether": {
       "loc": 2126,
@@ -52,28 +48,41 @@
     "vizx": {
       "loc": 1387,
       "primary_lang": "Rust"
+    },
+    "Velhara": {
+      "loc": 6344,
+      "primary_lang": "JavaScript"
+    },
+    "vortex-js": {
+      "loc": 18612,
+      "primary_lang": "JavaScript"
     }
   },
   "languages": [
     {
       "name": "Rust",
-      "loc": 92688,
-      "files": 425
+      "loc": 96274,
+      "files": 439
     },
     {
-      "name": "Zig",
-      "loc": 8187,
-      "files": 48
+      "name": "JavaScript",
+      "loc": 16360,
+      "files": 124
     },
     {
       "name": "Markdown",
-      "loc": 7800,
-      "files": 121
+      "loc": 10909,
+      "files": 148
+    },
+    {
+      "name": "Zig",
+      "loc": 8184,
+      "files": 46
     },
     {
       "name": "Python",
-      "loc": 5670,
-      "files": 53
+      "loc": 7411,
+      "files": 75
     },
     {
       "name": "F*",
@@ -81,14 +90,14 @@
       "files": 10
     },
     {
-      "name": "JavaScript",
-      "loc": 1212,
-      "files": 20
+      "name": "HTML",
+      "loc": 3465,
+      "files": 5
     },
     {
       "name": "TOML",
-      "loc": 703,
-      "files": 41
+      "loc": 846,
+      "files": 46
     },
     {
       "name": "C",
@@ -96,29 +105,14 @@
       "files": 27
     },
     {
-      "name": "C++",
-      "loc": 256,
-      "files": 2
-    },
-    {
-      "name": "YAML",
-      "loc": 252,
-      "files": 5
-    },
-    {
-      "name": "Shell",
-      "loc": 250,
-      "files": 6
-    },
-    {
       "name": "C/C++ Header",
       "loc": 177,
       "files": 2
     },
     {
-      "name": "HTML",
-      "loc": 133,
-      "files": 1
+      "name": "Shell",
+      "loc": 121,
+      "files": 4
     },
     {
       "name": "TypeScript",
