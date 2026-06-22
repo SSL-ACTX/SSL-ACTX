@@ -27,7 +27,7 @@
 
 I enjoy building systems from scratch to understand how they work under the hood. This profile is just a collection of my projects and experiments—ranging from custom runtimes to security research.
 
- * 🎓 **Current Status:** Graduating June 2026 (BSIT) | Colegio de Montalban.
+ * 🎓 **Current Status:** Graduating June 23, 2026 "TODAY!" (BSIT) | Colegio de Montalban.
  * 🦀 **Focus:** Formal Methods, Runtime Security, Systems Architecture.
  * 🧪 **Primary Stack:** **Rust** (Performance Primitives), **Zig** (Native Interception), **Python & JavaScript** (Orchestration).
  * 🌐 **Web Development:** Engineering modern, performant web applications utilizing **Next.js** and **FastAPI**.
