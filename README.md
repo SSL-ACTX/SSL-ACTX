@@ -5,7 +5,7 @@
   <p><i>Systems Researcher | Compilers & Distributed Runtimes</i></p>
   
   <p align="center">
-    <img src="https://img.shields.io/badge/Degree-BSIT%20@%20CDM-06b6d4?style=flat-square" alt="Education">
+    <img src="https://img.shields.io/badge/Graduated-BSIT%20%40%20CDM-gold?style=flat-square" alt="Graduated">
     <img src="https://visitor-badge.laobi.icu/badge?page_id=SSL-ACTX.SSL-ACTX&color=06b6d4" alt="Visitors">
   </p>
 
@@ -22,12 +22,12 @@
 
 ### 🌙 Technical Profile
   
-**Graduating June 2026** (BSIT) — **Colegio de Montalban**  
+**Graduated June 2026** (BSIT) — **Colegio de Montalban**  
 *Formal Methods • Runtime Security • Systems Architecture*
 
 I enjoy building systems from scratch to understand how they work under the hood. This profile is just a collection of my projects and experiments—ranging from custom runtimes to security research.
 
- * 🎓 **Current Status:** Graduating June 23, 2026 "TODAY!" (BSIT) | Colegio de Montalban.
+ * 🎓 **Current Status:** Graduated! (BSIT) — Colegio de Montalban (June 23, 2026) 🎉
  * 🦀 **Focus:** Formal Methods, Runtime Security, Systems Architecture.
  * 🧪 **Primary Stack:** **Rust** (Performance Primitives), **Zig** (Native Interception), **Python & JavaScript** (Orchestration).
  * 🌐 **Web Development:** Engineering modern, performant web applications utilizing **Next.js** and **FastAPI**.
