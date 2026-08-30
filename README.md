@@ -29,7 +29,7 @@ BSIT Graduate (June 2026, Colegio de Montalban) focused on formal verification, 
 
 ### Active Research: The Causm Language
 
-Currently designing and developing **[Causm](https://github.com/SSL-ACTX/Causm)** — a real-time, formally verified systems programming language with temporal semantics, entropic memory decay, and empirical contract synthesis.
+Currently designing and developing **[Causm](https://github.com/SSL-ACTX/Causm)** — a real-time, formally verifying systems programming language with temporal semantics, entropic memory decay, and empirical contract synthesis.
 
 ```text
 [ Source (.csm) ] ──> [ Pest AST / Lowering ] ──> [ SSA IR & DCE / Phi Opts ] ──> [ Z3 SMT Prover ] ──> [ Temporal Virtual Machine (TVM) ]
