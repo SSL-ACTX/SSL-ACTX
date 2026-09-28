@@ -22,8 +22,8 @@
 
 Systems researcher and compiler engineer focused on formal verification, mathematical memory safety, low-level execution models, and runtime security. I design and build self-contained language toolchains, virtual machines, and high-assurance systems from first principles.
 
-* **Primary Fields:** Formal SMT Verification, Obfuscation, Compiler Backends (Cranelift/WASM), Lock-Free Concurrency, Web Development
-* **Core Languages:** Rust (Compilers, VMs, SMT Solvers), Python (APIs and Automations), C / C99 (Kernel/POSIX shims, FFI), Zig, Python & TypeScript (Tooling/Protocols).
+* **Primary Fields:** Formal SMT Verification, Obfuscation, Compiler Backends (Cranelift/WASM), Concurrency, Web Development
+* **Core Languages:** Rust (Compilers, VMs, SMT Solvers), Python (APIs and Automations), C / C99 (Kernel Stuff & FFI), Zig, F* w/ `Pulse` (Formal Verification), Python & TypeScript (Tooling/Protocols).
 * **Architecture & Internals:** SMT Solvers (`oxiz`, Z3), WebAssembly, Linux Seccomp-BPF, ARM64 NEON SIMD, POSIX Berkeley Sockets.
 
 ---
