@@ -50,7 +50,7 @@ A selection of open-source compilers, obfuscation engines, virtual machines, and
 ### Technical Stacks
 
 <div align="center">
-  <img src="https://skillicons.dev/icons?i=rust,c,zig,python,js,ts,nodejs,wasm,nextjs,fastapi,git,github,vscode,docker,bash,linux&theme=dark&perline=8" />
+  <img src="https://skillicons.dev/icons?i=rust,c,zig,python,js,ocaml,nodejs,wasm,nextjs,fastapi,git,github,vscode,docker,bash,linux&theme=dark&perline=8" />
 </div>
 
 ---
