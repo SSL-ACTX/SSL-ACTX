@@ -1,4 +1,3 @@
-
 <div align="center">
   <img src="https://wsrv.nl/?url=https://cdn.jsdelivr.net/gh/SSL-ACTX/SSL-ACTX@main/images/seuriin_frz_circ.gif&output=webp&maxage=1y&n=-1&q=20&w=450" width="180" height="180" alt="Seuriin's Profile Picture">
   
