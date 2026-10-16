@@ -1,0 +1,33 @@
+[package]
+name = "seuriin"
+version = "0.0.1-alpha.1"
+edition = "2024"
+description = "Compiler Architect & Systems Researcher · Formal Methods · Runtimes"
+license = "MIT"
+
+[lib]
+name = "seuriin"
+path = "src/lib.rs"
+
+[package.metadata.readme]
+style = "architectural"
+max_width = 64
+tree_depth = 1
+
+[package.metadata.readme.loc]
+mode = "language"
+slots = 36
+threshold = 0.03
+
+[package.metadata.readme.tree]
+exclude = ["generated", "gifs", "images", "web", "__pycache__", ".git", "target"]
+annotations = { "scripts" = "GitHub Actions automation & stat generators", "templates" = "SVG/HTML profile templates" }
+
+[package.metadata.readme.pipeline]
+stages = [
+  { name = "Valerie",    detail = "Driver"  },
+  { name = "Shuangning", detail = "Crypto"   },
+  { name = "Causm",      detail = "Lang"     },
+  { name = "Lirien",     detail = "JIT"      },
+  { name = "Ruoxi",      detail = "Web"      },
+]
