@@ -23,27 +23,6 @@ Systems researcher and compiler engineer focused on formal verification, mathema
 
 * **Primary Fields:** Formal SMT Verification, Obfuscation, Compiler Backends (Cranelift/WASM), Concurrency, Web Development
 * **Core Languages:** Rust (Compilers, VMs, SMT Solvers), Python (APIs and Automations), C / C99 (Kernel Stuff & FFI), Zig, F* w/ `Pulse` (Formal Verification), Python & TypeScript (Tooling/Protocols).
-* **Architecture & Internals:** SMT Solvers (`oxiz`, Z3), WebAssembly, Linux Seccomp-BPF, ARM64 NEON SIMD, POSIX Berkeley Sockets.
-
----
-
-### Featured Systems Research & Projects
-
-A selection of open-source compilers, obfuscation engines, virtual machines, and high-performance runtimes.
-
-<br>
-
-| Repository | Project Specification & Architecture | Technologies |
-| :--- | :--- | :--- |
-| **[Causm](https://github.com/SSL-ACTX/Causm)** | An experimental real-time systems language with temporal semantics, entropic memory decay (EGC), SMT relational proofs (**Entropius**), Cranelift JIT, and a WASIp2 runtime. | <img src="https://skillicons.dev/icons?i=rust,wasm,c&theme=dark&perline=3" /> |
-| **[Ruoxi](https://github.com/SSL-ACTX/Ruoxi)** | An ultra-high-velocity experimental web synthesis engine & compiler. Compiles reactive islands and documents into atomic-hashed CSS, static HTML, and route-cycle verified graphs in **23~ microseconds per page** (43,000+ pages/sec). | <img src="https://skillicons.dev/icons?i=rust,html,css,js&theme=dark&perline=4" /> |
-| **[Lirien](https://github.com/SSL-ACTX/Lirien)** | A verifying JIT compiler for a safe subset of Python. Uses SMT solver verification to statically prove refinement types, memory bounds, and safety invariants before lowering to native code with Cranelift. | <img src="https://skillicons.dev/icons?i=rust,python&theme=dark&perline=2" /> |
-| **[Astraea](https://github.com/SSL-ACTX/astraea)** | Security middleware for Node.js implementing Object-Capability enforcement at the native boundary via dynamic C-ABI syscall hijacking (Zig) and Linux kernel Seccomp-BPF filters. | <img src="https://skillicons.dev/icons?i=rust,zig,nodejs&theme=dark&perline=3" /> |
-| **[Iris](https://github.com/SSL-ACTX/iris)** | A distributed actor runtime in Rust with Python bindings, featuring a reduction-based cooperative scheduler, location-transparent messaging, and live actor code updates. | <img src="https://skillicons.dev/icons?i=rust,python,nodejs&theme=dark&perline=3" /> |
-| **[Ocular](https://github.com/SSL-ACTX/ocular)** | An instruction-level tracer and telemetry runtime for Python 3.12+ (PEP 669). Uses hardware TSC cycle counting and adaptive de-instrumentation to minimize profiling overhead. | <img src="https://skillicons.dev/icons?i=rust,python&theme=dark&perline=2" /> |
-| **[MirageFS](https://github.com/SSL-ACTX/mirage-fs)** | A steganographic virtual block device (FUSE / WebDAV) that mounts encrypted filesystems inside media containers (PNG, MP4, MP3) with custom format-specific injectors. | <img src="https://skillicons.dev/icons?i=rust,c&theme=dark&perline=2" /> |
-
-<br>
 
 ---
 

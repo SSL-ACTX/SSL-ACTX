@@ -62,7 +62,7 @@ class Queries:
                 result = r_requests.json()
                 if result is not None:
                     return result
-        return dict()
+        return {}
 
     async def query_rest(self, path: str, params: dict | None = None) -> dict:
         """
@@ -77,7 +77,7 @@ class Queries:
                 "Authorization": f"token {self.access_token}",
             }
             if params is None:
-                params = dict()
+                params = {}
             path = path.removeprefix("/")
             try:
                 async with self.semaphore:
@@ -112,7 +112,7 @@ class Queries:
                         return r_requests.json()
         # print(f"There were too many 202s. Data for {path} will be incomplete.")
         print("There were too many 202s. Data for this repository will be incomplete.")
-        return dict()
+        return {}
 
     @staticmethod
     def repos_overview(
@@ -299,7 +299,7 @@ Languages:
         """
         self._stargazers = 0
         self._forks = 0
-        self._languages = dict()
+        self._languages = {}
         self._repos = set()
 
         next_owned = None
@@ -373,7 +373,7 @@ Languages:
         # TODO: Improve languages to scale by number of contributions to
         #       specific filetypes
         langs_total = sum([v.get("size", 0) for v in self._languages.values()])
-        for k, v in self._languages.items():
+        for v in self._languages.values():
             v["prop"] = 100 * (v.get("size", 0) / langs_total)
 
     @property
