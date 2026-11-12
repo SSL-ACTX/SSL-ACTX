@@ -31,7 +31,11 @@ Systems researcher and compiler engineer focused on formal verification, mathema
   - `Python`, `JS`/`TS` (APIs, Web and Automations)
   - `C` & `Zig` (Low Level Stuff & FFIs)
   - `F*` (Formal Verification)
-    - `Rocq` (Experimentation with Separation Logics)
+    - `Pulse`
+       > I'm currently building things using this one :)
+  - `Rocq` (Formal Verification)
+    - `Iris`
+      > Mostly for experimenting with separation logics metatheory. 
   - `Ocaml` (Parsers and Extraction)
 
 ---
