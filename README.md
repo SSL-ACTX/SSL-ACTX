@@ -39,6 +39,20 @@ Systems researcher and compiler engineer focused on formal verification, mathema
 
 ---
 
+### Key Projects
+
+* **Formal Verification & Compilers**
+  * [`valerie`](https://github.com/SSL-ACTX/valerie) — Formally verified compiler toolchain and multi-arch machine semantics in F* and Pulse separation logic.
+  * [`shuangning`](https://github.com/SSL-ACTX/shuangning) — Formally verified 2-adic cryptographic permutation and 384-bit Adelic AEAD duplex (F*, Pulse, Vale).
+  * [`lirien`](https://github.com/SSL-ACTX/Lirien) — SMT-verifying (Z3) JIT compiler for Python enforcing path-aware liquid refinement types via Cranelift.
+
+* **Systems & Distributed Runtimes**
+  * [`iris`](https://github.com/SSL-ACTX/Iris) — Hybrid distributed actor runtime fabric with cooperative reduction-based scheduling.
+  * [`ruri`](https://github.com/SSL-ACTX/ruri) — Pure-Rust wireless ADB implementation with `seccomp-bpf` syscall virtualization.
+  * [`ship`](https://github.com/SSL-ACTX/ship-pm) — Sandboxed prebuilt binary package manager with target-specific patching and rollback.
+
+---
+
 #### Technical Stacks
 
 <div align="left">
@@ -67,7 +81,6 @@ Systems researcher and compiler engineer focused on formal verification, mathema
   <img src="https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white" alt="FastAPI" />
   <img src="https://img.shields.io/badge/Node.js-5FA04E?style=flat-square&logo=nodedotjs&logoColor=white" alt="Node.js" />
   <img src="https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=nextdotjs&logoColor=white" alt="Next.js" />
-
 </div>
 
 ---
