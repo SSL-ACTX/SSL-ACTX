@@ -24,19 +24,19 @@ Systems researcher and compiler engineer focused on formal verification, mathema
   - Compiler Backends
   - Formal Methods
   - Concurrency
-  - Web Development
-  
+    
 * **Core Languages:**
   - `Rust` (Compilers, VMs, Daily Driver)
-  - `Python`, `JS`/`TS` (APIs, Web and Automations)
-  - `C` & `Zig` (Low Level Stuff & FFIs)
   - `F*` (Formal Verification)
     - `Pulse`
-       > I'm currently building things using this one :)
+       > My go-to for verified systems.
   - `Rocq` (Formal Verification)
     - `Iris`
       > Mostly for experimenting with separation logics metatheory. 
   - `Ocaml` (Parsers and Extraction)
+  - `C` & `Zig` (Low Level Stuff & FFIs)
+  - `Python`, `JS`/`TS` (APIs, Web Infra and Automations)
+  
 
 ---
 
