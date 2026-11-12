@@ -36,14 +36,38 @@ Systems researcher and compiler engineer focused on formal verification, mathema
   - `Ocaml` (Parsers and Extraction)
   - `C` & `Zig` (Low Level Stuff & FFIs)
   - `Python`, `JS`/`TS` (APIs, Web Infra and Automations)
-  
 
 ---
 
 #### Technical Stacks
 
-<div align="center">
-  <img src="https://skillicons.dev/icons?i=rust,c,zig,python,js,ocaml,nodejs,wasm,nextjs,fastapi,git,github,vscode,docker,bash,linux&theme=dark&perline=8" />
+<div align="left">
+  <sub><b>Formal Methods & Compiler Systems (Core)</b></sub><br>
+  <img src="https://img.shields.io/badge/Rust-black?style=flat-square&logo=rust&logoColor=white" alt="Rust" />
+  <img src="https://img.shields.io/badge/F*-24292e?style=flat-square&logo=starship&logoColor=white" alt="F*" />
+  <img src="https://img.shields.io/badge/Pulse-06b6d4?style=flat-square&logo=instatus&logoColor=white" alt="Pulse" />
+  <img src="https://img.shields.io/badge/Rocq%20(Coq)-3b4252?style=flat-square&logo=wolfram&logoColor=white" alt="Rocq" />
+  <img src="https://img.shields.io/badge/Iris-5e81ac?style=flat-square&logo=prisma&logoColor=white" alt="Iris" />
+  <img src="https://img.shields.io/badge/OCaml-EC6813?style=flat-square&logo=ocaml&logoColor=white" alt="OCaml" />
+  <img src="https://img.shields.io/badge/C-00599C?style=flat-square&logo=c&logoColor=white" alt="C" />
+  <img src="https://img.shields.io/badge/Zig-F7A41D?style=flat-square&logo=zig&logoColor=white" alt="Zig" />
+  <img src="https://img.shields.io/badge/WebAssembly-654FF0?style=flat-square&logo=webassembly&logoColor=white" alt="WebAssembly" />
+  <br>
+  <sub><b>Environments & Toolchains</b></sub><br>
+  <img src="https://img.shields.io/badge/Linux-FCC624?style=flat-square&logo=linux&logocolor=black" alt="Linux" />
+  <img src="https://img.shields.io/badge/Bash-4EAA25?style=flat-square&logo=gnubash&logoColor=white" alt="Bash" />
+  <img src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white" alt="Docker" />
+  <img src="https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white" alt="Git" />
+  <img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white" alt="GitHub" />
+  <br>
+  <sub><b>Peripheral & Web Infrastructure</b></sub><br>
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black" alt="JavaScript" />
+  <img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python" />
+  <img src="https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white" alt="FastAPI" />
+  <img src="https://img.shields.io/badge/Node.js-5FA04E?style=flat-square&logo=nodedotjs&logoColor=white" alt="Node.js" />
+  <img src="https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=nextdotjs&logoColor=white" alt="Next.js" />
+
 </div>
 
 ---
